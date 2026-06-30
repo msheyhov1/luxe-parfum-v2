@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<script src="app.js"></script>
+</head>
+<body>
+
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<style>/* cyrillic-ext */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("fonts/manrope-01.woff2") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("fonts/manrope-02.woff2") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("fonts/manrope-03.woff2") format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("fonts/manrope-04.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("fonts/manrope-05.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("fonts/manrope-06.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("fonts/manrope-01.woff2") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("fonts/manrope-02.woff2") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("fonts/manrope-03.woff2") format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("fonts/manrope-04.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("fonts/manrope-05.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("fonts/manrope-06.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("fonts/manrope-01.woff2") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("fonts/manrope-02.woff2") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("fonts/manrope-03.woff2") format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("fonts/manrope-04.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("fonts/manrope-05.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("fonts/manrope-06.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("fonts/manrope-01.woff2") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("fonts/manrope-02.woff2") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("fonts/manrope-03.woff2") format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("fonts/manrope-04.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("fonts/manrope-05.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("fonts/manrope-06.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("fonts/manrope-01.woff2") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("fonts/manrope-02.woff2") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("fonts/manrope-03.woff2") format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("fonts/manrope-04.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("fonts/manrope-05.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("fonts/manrope-06.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Prata';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("fonts/manrope-07.woff2") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Prata';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("fonts/manrope-08.woff2") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Prata';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("fonts/manrope-09.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin */
+@font-face {
+  font-family: 'Prata';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("fonts/manrope-10.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+</style>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:#0b0b0c}
+::selection{background:rgba(201,162,75,.3);color:#fff}
+input::placeholder{color:#6f6b63}
+@keyframes lxFade{from{opacity:0}to{opacity:1}}
+@keyframes lxUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+@keyframes lxView{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes lxDrop{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+@keyframes lxPop{0%{transform:scale(.6);opacity:0}60%{transform:scale(1.12)}100%{transform:scale(1);opacity:1}}
+::-webkit-scrollbar{width:10px;height:10px}::-webkit-scrollbar-track{background:#0b0b0c}::-webkit-scrollbar-thumb{background:#26262a}::-webkit-scrollbar-thumb:hover{background:#33333a}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms !important;transition-duration:.001ms !important}}
+@media (max-width:880px){header>div{flex-wrap:wrap;height:auto !important;row-gap:12px;padding-top:11px;padding-bottom:11px}header nav{order:3;width:100%;margin-left:0 !important;justify-content:flex-start;flex-wrap:wrap;gap:14px 18px}header [style*="width:290px"]{margin-left:0 !important;width:100% !important}}
+</style>
+</helmet>
+<div ref="{{ rootRef }}" style="--bg:#0b0b0c;--bg2:#141416;--bg3:#1b1b1e;--line:rgba(236,232,224,.10);--line2:rgba(236,232,224,.18);--gold:#c9a24b;--gold2:#e3c178;--goldd:#9c7836;--text:#ece8e0;--t2:#a8a399;--t3:#736f67;--ease:cubic-bezier(.22,.61,.36,1);background:var(--bg);color:var(--text);min-height:100vh;font-family:Manrope,sans-serif;-webkit-font-smoothing:antialiased">
+
+  <header style="position:sticky;top:0;z-index:60;background:rgba(10,10,11,.86);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)">
+    <div style="max-width:1480px;margin:0 auto;padding:0 40px;height:66px;display:flex;align-items:center;gap:24px">
+      <div onclick="{{ onLogo }}" style="cursor:pointer;display:flex;flex-direction:column;line-height:1;margin-right:4px">
+        <span style="font-family:Prata,serif;font-size:24px;letter-spacing:.3em;color:var(--text);padding-left:.3em">LUXE</span>
+        <span style="font-size:8px;letter-spacing:.46em;color:var(--gold);margin-top:5px;padding-left:.46em">ПАРФЮМЕРИЯ</span>
+      </div>
+      <nav style="display:flex;align-items:center;gap:20px;margin-left:6px">
+        <sc-for list="{{ navLinks }}" as="n" hint-placeholder-count="6"><button onclick="{{ n.onClick }}" style="background:none;border:none;color:var(--t2);font-family:Manrope,sans-serif;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;cursor:pointer;padding:6px 0;transition:color .25s var(--ease),letter-spacing .25s var(--ease)" style-hover="color:var(--gold);letter-spacing:.18em">{{ n.label }}</button></sc-for>
+      </nav>
+      <div style="margin-left:auto;width:290px;position:relative">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="#736f67" stroke-width="1.5" style="position:absolute;left:17px;top:50%;transform:translateY(-50%)"><circle cx="11" cy="11" r="7"></circle><line x1="16.5" y1="16.5" x2="21" y2="21"></line></svg>
+        <input value="{{ query }}" oninput="{{ onSearch }}" placeholder="Поиск по бренду…" style="width:100%;height:40px;background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--text);padding:0 16px 0 40px;font-family:Manrope,sans-serif;font-size:12px;letter-spacing:.02em;outline:none;transition:border-color .3s var(--ease)" style-focus="border-color:rgba(201,162,75,.5)">
+      </div>
+      <div style="display:flex;align-items:center;gap:2px">
+        <button onclick="{{ onAccount }}" aria-label="Аккаунт" style="position:relative;width:42px;height:42px;display:grid;place-items:center;background:none;border:none;cursor:pointer;color:var(--text);transition:color .3s var(--ease)" style-hover="color:var(--gold)"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="8" r="4"></circle><path d="M4.5 20.5c0-4.2 3.4-6.8 7.5-6.8s7.5 2.6 7.5 6.8"></path></svg><sc-if value="{{ loggedIn }}" hint-placeholder-val=""><span style="position:absolute;top:7px;right:5px;min-width:16px;height:16px;padding:0 4px;background:var(--gold);color:#0b0b0c;font-size:9px;font-weight:700;border-radius:9px;display:grid;place-items:center;animation:lxPop .4s var(--ease)">{{ accountInitial }}</span></sc-if></button>
+        <button onclick="{{ onWishIcon }}" aria-label="Избранное" style="position:relative;width:42px;height:42px;display:grid;place-items:center;background:none;border:none;cursor:pointer;color:var(--text);transition:color .3s var(--ease)" style-hover="color:var(--gold)"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 20S3.5 14.5 3.5 8.8C3.5 6 5.6 4 8.1 4c1.8 0 3.1 1 3.9 2.3C12.8 5 14.1 4 15.9 4c2.5 0 4.6 2 4.6 4.8C20.5 14.5 12 20 12 20Z"></path></svg><sc-if value="{{ wishCount }}" hint-placeholder-val=""><span style="position:absolute;top:7px;right:6px;min-width:16px;height:16px;padding:0 4px;background:var(--gold);color:#0b0b0c;font-size:9px;font-weight:700;border-radius:9px;display:grid;place-items:center;animation:lxPop .4s var(--ease)">{{ wishCount }}</span></sc-if></button>
+        <button onclick="{{ onCartIcon }}" aria-label="Корзина" style="position:relative;width:42px;height:42px;display:grid;place-items:center;background:none;border:none;cursor:pointer;color:var(--text);transition:color .3s var(--ease)" style-hover="color:var(--gold)"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6.5 8h11l-1 11.5h-9L6.5 8Z"></path><path d="M9 8V6.6a3 3 0 0 1 6 0V8"></path></svg><sc-if value="{{ cartCount }}" hint-placeholder-val=""><span style="position:absolute;top:7px;right:5px;min-width:16px;height:16px;padding:0 4px;background:var(--gold);color:#0b0b0c;font-size:9px;font-weight:700;border-radius:9px;display:grid;place-items:center;animation:lxPop .4s var(--ease)">{{ cartCount }}</span></sc-if></button>
+      </div>
+    </div>
+  </header>
+
+  <sc-if value="{{ anyMenuOpen }}" hint-placeholder-val=""><div onclick="{{ onBackdrop }}" style="position:fixed;inset:0;z-index:40"></div></sc-if>
+
+  <!-- nav drawer removed — navigation is now always visible inline in the header -->
+
+
+  <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+  <div style="animation:lxView .5s var(--ease)">
+    <section style="position:relative;height:min(84vh,800px);min-height:540px;overflow:hidden;border-bottom:1px solid var(--line)">
+      <sc-for list="{{ heroLayers }}" as="l" hint-placeholder-count="3"><div style="position:absolute;inset:0;background: {{ l.bg }};background-size:cover;background-position:center;will-change:opacity,transform;transition:opacity 1s var(--ease),transform 7s var(--ease); {{ l.extra }}"></div></sc-for>
+      <div style="position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(236,232,224,.02) 0 1px,transparent 1px 11px)"></div>
+      <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,8,9,.93) 0%,rgba(8,8,9,.62) 36%,rgba(8,8,9,.2) 66%,transparent 100%)"></div>
+      <div style="position:absolute;right:34px;bottom:26px;font-family:ui-monospace,Menlo,monospace;font-size:9.5px;letter-spacing:.18em;color:var(--t3);text-transform:uppercase">{{ heroCapt }}</div>
+      <div style="position:relative;max-width:1480px;margin:0 auto;height:100%;padding:0 40px;display:flex;flex-direction:column;justify-content:center">
+        <div style="max-width:640px">
+          <div style="display:flex;align-items:center;gap:16px;margin-bottom:26px"><span style="width:46px;height:1px;background:var(--gold)"></span><span style="font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:var(--gold2)">{{ heroEyebrow }}</span></div>
+          <h1 style="font-family:Prata,serif;font-weight:400;font-size:clamp(44px,6vw,86px);line-height:1.04;color:var(--text);margin:0 0 26px;letter-spacing:-.01em">{{ heroTitle }}</h1>
+          <p style="font-size:16px;line-height:1.7;color:var(--t2);max-width:430px;margin:0 0 38px;letter-spacing:.01em">{{ heroSub }}</p>
+          <button onclick="{{ onHeroCta }}" style="display:inline-flex;align-items:center;gap:14px;background:none;border:1px solid var(--line2);color:var(--text);padding:17px 34px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;transition:all .35s var(--ease)" style-hover="background:var(--gold);color:#0b0b0c;border-color:var(--gold)">{{ heroCta }}<span style="font-size:15px">→</span></button>
+        </div>
+      </div>
+      <button onclick="{{ onHeroPrev }}" aria-label="Назад" style="display:none"></button>
+      <button onclick="{{ onHeroNext }}" aria-label="Вперёд" style="display:none"></button>
+      <div style="position:absolute;left:40px;bottom:34px;display:flex;align-items:center;gap:18px">
+        <div style="display:flex;gap:8px"><sc-for list="{{ heroDots }}" as="d" hint-placeholder-count="3"><button onclick="{{ d.onClick }}" style="height:3px;border:none;cursor:pointer;padding:0;transition:all .4s var(--ease); {{ d.extra }}"></button></sc-for></div>
+        <span style="font-family:ui-monospace,Menlo,monospace;font-size:10px;letter-spacing:.16em;color:var(--t3)">{{ heroNum }} / {{ heroTotal }}</span>
+      </div>
+    </section>
+
+    <div style="border-bottom:1px solid var(--line);background:#0a0a0b">
+      <div style="max-width:1480px;margin:0 auto;padding:22px 40px;display:flex;flex-wrap:wrap;gap:20px 56px;justify-content:center;align-items:center">
+        <div style="display:flex;align-items:center;gap:11px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--t2)"><span style="width:6px;height:6px;background:var(--gold);transform:rotate(45deg)"></span>100% оригинал</div>
+        <div style="display:flex;align-items:center;gap:11px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--t2)"><span style="width:6px;height:6px;background:var(--gold);transform:rotate(45deg)"></span>Доставка по России</div>
+        <div style="display:flex;align-items:center;gap:11px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--t2)"><span style="width:6px;height:6px;background:var(--gold);transform:rotate(45deg)"></span>Пробники в подарок</div>
+        <div style="display:flex;align-items:center;gap:11px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--t2)"><span style="width:6px;height:6px;background:var(--gold);transform:rotate(45deg)"></span>Подарочная упаковка</div>
+      </div>
+    </div>
+
+    <section id="catalog" style="max-width:1480px;margin:0 auto;padding:84px 40px 100px">
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:40px;flex-wrap:wrap">
+        <div>
+          <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px"><span style="width:34px;height:1px;background:var(--gold)"></span><span style="font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold2)">Каталог ароматов</span></div>
+          <h2 style="font-family:Prata,serif;font-weight:400;font-size:clamp(30px,3.6vw,50px);line-height:1.06;color:var(--text);margin:0">Эксклюзивная подборка</h2>
+        </div>
+        <div style="font-size:12px;letter-spacing:.04em;color:var(--t3)">Найдено: <span style="color:var(--text)">{{ resultCount }}</span></div>
+      </div>
+
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;padding-bottom:22px;border-bottom:1px solid var(--line);margin-bottom:42px">
+        <div style="display:flex;gap:9px;flex-wrap:wrap"><sc-for list="{{ familyChips }}" as="c" hint-placeholder-count="6"><button onclick="{{ c.onClick }}" style="padding:9px 17px;border:1px solid var(--line);background:transparent;cursor:pointer;font-family:Manrope,sans-serif;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;transition:all .3s var(--ease); {{ c.extra }}">{{ c.label }}</button></sc-for></div>
+        <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+          <div style="position:relative"><button onclick="{{ onBrandToggle }}" style="display:flex;align-items:center;gap:8px;background:transparent;border:1px solid var(--line);color:var(--t2);height:40px;padding:0 15px;font-family:Manrope,sans-serif;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:border-color .3s var(--ease)" style-hover="border-color:var(--line2)"><span style="opacity:.65">Бренд</span><span style="color:var(--text)">{{ brandValue }}</span><span style="color:var(--t3);font-size:8px;margin-left:2px">▼</span></button><sc-if value="{{ brandOpen }}" hint-placeholder-val=""><div style="position:absolute;top:48px;right:0;min-width:230px;max-height:320px;overflow:auto;background:#141416;border:1px solid var(--line2);z-index:90;padding:6px;animation:lxDrop .24s var(--ease)"><sc-for list="{{ brandOptions }}" as="o"><div onclick="{{ o.onClick }}" style="padding:11px 13px;font-size:12px;color:var(--t2);cursor:pointer;letter-spacing:.04em;transition:all .2s var(--ease); {{ o.extra }}" style-hover="color:var(--text)">{{ o.label }}</div></sc-for></div></sc-if></div>
+          <div style="position:relative"><button onclick="{{ onGenderToggle }}" style="display:flex;align-items:center;gap:8px;background:transparent;border:1px solid var(--line);color:var(--t2);height:40px;padding:0 15px;font-family:Manrope,sans-serif;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:border-color .3s var(--ease)" style-hover="border-color:var(--line2)"><span style="opacity:.65">Пол</span><span style="color:var(--text)">{{ genderValue }}</span><span style="color:var(--t3);font-size:8px;margin-left:2px">▼</span></button><sc-if value="{{ genderOpen }}" hint-placeholder-val=""><div style="position:absolute;top:48px;right:0;min-width:180px;background:#141416;border:1px solid var(--line2);z-index:90;padding:6px;animation:lxDrop .24s var(--ease)"><sc-for list="{{ genderOptions }}" as="o"><div onclick="{{ o.onClick }}" style="padding:11px 13px;font-size:12px;color:var(--t2);cursor:pointer;letter-spacing:.04em;transition:all .2s var(--ease); {{ o.extra }}" style-hover="color:var(--text)">{{ o.label }}</div></sc-for></div></sc-if></div>
+          <div style="position:relative"><button onclick="{{ onSortToggle }}" style="display:flex;align-items:center;gap:8px;background:transparent;border:1px solid var(--line);color:var(--t2);height:40px;padding:0 15px;font-family:Manrope,sans-serif;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:border-color .3s var(--ease)" style-hover="border-color:var(--line2)"><span style="opacity:.65">Сортировка</span><span style="color:var(--text)">{{ sortValue }}</span><span style="color:var(--t3);font-size:8px;margin-left:2px">▼</span></button><sc-if value="{{ sortOpen }}" hint-placeholder-val=""><div style="position:absolute;top:48px;right:0;min-width:210px;background:#141416;border:1px solid var(--line2);z-index:90;padding:6px;animation:lxDrop .24s var(--ease)"><sc-for list="{{ sortOptions }}" as="o"><div onclick="{{ o.onClick }}" style="padding:11px 13px;font-size:12px;color:var(--t2);cursor:pointer;letter-spacing:.04em;transition:all .2s var(--ease); {{ o.extra }}" style-hover="color:var(--text)">{{ o.label }}</div></sc-for></div></sc-if></div>
+        </div>
+      </div>
+
+      <sc-if value="{{ cardsEmpty }}" hint-placeholder-val=""><div style="padding:80px 0;text-align:center"><div style="font-family:Prata,serif;font-size:26px;color:var(--text);margin-bottom:14px">Ничего не найдено</div><div style="font-size:13px;color:var(--t2);margin-bottom:26px">Попробуйте изменить фильтры или поисковый запрос.</div><button onclick="{{ onClearFilters }}" style="background:none;border:1px solid var(--line2);color:var(--text);padding:14px 28px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;transition:all .3s var(--ease)" style-hover="border-color:var(--gold);color:var(--gold)">Сбросить фильтры</button></div></sc-if>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(244px,1fr));gap:46px 28px"><sc-for list="{{ cards }}" as="c" hint-placeholder-count="8"><div style="animation:lxUp .55s var(--ease) {{ c.animDelay }} both"><dc-import name="Product Card" card="{{ c }}" hint-size="100%,470px"></dc-import></div></sc-for></div>
+    </section>
+
+    <section style="border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:#0a0a0b">
+      <div style="max-width:1080px;margin:0 auto;padding:92px 40px;text-align:center">
+        <div style="font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold2);margin-bottom:28px">Философия дома</div>
+        <p style="font-family:Prata,serif;font-size:clamp(22px,2.6vw,34px);line-height:1.42;color:var(--text);margin:0;letter-spacing:.01em">«Аромат — это невидимая, но безошибочная подпись. Мы собираем лишь те, что достойны вашей.»</p>
+      </div>
+    </section>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ isProduct }}" hint-placeholder-val="">
+  <div style="max-width:1480px;margin:0 auto;padding:34px 40px 96px;animation:lxView .5s var(--ease)">
+    <button onclick="{{ pv.onBack }}" style="display:inline-flex;align-items:center;gap:10px;background:none;border:none;color:var(--t2);font-size:11px;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;margin-bottom:34px;transition:color .3s var(--ease)" style-hover="color:var(--gold)"><span style="font-size:15px">←</span>Каталог</button>
+    <div style="display:grid;grid-template-columns:1.08fr 1fr;gap:64px;align-items:start">
+      <div style="position:sticky;top:104px">
+        <div style="position:relative;aspect-ratio:1/1.12;overflow:hidden;background:#0c0c0e;border:1px solid var(--line)">
+          <div style="position:absolute;inset:0;transition:background .6s var(--ease);background: {{ pv.imgBg }}"></div>
+          <div style="position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(236,232,224,.02) 0 1px,transparent 1px 11px)"></div>
+          <sc-if value="{{ pv.badge }}" hint-placeholder-val=""><div style="position:absolute;top:22px;left:22px;padding:7px 14px;background:rgba(11,11,12,.5);backdrop-filter:blur(5px);border:1px solid rgba(201,162,75,.55);color:var(--gold2);font-size:9.5px;letter-spacing:.24em;text-transform:uppercase">{{ pv.badge }}</div></sc-if>
+          <div style="position:absolute;left:24px;bottom:22px;font-family:ui-monospace,Menlo,monospace;font-size:10px;letter-spacing:.16em;color:var(--t3);text-transform:uppercase">{{ pv.capt }}</div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:12px"><sc-for list="{{ pv.thumbs }}" as="t" hint-placeholder-count="4"><button onclick="{{ t.onClick }}" style="aspect-ratio:1/1;cursor:pointer;overflow:hidden;background:#0c0c0e;border:1px solid var(--line);transition:border-color .3s var(--ease); {{ t.extra }}"><div style="width:100%;height:100%;background: {{ t.imgBg }}"></div></button></sc-for></div>
+      </div>
+      <div>
+        <div style="font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--t2);margin-bottom:18px">{{ pv.brand }}</div>
+        <h1 style="font-family:Prata,serif;font-weight:400;font-size:clamp(34px,4vw,54px);line-height:1.05;color:var(--text);margin:0 0 18px">{{ pv.name }}</h1>
+        <p style="font-size:15px;line-height:1.7;color:var(--t2);max-width:460px;margin:0 0 18px">{{ pv.tagline }}</p>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:24px"><span style="color:var(--gold);font-size:15px;letter-spacing:2px">{{ pv.ratingStars }}</span><span style="font-size:13px;color:var(--text)">{{ pv.rating }}</span><span style="font-size:12px;color:var(--t3)">· {{ pv.reviewCount }} отзыва</span></div>
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:30px"><span style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);border:1px solid var(--line);padding:6px 13px">{{ pv.family }}</span><span style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);border:1px solid var(--line);padding:6px 13px">{{ pv.gender }}</span></div>
+        <div style="font-family:Prata,serif;font-size:34px;color:var(--text);margin-bottom:28px;letter-spacing:.01em">{{ pv.priceFmt }}</div>
+        <div style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--t3);margin-bottom:13px">Объём</div>
+        <div style="display:flex;gap:11px;margin-bottom:34px;flex-wrap:wrap"><sc-for list="{{ pv.volChips }}" as="v" hint-placeholder-count="2"><button onclick="{{ v.onClick }}" style="display:flex;flex-direction:column;gap:5px;padding:13px 22px;border:1px solid var(--line);background:transparent;cursor:pointer;transition:all .3s var(--ease); {{ v.extra }}"><span style="font-size:13px;letter-spacing:.05em">{{ v.label }}</span><span style="font-size:11px;color:var(--t3)">{{ v.priceFmt }}</span></button></sc-for></div>
+        <div style="border-top:1px solid var(--line);padding-top:30px;margin-bottom:34px">
+          <div style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold2);margin-bottom:24px">Пирамида аромата</div>
+          <div style="display:flex;flex-direction:column;gap:22px">
+            <div style="display:grid;grid-template-columns:96px 1fr;gap:18px;align-items:start"><div style="font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);padding-top:5px">Верхние</div><div style="display:flex;gap:8px;flex-wrap:wrap"><sc-for list="{{ pv.notesTop }}" as="n" hint-placeholder-count="3"><span style="font-size:12.5px;color:var(--text);border:1px solid var(--line);padding:7px 14px;letter-spacing:.02em">{{ n }}</span></sc-for></div></div>
+            <div style="display:grid;grid-template-columns:96px 1fr;gap:18px;align-items:start"><div style="font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);padding-top:5px">Сердце</div><div style="display:flex;gap:8px;flex-wrap:wrap"><sc-for list="{{ pv.notesHeart }}" as="n" hint-placeholder-count="3"><span style="font-size:12.5px;color:var(--text);border:1px solid var(--line);padding:7px 14px;letter-spacing:.02em">{{ n }}</span></sc-for></div></div>
+            <div style="display:grid;grid-template-columns:96px 1fr;gap:18px;align-items:start"><div style="font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);padding-top:5px">База</div><div style="display:flex;gap:8px;flex-wrap:wrap"><sc-for list="{{ pv.notesBase }}" as="n" hint-placeholder-count="3"><span style="font-size:12.5px;color:var(--text);border:1px solid var(--line);padding:7px 14px;letter-spacing:.02em">{{ n }}</span></sc-for></div></div>
+          </div>
+        </div>
+        <div style="display:flex;gap:14px;align-items:stretch;margin-bottom:18px">
+          <div style="display:flex;align-items:center;border:1px solid var(--line2)"><button onclick="{{ pv.onMinus }}" style="width:48px;height:56px;background:none;border:none;color:var(--text);font-size:20px;cursor:pointer">−</button><span style="width:40px;text-align:center;font-size:15px;color:var(--text)">{{ pv.qty }}</span><button onclick="{{ pv.onPlus }}" style="width:48px;height:56px;background:none;border:none;color:var(--text);font-size:20px;cursor:pointer">+</button></div>
+          <button onclick="{{ pv.onAdd }}" style="flex:1;height:56px;background:var(--gold);border:1px solid var(--gold);color:#0b0b0c;font-family:Manrope,sans-serif;font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;transition:all .3s var(--ease)" style-hover="background:var(--gold2);border-color:var(--gold2)">{{ pv.addLabel }}</button>
+          <button onclick="{{ pv.onWish }}" aria-label="В избранное" style="width:56px;height:56px;display:grid;place-items:center;background:none;border:1px solid var(--line2);color:var(--text);cursor:pointer;transition:all .3s var(--ease)" style-hover="border-color:var(--gold);color:var(--gold)"><span style="font-size:18px">{{ pv.wishGlyph }}</span></button>
+        </div>
+        <div style="display:flex;gap:22px;flex-wrap:wrap;margin-bottom:38px;font-size:11px;letter-spacing:.04em;color:var(--t3)"><span>✓ Оригинал с сертификатом</span><span>✓ Бесплатная доставка</span><span>✓ Пробник в подарок</span></div>
+        <div style="border-top:1px solid var(--line)"><sc-for list="{{ pv.accordions }}" as="a" hint-placeholder-count="3"><div style="border-bottom:1px solid var(--line)"><button onclick="{{ a.onToggle }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;background:none;border:none;color:var(--text);padding:22px 0;cursor:pointer;font-family:Manrope,sans-serif;font-size:13px;letter-spacing:.1em;text-transform:uppercase"><span>{{ a.title }}</span><span style="color:var(--gold);font-size:18px">{{ a.sign }}</span></button><div style="overflow:hidden;transition:all .4s var(--ease);font-size:13.5px;line-height:1.8;color:var(--t2); {{ a.bodyStyle }}">{{ a.body }}</div></div></sc-for></div>
+      </div>
+    </div>
+    <div style="margin-top:96px;border-top:1px solid var(--line);padding-top:54px">
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:14px"><span style="width:34px;height:1px;background:var(--gold)"></span><h3 style="font-family:Prata,serif;font-weight:400;font-size:28px;color:var(--text);margin:0">Отзывы</h3></div>
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:36px"><span style="color:var(--gold);font-size:17px;letter-spacing:2px">{{ pv.ratingStars }}</span><span style="font-size:15px;color:var(--text)">{{ pv.rating }} из 5</span><span style="font-size:12px;color:var(--t3)">· {{ pv.reviewCount }} отзыва</span></div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:22px"><sc-for list="{{ pv.reviews }}" as="r" hint-placeholder-count="4"><div style="border:1px solid var(--line);background:#0c0c0d;padding:24px"><div style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px"><span style="font-size:13px;color:var(--text);letter-spacing:.04em">{{ r.name }}</span><span style="color:var(--gold);font-size:12px;letter-spacing:1.5px">{{ r.stars }}</span></div><p style="font-size:13.5px;line-height:1.7;color:var(--t2);margin:0 0 12px">{{ r.text }}</p><div style="font-size:11px;color:var(--t3);letter-spacing:.04em">{{ r.date }}</div></div></sc-for></div>
+    </div>
+    <div style="margin-top:96px;border-top:1px solid var(--line);padding-top:54px">
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:38px"><span style="width:34px;height:1px;background:var(--gold)"></span><h3 style="font-family:Prata,serif;font-weight:400;font-size:28px;color:var(--text);margin:0">Похожие ароматы</h3></div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(244px,1fr));gap:46px 28px"><sc-for list="{{ pv.related }}" as="c" hint-placeholder-count="4"><dc-import name="Product Card" card="{{ c }}" hint-size="100%,470px"></dc-import></sc-for></div>
+    </div>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ isCart }}" hint-placeholder-val="">
+  <div style="max-width:1200px;margin:0 auto;padding:48px 40px 96px;min-height:60vh;animation:lxView .5s var(--ease)">
+    <sc-if value="{{ showEmpty }}" hint-placeholder-val=""><div style="text-align:center;padding:90px 0"><div style="font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold2);margin-bottom:22px">Корзина</div><div style="font-family:Prata,serif;font-size:34px;color:var(--text);margin-bottom:16px">Пока пусто</div><p style="font-size:14px;color:var(--t2);margin:0 0 32px">Добавьте ароматы из каталога, чтобы оформить заказ.</p><button onclick="{{ onContinue }}" style="background:var(--gold);border:none;color:#0b0b0c;padding:16px 34px;font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;transition:background .3s var(--ease)" style-hover="background:var(--gold2)">Перейти в каталог</button></div></sc-if>
+
+    <sc-if value="{{ showList }}" hint-placeholder-val="">
+      <h1 style="font-family:Prata,serif;font-weight:400;font-size:clamp(30px,4vw,46px);color:var(--text);margin:0 0 8px">Корзина</h1>
+      <div style="font-size:12px;letter-spacing:.06em;color:var(--t3);margin-bottom:42px">{{ cartCount }} шт.</div>
+      <div style="display:grid;grid-template-columns:1fr 380px;gap:54px;align-items:start">
+        <div>
+          <div style="border-top:1px solid var(--line)"><sc-for list="{{ items }}" as="it" hint-placeholder-count="2"><div style="display:grid;grid-template-columns:92px 1fr auto;gap:22px;padding:26px 0;border-bottom:1px solid var(--line);align-items:center"><div style="aspect-ratio:3/3.6;background:#0c0c0e;border:1px solid var(--line);position:relative;overflow:hidden"><div style="position:absolute;inset:0;background: {{ it.imgBg }}"></div></div><div style="display:flex;flex-direction:column;gap:6px"><div style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--t2)">{{ it.brand }}</div><div style="font-family:Prata,serif;font-size:21px;color:var(--text);line-height:1.1">{{ it.name }}</div><div style="font-size:11px;color:var(--t3)">{{ it.volLabel }} · {{ it.unitFmt }}</div><div style="display:flex;align-items:center;gap:18px;margin-top:10px"><div style="display:flex;align-items:center;border:1px solid var(--line2)"><button onclick="{{ it.onMinus }}" style="width:36px;height:38px;background:none;border:none;color:var(--text);font-size:16px;cursor:pointer">−</button><span style="width:34px;text-align:center;font-size:13px;color:var(--text)">{{ it.qty }}</span><button onclick="{{ it.onPlus }}" style="width:36px;height:38px;background:none;border:none;color:var(--text);font-size:16px;cursor:pointer">+</button></div><button onclick="{{ it.onRemove }}" style="background:none;border:none;color:var(--t3);font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:color .3s var(--ease)" style-hover="color:var(--gold)">Удалить</button></div></div><div style="font-family:Prata,serif;font-size:19px;color:var(--text);white-space:nowrap">{{ it.lineFmt }}</div></div></sc-for></div>
+          <button onclick="{{ onContinue }}" style="margin-top:30px;display:inline-flex;align-items:center;gap:10px;background:none;border:none;color:var(--t2);font-size:11px;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;transition:color .3s var(--ease)" style-hover="color:var(--gold)"><span>←</span>Продолжить покупки</button>
+        </div>
+        <div style="border:1px solid var(--line);background:#0c0c0d;padding:32px">
+          <div style="font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold2);margin-bottom:26px">Ваш заказ</div>
+          <div style="display:flex;flex-direction:column;gap:15px;font-size:13px;color:var(--t2);padding-bottom:24px;border-bottom:1px solid var(--line)"><div style="display:flex;justify-content:space-between"><span>Сумма</span><span style="color:var(--text)">{{ subtotalFmt }}</span></div><sc-if value="{{ hasDiscount }}" hint-placeholder-val=""><div style="display:flex;justify-content:space-between"><span>Скидка</span><span style="color:var(--gold2)">{{ discountFmt }}</span></div></sc-if><div style="display:flex;justify-content:space-between"><span>Доставка</span><span style="color:var(--text)">Бесплатно</span></div><div style="display:flex;justify-content:space-between"><span>Образцы</span><span style="color:var(--text)">В подарок</span></div></div>
+          <div style="display:flex;gap:8px;margin:22px 0"><input value="{{ promo }}" oninput="{{ onPromo }}" placeholder="Промокод" style="flex:1;height:44px;background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--text);padding:0 14px;font-family:Manrope,sans-serif;font-size:12px;letter-spacing:.06em;outline:none"><button onclick="{{ onApplyPromo }}" style="height:44px;padding:0 18px;background:none;border:1px solid var(--line2);color:var(--text);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:all .3s var(--ease)" style-hover="border-color:var(--gold);color:var(--gold)">ОК</button></div>
+          <sc-if value="{{ hasPromoMsg }}" hint-placeholder-val=""><div style="font-size:11px;color:var(--gold2);margin-bottom:14px;letter-spacing:.04em">{{ promoMsg }}</div></sc-if>
+          <div style="display:flex;justify-content:space-between;align-items:baseline;padding-top:20px;border-top:1px solid var(--line);margin-bottom:26px"><span style="font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--t2)">Итого</span><span style="font-family:Prata,serif;font-size:28px;color:var(--text)">{{ totalFmt }}</span></div>
+          <button onclick="{{ onCheckout }}" style="width:100%;height:56px;background:var(--gold);border:none;color:#0b0b0c;font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;transition:background .3s var(--ease)" style-hover="background:var(--gold2)">Оформить заказ</button>
+          <div style="text-align:center;font-size:10.5px;color:var(--t3);margin-top:16px;letter-spacing:.04em">Безопасная оплата · Возврат 14 дней</div>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ showCheckout }}" hint-placeholder-val="">
+      <button onclick="{{ onBackToCart }}" style="display:inline-flex;align-items:center;gap:10px;background:none;border:none;color:var(--t2);font-size:11px;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;margin-bottom:30px;transition:color .3s var(--ease)" style-hover="color:var(--gold)"><span>←</span>Назад в корзину</button>
+      <h1 style="font-family:Prata,serif;font-weight:400;font-size:clamp(30px,4vw,46px);color:var(--text);margin:0 0 38px">Оформление заказа</h1>
+      <div style="display:grid;grid-template-columns:1fr 380px;gap:54px;align-items:start">
+        <div style="display:flex;flex-direction:column;gap:40px">
+          <div><div style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold2);margin-bottom:22px">01 — Контакты</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:16px"><input value="{{ fName.value }}" oninput="{{ fName.onInput }}" placeholder="Имя и фамилия" style="height:50px;background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--text);padding:0 16px;font-family:Manrope,sans-serif;font-size:13px;letter-spacing:.02em;outline:none"><input value="{{ fPhone.value }}" oninput="{{ fPhone.onInput }}" placeholder="Телефон" style="height:50px;background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--text);padding:0 16px;font-family:Manrope,sans-serif;font-size:13px;letter-spacing:.02em;outline:none"><input value="{{ fEmail.value }}" oninput="{{ fEmail.onInput }}" placeholder="E-mail" style="grid-column:1/3;height:50px;background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--text);padding:0 16px;font-family:Manrope,sans-serif;font-size:13px;letter-spacing:.02em;outline:none"></div></div>
+          <div><div style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold2);margin-bottom:22px">02 — Доставка</div><div style="display:flex;gap:11px;flex-wrap:wrap;margin-bottom:16px"><sc-for list="{{ deliveryOpts }}" as="o"><button onclick="{{ o.onClick }}" style="padding:12px 20px;border:1px solid var(--line);background:transparent;cursor:pointer;font-family:Manrope,sans-serif;font-size:12px;letter-spacing:.04em;transition:all .3s var(--ease); {{ o.extra }}">{{ o.label }}</button></sc-for></div><div style="display:grid;grid-template-columns:1fr 2fr;gap:16px"><input value="{{ fCity.value }}" oninput="{{ fCity.onInput }}" placeholder="Город" style="height:50px;background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--text);padding:0 16px;font-family:Manrope,sans-serif;font-size:13px;letter-spacing:.02em;outline:none"><input value="{{ fAddress.value }}" oninput="{{ fAddress.onInput }}" placeholder="Адрес доставки" style="height:50px;background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--text);padding:0 16px;font-family:Manrope,sans-serif;font-size:13px;letter-spacing:.02em;outline:none"></div></div>
+          <div><div style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold2);margin-bottom:22px">03 — Оплата</div><div style="display:flex;gap:11px;flex-wrap:wrap"><sc-for list="{{ paymentOpts }}" as="o"><button onclick="{{ o.onClick }}" style="padding:12px 20px;border:1px solid var(--line);background:transparent;cursor:pointer;font-family:Manrope,sans-serif;font-size:12px;letter-spacing:.04em;transition:all .3s var(--ease); {{ o.extra }}">{{ o.label }}</button></sc-for></div></div>
+        </div>
+        <div style="border:1px solid var(--line);background:#0c0c0d;padding:32px">
+          <div style="font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold2);margin-bottom:24px">Ваш заказ</div>
+          <div style="display:flex;flex-direction:column;gap:15px;padding-bottom:22px;border-bottom:1px solid var(--line);margin-bottom:20px"><sc-for list="{{ checkoutItems }}" as="it"><div style="display:flex;justify-content:space-between;gap:14px;font-size:12.5px"><span style="color:var(--t2)">{{ it.brand }} {{ it.name }} <span style="color:var(--t3)">×{{ it.qty }}</span></span><span style="color:var(--text);white-space:nowrap">{{ it.lineFmt }}</span></div></sc-for></div>
+          <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:24px"><span style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--t2)">Итого</span><span style="font-family:Prata,serif;font-size:26px;color:var(--text)">{{ totalFmt }}</span></div>
+          <button onclick="{{ onPlaceOrder }}" style="width:100%;height:56px;background:var(--gold);border:none;color:#0b0b0c;font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;transition:background .3s var(--ease)" style-hover="background:var(--gold2)">Подтвердить заказ</button>
+          <div style="text-align:center;font-size:10.5px;color:var(--t3);margin-top:16px;letter-spacing:.04em">Нажимая кнопку, вы соглашаетесь с условиями</div>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ showDone }}" hint-placeholder-val=""><div style="text-align:center;padding:80px 0;max-width:540px;margin:0 auto;animation:lxUp .5s var(--ease)"><div style="width:72px;height:72px;border:1px solid var(--gold);border-radius:50%;display:grid;place-items:center;margin:0 auto 30px"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="#c9a24b" stroke-width="1.3"><polyline points="5 12.5 10 17.5 19 7"></polyline></svg></div><div style="font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold2);margin-bottom:20px">Заказ оформлен</div><h1 style="font-family:Prata,serif;font-weight:400;font-size:40px;color:var(--text);margin:0 0 18px">Благодарим за заказ</h1><p style="font-size:14px;line-height:1.7;color:var(--t2);margin:0 0 8px">Номер вашего заказа <span style="color:var(--gold2)">{{ orderNo }}</span>.</p><p style="font-size:14px;line-height:1.7;color:var(--t2);margin:0 0 34px">Мы свяжемся с вами для подтверждения доставки.</p><button onclick="{{ onContinue }}" style="background:var(--gold);border:none;color:#0b0b0c;padding:16px 34px;font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;transition:background .3s var(--ease)" style-hover="background:var(--gold2)">Продолжить покупки</button></div></sc-if>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ isAccount }}" hint-placeholder-val="">
+  <div style="max-width:1100px;margin:0 auto;padding:48px 40px 96px;min-height:60vh;animation:lxView .5s var(--ease)">
+    <sc-if value="{{ av.notLoggedIn }}" hint-placeholder-val="{{ true }}">
+      <div style="max-width:440px;margin:0 auto">
+        <div style="text-align:center;margin-bottom:34px">
+          <div style="font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold2);margin-bottom:18px">Личный кабинет</div>
+          <h1 style="font-family:Prata,serif;font-weight:400;font-size:clamp(28px,4vw,40px);color:var(--text);margin:0">Добро пожаловать</h1>
+        </div>
+        <div style="display:flex;border-bottom:1px solid var(--line);margin-bottom:30px">
+          <button onclick="{{ av.onTabLogin }}" style="flex:1;background:none;border:none;border-bottom:2px solid transparent;padding:16px 0;font-family:Manrope,sans-serif;font-size:12px;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;transition:all .3s var(--ease); {{ av.tabLoginExtra }}">Вход</button>
+          <button onclick="{{ av.onTabRegister }}" style="flex:1;background:none;border:none;border-bottom:2px solid transparent;padding:16px 0;font-family:Manrope,sans-serif;font-size:12px;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;transition:all .3s var(--ease); {{ av.tabRegExtra }}">Регистрация</button>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <sc-if value="{{ av.isRegister }}" hint-placeholder-val=""><input value="{{ av.aName.value }}" oninput="{{ av.aName.onInput }}" placeholder="Имя и фамилия" style="height:52px;background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--text);padding:0 16px;font-family:Manrope,sans-serif;font-size:13px;letter-spacing:.02em;outline:none"><input value="{{ av.aPhone.value }}" oninput="{{ av.aPhone.onInput }}" placeholder="Телефон" style="height:52px;background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--text);padding:0 16px;font-family:Manrope,sans-serif;font-size:13px;letter-spacing:.02em;outline:none"></sc-if>
+          <input value="{{ av.aEmail.value }}" oninput="{{ av.aEmail.onInput }}" placeholder="E-mail" style="height:52px;background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--text);padding:0 16px;font-family:Manrope,sans-serif;font-size:13px;letter-spacing:.02em;outline:none">
+          <input value="{{ av.aPassword.value }}" oninput="{{ av.aPassword.onInput }}" type="password" placeholder="Пароль" style="height:52px;background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--text);padding:0 16px;font-family:Manrope,sans-serif;font-size:13px;letter-spacing:.02em;outline:none">
+          <sc-if value="{{ av.hasAuthMsg }}" hint-placeholder-val=""><div style="font-size:12px;color:#e2a59a;letter-spacing:.02em">{{ av.authMsg }}</div></sc-if>
+          <button onclick="{{ av.onSubmit }}" style="height:54px;background:var(--gold);border:none;color:#0b0b0c;font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;transition:background .3s var(--ease)" style-hover="background:var(--gold2)">{{ av.submitLabel }}</button>
+        </div>
+        <div style="text-align:center;margin-top:26px"><button onclick="{{ av.onBack }}" style="background:none;border:none;color:var(--t3);font-size:11px;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:color .3s var(--ease)" style-hover="color:var(--gold)">← На главную</button></div>
+      </div>
+    </sc-if>
+    <sc-if value="{{ av.loggedIn }}" hint-placeholder-val="">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:42px">
+        <div style="display:flex;align-items:center;gap:18px">
+          <div style="width:64px;height:64px;border-radius:50%;border:1px solid var(--gold);display:grid;place-items:center;font-family:Prata,serif;font-size:26px;color:var(--gold2)">{{ av.userInitial }}</div>
+          <div><div style="font-family:Prata,serif;font-size:26px;color:var(--text);line-height:1.1">{{ av.userName }}</div><div style="font-size:12px;color:var(--t3);margin-top:6px">{{ av.userEmail }} · {{ av.userPhone }}</div></div>
+        </div>
+        <button onclick="{{ av.onLogout }}" style="background:none;border:1px solid var(--line2);color:var(--text);padding:13px 24px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;transition:all .3s var(--ease)" style-hover="border-color:var(--gold);color:var(--gold)">Выйти</button>
+      </div>
+      <div style="border-top:1px solid var(--line);padding-top:34px">
+        <div style="font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold2);margin-bottom:26px">История заказов</div>
+        <sc-if value="{{ av.noOrders }}" hint-placeholder-val=""><div style="padding:50px 0;text-align:center"><p style="font-size:14px;color:var(--t2);margin:0 0 24px">У вас пока нет заказов.</p><button onclick="{{ av.onShop }}" style="background:var(--gold);border:none;color:#0b0b0c;padding:15px 30px;font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;transition:background .3s var(--ease)" style-hover="background:var(--gold2)">Перейти в каталог</button></div></sc-if>
+        <sc-if value="{{ av.hasOrders }}" hint-placeholder-val=""><div style="display:flex;flex-direction:column;gap:18px"><sc-for list="{{ av.orders }}" as="o" hint-placeholder-count="2"><div style="border:1px solid var(--line);background:#0c0c0d;padding:24px 26px"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:16px;margin-bottom:16px"><div><span style="font-size:13px;color:var(--text);letter-spacing:.06em">Заказ {{ o.no }}</span><span style="font-size:12px;color:var(--t3);margin-left:12px">{{ o.date }} · {{ o.countLabel }}</span></div><span style="font-family:Prata,serif;font-size:20px;color:var(--text)">{{ o.totalFmt }}</span></div><div style="display:flex;flex-direction:column;gap:8px"><sc-for list="{{ o.items }}" as="li"><div style="display:flex;justify-content:space-between;gap:14px;font-size:12.5px"><span style="color:var(--t2)">{{ li.label }} <span style="color:var(--t3)">{{ li.vol }} ×{{ li.qty }}</span></span><span style="color:var(--text);white-space:nowrap">{{ li.lineFmt }}</span></div></sc-for></div></div></sc-for></div></sc-if>
+      </div>
+    </sc-if>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ isInfo }}" hint-placeholder-val="">
+  <div style="max-width:920px;margin:0 auto;padding:48px 40px 96px;min-height:60vh;animation:lxView .5s var(--ease)">
+    <button onclick="{{ iv.onBack }}" style="display:inline-flex;align-items:center;gap:10px;background:none;border:none;color:var(--t2);font-size:11px;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;margin-bottom:34px;transition:color .3s var(--ease)" style-hover="color:var(--gold)"><span style="font-size:15px">←</span>На главную</button>
+    <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px"><span style="width:34px;height:1px;background:var(--gold)"></span><span style="font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold2)">{{ iv.eyebrow }}</span></div>
+    <h1 style="font-family:Prata,serif;font-weight:400;font-size:clamp(32px,4.4vw,52px);line-height:1.06;color:var(--text);margin:0 0 22px">{{ iv.title }}</h1>
+    <p style="font-size:16px;line-height:1.7;color:var(--t2);max-width:600px;margin:0 0 46px">{{ iv.lead }}</p>
+    <sc-if value="{{ iv.hasContacts }}" hint-placeholder-val=""><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-bottom:50px"><div style="border:1px solid var(--line);background:#0c0c0d;padding:22px"><div style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--t3);margin-bottom:10px">Телефон</div><div style="font-size:15px;color:var(--text)">{{ iv.contacts.phone }}</div></div><div style="border:1px solid var(--line);background:#0c0c0d;padding:22px"><div style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--t3);margin-bottom:10px">E-mail</div><div style="font-size:15px;color:var(--text)">{{ iv.contacts.email }}</div></div><div style="border:1px solid var(--line);background:#0c0c0d;padding:22px"><div style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--t3);margin-bottom:10px">Telegram</div><div style="font-size:15px;color:var(--text)">{{ iv.contacts.telegram }}</div></div><div style="border:1px solid var(--line);background:#0c0c0d;padding:22px"><div style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--t3);margin-bottom:10px">Адрес</div><div style="font-size:15px;color:var(--text)">{{ iv.contacts.address }}</div></div><div style="border:1px solid var(--line);background:#0c0c0d;padding:22px"><div style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--t3);margin-bottom:10px">Часы работы</div><div style="font-size:15px;color:var(--text)">{{ iv.contacts.hours }}</div></div></div></sc-if>
+    <div style="display:flex;flex-direction:column;gap:34px"><sc-for list="{{ iv.sections }}" as="s" hint-placeholder-count="3"><div style="border-top:1px solid var(--line);padding-top:26px"><h3 style="font-family:Prata,serif;font-weight:400;font-size:22px;color:var(--text);margin:0 0 12px">{{ s.h }}</h3><p style="font-size:14.5px;line-height:1.8;color:var(--t2);margin:0;max-width:660px">{{ s.body }}</p></div></sc-for></div>
+    <div style="margin-top:54px"><button onclick="{{ iv.onShop }}" style="display:inline-flex;align-items:center;gap:14px;background:none;border:1px solid var(--line2);color:var(--text);padding:16px 32px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;transition:all .35s var(--ease)" style-hover="background:var(--gold);color:#0b0b0c;border-color:var(--gold)">В каталог<span style="font-size:15px">→</span></button></div>
+  </div>
+  </sc-if>
+
+  <footer style="border-top:1px solid var(--line);background:#090909;padding:78px 40px 38px">
+    <div style="max-width:1480px;margin:0 auto">
+      <div style="display:grid;grid-template-columns:1.5fr 1fr 1fr 1.3fr;gap:48px;padding-bottom:54px;border-bottom:1px solid var(--line)">
+        <div>
+          <div style="display:flex;flex-direction:column;line-height:1;margin-bottom:22px"><span style="font-family:Prata,serif;font-size:24px;letter-spacing:.3em;padding-left:.3em">LUXE</span><span style="font-size:8px;letter-spacing:.46em;color:var(--gold);margin-top:5px;padding-left:.46em">ПАРФЮМЕРИЯ</span></div>
+          <p style="font-size:13px;line-height:1.8;color:var(--t2);max-width:300px;margin:0">Нишевая и селективная парфюмерия из официальных источников. Подбор ароматов, образцы и доставка по всей России.</p>
+        </div>
+        <div><div style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--t3);margin-bottom:20px">Каталог</div><div style="display:flex;flex-direction:column;gap:13px"><sc-for list="{{ navLinks }}" as="n" hint-placeholder-count="6"><button onclick="{{ n.onClick }}" style="text-align:left;background:none;border:none;color:var(--t2);font-family:Manrope,sans-serif;font-size:13px;letter-spacing:.02em;cursor:pointer;padding:0;transition:color .3s var(--ease)" style-hover="color:var(--gold)">{{ n.label }}</button></sc-for></div></div>
+        <div><div style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--t3);margin-bottom:20px">Клиентам</div><div style="display:flex;flex-direction:column;gap:13px"><sc-for list="{{ clientLinks }}" as="l" hint-placeholder-count="6"><button onclick="{{ l.onClick }}" style="text-align:left;background:none;border:none;color:var(--t2);font-family:Manrope,sans-serif;font-size:13px;letter-spacing:.02em;cursor:pointer;padding:0;transition:color .3s var(--ease)" style-hover="color:var(--gold)">{{ l.label }}</button></sc-for></div></div>
+        <div><div style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--t3);margin-bottom:20px">Рассылка</div><p style="font-size:13px;line-height:1.7;color:var(--t2);margin:0 0 18px">Первыми узнавайте о поступлениях и закрытых распродажах.</p><sc-if value="{{ subscribed }}" hint-placeholder-val=""><div style="font-size:13px;color:var(--gold2);letter-spacing:.04em">Спасибо за подписку.</div></sc-if><sc-if value="{{ notSubscribed }}" hint-placeholder-val="{{ true }}"><div style="display:flex;gap:8px"><input value="{{ subEmail }}" oninput="{{ onSubEmail }}" placeholder="Ваш e-mail" style="flex:1;height:46px;background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--text);padding:0 14px;font-family:Manrope,sans-serif;font-size:12px;letter-spacing:.04em;outline:none"><button onclick="{{ onSubscribe }}" aria-label="Подписаться" style="width:46px;height:46px;display:grid;place-items:center;background:var(--gold);border:none;color:#0b0b0c;cursor:pointer;transition:background .3s var(--ease)" style-hover="background:var(--gold2)"><span style="font-size:16px">→</span></button></div><sc-if value="{{ hasSubMsg }}" hint-placeholder-val=""><div style="font-size:11px;color:#e2a59a;margin-top:10px;letter-spacing:.02em">{{ subMsg }}</div></sc-if></sc-if></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;padding-top:30px">
+        <div style="font-size:11px;color:var(--t3);letter-spacing:.04em">© 2026 LUXE Парфюмерия. Все права защищены.</div>
+        <div style="display:flex;gap:8px;align-items:center"><span style="font-size:9.5px;letter-spacing:.12em;color:var(--t3);border:1px solid var(--line);padding:7px 12px">VISA</span><span style="font-size:9.5px;letter-spacing:.12em;color:var(--t3);border:1px solid var(--line);padding:7px 12px">MASTERCARD</span><span style="font-size:9.5px;letter-spacing:.12em;color:var(--t3);border:1px solid var(--line);padding:7px 12px">МИР</span><span style="font-size:9.5px;letter-spacing:.12em;color:var(--t3);border:1px solid var(--line);padding:7px 12px">СБП</span></div>
+      </div>
+    </div>
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script="" data-props="{&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#c9a24b&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;#c9a24b&quot;,&quot;#d8b15f&quot;,&quot;#c98f6a&quot;,&quot;#cfc9bd&quot;],&quot;section&quot;:&quot;Оформление&quot;},&quot;heroAutoplay&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Оформление&quot;},&quot;showBadges&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Оформление&quot;}}">
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.products = [
+      {id:'creed',brand:'CREED',name:'Millésime Impérial',family:'Цитрусовые',gender:'Унисекс',badge:'ХИТ',glow:'201,161,95',photo:'photos/creed.jpg',
+       tagline:'Морская свежесть в обрамлении ириса и солёного мускуса — аромат солнца и южных побережий.',
+       vols:[{ml:50,price:27000},{ml:100,price:43500}],mainVol:1,
+       top:['Бергамот','Мандарин','Морская соль'],heart:['Ирис','Чёрная смородина'],base:['Сандал','Мускус','Амбра']},
+      {id:'tomford',brand:'TOM FORD',name:'Oud Wood',family:'Древесные',gender:'Унисекс',badge:'',glow:'176,123,78',photo:'photos/tomford.jpg',
+       tagline:'Дымный уд, сандал и розовый перец — обволакивающая древесина сдержанной роскоши.',
+       vols:[{ml:50,price:17500},{ml:100,price:28000}],mainVol:1,
+       top:['Розовый перец','Кардамон'],heart:['Уд','Сандал','Ветивер'],base:['Ваниль','Амбра','Тонка']},
+      {id:'amouage',brand:'AMOUAGE',name:'Gold Man',family:'Восточные',gender:'Мужской',badge:'ЛЮКС',glow:'201,162,75',photo:'photos/amouage.jpg',
+       tagline:'Парадная цветочно-восточная композиция с розой и ладаном. Золото в прямом смысле.',
+       vols:[{ml:50,price:39000},{ml:100,price:61000}],mainVol:1,
+       top:['Лаванда','Можжевельник'],heart:['Роза','Жасмин','Ладан'],base:['Уд','Мускус','Кедр']},
+      {id:'dior',brand:'DIOR',name:'Sauvage Elixir',family:'Пряные',gender:'Мужской',badge:'',glow:'120,134,150',photo:'photos/dior.jpg',
+       tagline:'Концентрат грейпфрута, лаванды и пряностей на амбровой базе. Плотный, узнаваемый шлейф.',
+       vols:[{ml:60,price:31000},{ml:100,price:44000}],mainVol:0,
+       top:['Грейпфрут','Корица','Бадьян'],heart:['Лаванда','Мускатный шалфей'],base:['Амбра','Сандал','Ликорис']},
+      {id:'chanel',brand:'CHANEL',name:'No.\u00A05 L’Eau',family:'Цветочные',gender:'Женский',badge:'НОВИНКА',glow:'198,191,154',photo:'photos/chanel.jpg',
+       tagline:'Прозрачная версия легенды: альдегиды, роза и жасмин в лёгкой, искрящейся огранке.',
+       vols:[{ml:50,price:13500},{ml:100,price:19500}],mainVol:1,
+       top:['Альдегиды','Лимон','Нероли'],heart:['Роза','Жасмин','Иланг-иланг'],base:['Кедр','Белый мускус']},
+      {id:'xerjoff',brand:'XERJOFF',name:'Naxos',family:'Восточные',gender:'Унисекс',badge:'НИШЕВЫЙ',glow:'181,129,74',photo:'photos/xerjoff.jpg',
+       tagline:'Мёд, табак и ваниль с лавандовой огранкой. Сицилийская щедрость в нишевом исполнении.',
+       vols:[{ml:50,price:33000},{ml:100,price:52000}],mainVol:1,
+       top:['Бергамот','Лаванда'],heart:['Корица','Мёд','Табак'],base:['Ваниль','Тонка','Кашмеран']},
+      {id:'marly',brand:'PARFUMS DE MARLY',name:'Pegasus',family:'Древесные',gender:'Мужской',badge:'',glow:'194,176,138',photo:'photos/marly.jpg',
+       tagline:'Горький миндаль и гелиотроп на сливочно-древесной базе. Бархатная мужская классика.',
+       vols:[{ml:75,price:24000},{ml:125,price:35000}],mainVol:1,
+       top:['Горький миндаль','Бергамот'],heart:['Гелиотроп','Жасмин'],base:['Ваниль','Сандал','Амбра']},
+      {id:'roja',brand:'ROJA DOVE',name:'Elysium',family:'Цитрусовые',gender:'Мужской',badge:'ЭКСКЛЮЗИВ',glow:'150,168,150',photo:'photos/roja.jpg',
+       tagline:'Искристый цитрус, можжевельник и кедр. Свежесть высшего класса — лёгкая и дорогая.',
+       vols:[{ml:50,price:49000},{ml:100,price:78000}],mainVol:1,
+       top:['Лимон','Грейпфрут','Чёрный перец'],heart:['Кипарис','Можжевельник'],base:['Кедр','Амбра','Мускус']}
+    ];
+    this.heroSlides = [
+      {eyebrow:'Новая коллекция',title:'Роскошь в каждой капле',sub:'Изысканные ароматы для тех, кто привык к лучшему.',cta:'Смотреть коллекцию',glow:'201,162,90',photo:'photos/hero-1.jpg',capt:'HERO · FULL-BLEED PRODUCT PHOTO'},
+      {eyebrow:'Для него',title:'Сила тихого присутствия',sub:'Глубокие древесные и пряные композиции с характером.',cta:'Мужские ароматы',glow:'150,120,90',photo:'photos/hero-2.jpg',capt:'HERO · FULL-BLEED PRODUCT PHOTO'},
+      {eyebrow:'Нишевые дома',title:'Редкие тиражи, штучная работа',sub:'Парфюмерия, которую носят единицы.',cta:'Открыть нишу',glow:'120,134,150',photo:'photos/hero-3.jpg',capt:'HERO · FULL-BLEED PRODUCT PHOTO'}
+    ];
+    this.familyOptions = ['Все','Цветочные','Древесные','Восточные','Цитрусовые','Пряные'];
+    this.genderOptions = ['Все','Женский','Мужской','Унисекс'];
+    this.sortOptions = ['Рекомендуемые','Сначала дешёвые','Сначала дорогие','Новинки'];
+    this.accordionsData = [
+      {title:'Состав и стойкость',body:'Eau de Parfum. Стойкость 8–12 часов, умеренный шлейф. Концентрация ароматических масел 18–22%.'},
+      {title:'Доставка и возврат',body:'Бесплатная курьерская доставка по России за 1–3 дня. Возврат в течение 14 дней при сохранении упаковки.'},
+      {title:'Оригинальность',body:'Только официальные поставки. Каждый флакон сопровождается сертификатом подлинности и проходит проверку.'}
+    ];
+    this.reviews = [
+      {name:'Анастасия К.',date:'12 мая 2026',rating:5,text:'Аромат раскрывается постепенно и держится весь день. Упаковка достойна подарка — пришло быстро, с пробниками.'},
+      {name:'Дмитрий В.',date:'28 апреля 2026',rating:5,text:'Брал вслепую по описанию — попадание стопроцентное. Оригинал, есть сертификат. Шлейф деликатный, но заметный.'},
+      {name:'Марина С.',date:'7 апреля 2026',rating:4,text:'Очень красивый и дорогой по звучанию парфюм. Сняла звезду только за то, что хотелось бы стойкости чуть больше.'},
+      {name:'Игорь Л.',date:'19 марта 2026',rating:5,text:'Сервис на высоте: консультация, быстрая доставка, всё аккуратно упаковано. Беру здесь уже второй флакон.'}
+    ];
+    this.infoData = {
+      about:{ eyebrow:'О доме', title:'О нас',
+        lead:'LUXE Парфюмерия — селективная и нишевая парфюмерия для тех, кто ценит детали.',
+        sections:[
+          {h:'Философия',body:'Мы собираем ароматы, достойные стать вашей подписью: редкие тиражи, штучную работу и признанную классику парфюмерного искусства.'},
+          {h:'Подбор',body:'Наши консультанты помогут выбрать аромат под настроение, сезон и повод. Образцы в подарок к каждому заказу — чтобы решение было осознанным.'},
+          {h:'Доверие',body:'Тысячи клиентов по всей России возвращаются к нам за оригинальной парфюмерией, безупречным сервисом и честными ценами.'}
+        ]},
+      delivery:{ eyebrow:'Сервис', title:'Доставка и оплата',
+        lead:'Бесплатная доставка по всей России и несколько способов оплаты — выберите удобный.',
+        sections:[
+          {h:'Курьерская доставка',body:'По Москве и Санкт-Петербургу — в день заказа или на следующий день. По России — 1–3 рабочих дня курьерской службой до двери.'},
+          {h:'Пункты выдачи и почта',body:'Самовывоз из партнёрских пунктов выдачи и доставка Почтой России в любой населённый пункт. Сроки — 2–7 дней в зависимости от региона.'},
+          {h:'Способы оплаты',body:'Банковской картой онлайн, через СБП по QR-коду или наличными и картой при получении. Все платежи проходят по защищённому соединению.'},
+          {h:'Упаковка',body:'Каждый заказ бережно упакован в фирменную коробку с пробниками в подарок. Доступна подарочная упаковка с открыткой.'}
+        ]},
+      returns:{ eyebrow:'Сервис', title:'Возврат и обмен',
+        lead:'Если аромат не подошёл — вернём деньги в течение 14 дней.',
+        sections:[
+          {h:'Условия возврата',body:'Парфюмерию надлежащего качества можно вернуть в течение 14 дней с момента получения при сохранении товарного вида, упаковки и заводской плёнки.'},
+          {h:'Как оформить',body:'Свяжитесь с нами по телефону или почте, и мы согласуем удобный способ возврата. Деньги возвращаются на ту же карту в течение 3–10 рабочих дней.'},
+          {h:'Брак или ошибка',body:'Если флакон повреждён или пришёл не тот аромат — заменим за наш счёт и компенсируем доставку. Просто пришлите фото при получении.'}
+        ]},
+      authenticity:{ eyebrow:'Гарантии', title:'Подлинность',
+        lead:'Только официальные поставки и 100% оригинальная продукция.',
+        sections:[
+          {h:'Официальные источники',body:'Мы работаем напрямую с авторизованными дистрибьюторами и парфюмерными домами. Никаких «серых» партий и реплик.'},
+          {h:'Сертификаты',body:'Каждый флакон сопровождается документами, подтверждающими происхождение. Сертификат подлинности предоставляется по запросу.'},
+          {h:'Проверка',body:'Перед отправкой каждый заказ проходит визуальный контроль: батч-код, качество печати, целостность плёнки и флакона.'}
+        ]},
+      giftcards:{ eyebrow:'Подарок', title:'Подарочные карты',
+        lead:'Беспроигрышный подарок ценителю ароматов — на любую сумму.',
+        sections:[
+          {h:'Номиналы',body:'Электронные подарочные карты доступны номиналом от 5 000 до 100 000 ₽. Сумму можно выбрать любую в этом диапазоне.'},
+          {h:'Как это работает',body:'Карта приходит на e-mail получателя с персональным поздравлением в выбранный вами день. Активируется мгновенно.'},
+          {h:'Срок действия',body:'Подарочная карта действует 12 месяцев и может быть использована для любого заказа, в том числе со скидками и промокодами.'}
+        ]},
+      contacts:{ eyebrow:'Связь', title:'Контакты',
+        lead:'Мы на связи каждый день и поможем с выбором, заказом и доставкой.',
+        contacts:{ phone:'+7 (495) 000-00-00', email:'hello@luxe-parfum.ru', address:'Москва, Кутузовский проспект, 12', hours:'Ежедневно 10:00 – 22:00', telegram:'@luxe_parfum' },
+        sections:[
+          {h:'Шоурум',body:'Приезжайте познакомиться с коллекцией вживую — адрес выше. Рекомендуем согласовать визит заранее, чтобы консультант был свободен.'},
+          {h:'Сотрудничество',body:'По вопросам оптовых заказов, корпоративных подарков и партнёрства пишите на e-mail с пометкой «Сотрудничество».'}
+        ]}
+    };
+    this.clientLinks = [
+      {label:'О нас',topic:'about'},
+      {label:'Доставка и оплата',topic:'delivery'},
+      {label:'Возврат и обмен',topic:'returns'},
+      {label:'Подлинность',topic:'authenticity'},
+      {label:'Подарочные карты',topic:'giftcards'},
+      {label:'Контакты',topic:'contacts'}
+    ];
+    this.state = {
+      view:'home', cartStep:'cart', activeId:null, heroSlide:0, query:'',
+      filterFamily:'Все', filterGender:'Все', filterBrand:'Все', sort:'Рекомендуемые', filterWish:false,
+      cart:[], wishlist:[], openMenu:null, justAdded:null,
+      selVol:1, qty:1, activeThumb:0, openAcc:0,
+      promo:'', promoMsg:'', subscribed:false, subEmail:'', subMsg:'',
+      form:{name:'',phone:'',email:'',city:'',address:'',delivery:'Курьер',payment:'Карта'},
+      orderNo:'',
+      infoTopic:null,
+      users:[], currentUser:null, authTab:'login',
+      auth:{name:'',email:'',phone:'',password:''}, authMsg:''
+    };
+  }
+  componentDidMount() {
+    try {
+      const c = JSON.parse(localStorage.getItem('luxe_cart') || '[]');
+      const w = JSON.parse(localStorage.getItem('luxe_wish') || '[]');
+      const u = JSON.parse(localStorage.getItem('luxe_users') || '[]');
+      const sess = localStorage.getItem('luxe_session') || '';
+      const users = Array.isArray(u) ? u : [];
+      const currentUser = (sess && users.some(x => x.email === sess)) ? sess : null;
+      this.setState({ cart: Array.isArray(c) ? c : [], wishlist: Array.isArray(w) ? w : [], users, currentUser });
+    } catch (e) {}
+    this._timer = setInterval(() => {
+      if (this.state.view === 'home' && this.props.heroAutoplay !== false)
+        this.setState(s => ({ heroSlide: (s.heroSlide + 1) % this.heroSlides.length }));
+    }, 7000);
+    this.applyAccent();
+  }
+  componentDidUpdate() { this.applyAccent(); }
+  componentWillUnmount() { clearInterval(this._timer); }
+  applyAccent() { if (this._root && this.props.accent) this._root.style.setProperty('--gold', this.props.accent); }
+  persist() { try { localStorage.setItem('luxe_cart', JSON.stringify(this.state.cart)); localStorage.setItem('luxe_wish', JSON.stringify(this.state.wishlist)); } catch (e) {} }
+  persistAuth() { try { localStorage.setItem('luxe_users', JSON.stringify(this.state.users)); if (this.state.currentUser) localStorage.setItem('luxe_session', this.state.currentUser); else localStorage.removeItem('luxe_session'); } catch (e) {} }
+  curUser() { return this.state.users.find(u => u.email === this.state.currentUser) || null; }
+  fmt(n) { return Math.round(n).toLocaleString('ru-RU').replace(/\u00A0/g, ' ').replace(/,/g, ' ') + ' ₽'; }
+  find(id) { return this.products.find(p => p.id === id); }
+  toTop() { try { window.scrollTo({ top: 0, behavior: 'auto' }); } catch (e) {} }
+  goHome() { this.setState({ view:'home', openMenu:null }); this.toTop(); }
+  goCart() { this.setState({ view:'cart', cartStep:(this.state.cart.length ? this.state.cartStep : 'cart'), openMenu:null }); this.toTop(); }
+  openAccount() { this.setState({ view:'account', openMenu:null, authMsg:'' }); this.toTop(); }
+  openInfo(topic) { this.setState({ view:'info', infoTopic:topic, openMenu:null }); this.toTop(); }
+  openProduct(id) { const p = this.find(id); this.setState({ view:'product', activeId:id, selVol:p?p.mainVol:1, qty:1, activeThumb:0, openAcc:0, openMenu:null }); this.toTop(); }
+  scrollCatalog() { try { const el = document.getElementById('catalog'); if (el) window.scrollTo({ top: el.offsetTop - 90, behavior:'smooth' }); } catch (e) {} }
+  addToCart(id, volIdx, qty) {
+    this.setState(s => {
+      const cart = s.cart.slice();
+      const i = cart.findIndex(it => it.id === id && it.vol === volIdx);
+      if (i >= 0) cart[i] = Object.assign({}, cart[i], { qty: cart[i].qty + qty });
+      else cart.push({ id, vol: volIdx, qty });
+      return { cart, justAdded: id };
+    }, () => this.persist());
+    clearTimeout(this._ja);
+    this._ja = setTimeout(() => this.setState({ justAdded: null }), 1300);
+  }
+  setQtyCart(id, vol, d) { this.setState(s => ({ cart: s.cart.map(it => (it.id === id && it.vol === vol) ? Object.assign({}, it, { qty: Math.max(1, it.qty + d) }) : it) }), () => this.persist()); }
+  removeCart(id, vol) { this.setState(s => ({ cart: s.cart.filter(it => !(it.id === id && it.vol === vol)) }), () => this.persist()); }
+  toggleWishlist(id) { this.setState(s => ({ wishlist: s.wishlist.includes(id) ? s.wishlist.filter(x => x !== id) : s.wishlist.concat(id) }), () => this.persist()); }
+  setFamily(f) { this.setState({ filterFamily: f }); }
+  setOpenMenu(m) { this.setState(s => ({ openMenu: s.openMenu === m ? null : m })); }
+  pick(type, val) { const k = { brand:'filterBrand', gender:'filterGender', sort:'sort' }[type]; this.setState({ [k]: val, openMenu: null }); }
+  clearFilters() { this.setState({ filterFamily:'Все', filterGender:'Все', filterBrand:'Все', filterWish:false, query:'', sort:'Рекомендуемые' }); }
+  selVolFn(i) { this.setState({ selVol: i }); }
+  qtyDelta(d) { this.setState(s => ({ qty: Math.max(1, s.qty + d) })); }
+  setForm(k, v) { this.setState(s => ({ form: Object.assign({}, s.form, { [k]: v }) })); }
+  applyPromo() { const ok = this.state.promo.trim().toUpperCase() === 'LUXE'; this.setState({ promoMsg: this.state.promo.trim() ? (ok ? 'Промокод применён — скидка 10%' : 'Промокод не найден') : '' }); }
+  placeOrder() {
+    const S = this.state;
+    if (!S.form.name.trim() || !S.form.phone.trim()) { this.setState({ cartStep:'checkout' }); return; }
+    const no = 'LX-' + Math.floor(100000 + Math.random() * 899999);
+    const subtotal = S.cart.reduce((a, it) => a + this.find(it.id).vols[it.vol].price * it.qty, 0);
+    const discount = (S.promoMsg.indexOf('применён') >= 0) ? Math.round(subtotal * 0.1) : 0;
+    const total = subtotal - discount;
+    const count = S.cart.reduce((a, it) => a + it.qty, 0);
+    const lines = S.cart.map(it => { const p = this.find(it.id); return { label:p.brand + ' ' + p.name, vol:p.vols[it.vol].ml + ' мл', qty:it.qty, lineFmt:this.fmt(p.vols[it.vol].price * it.qty) }; });
+    let d; try { d = new Date().toLocaleDateString('ru-RU', { day:'numeric', month:'long', year:'numeric' }); } catch (e) { d = ''; }
+    const order = { no, date:d, totalFmt:this.fmt(total), count, items:lines };
+    this.setState(s => {
+      let users = s.users;
+      if (s.currentUser) users = s.users.map(u => u.email === s.currentUser ? Object.assign({}, u, { orders:[order].concat(u.orders || []) }) : u);
+      return { users, cartStep:'done', orderNo:no, cart:[], promoMsg:'', promo:'' };
+    }, () => { this.persist(); this.persistAuth(); });
+    this.toTop();
+  }
+  goCheckout() {
+    if (!this.state.cart.length) return;
+    const u = this.curUser();
+    this.setState(s => ({ cartStep:'checkout', form: u ? Object.assign({}, s.form, { name:s.form.name || u.name, phone:s.form.phone || u.phone, email:s.form.email || u.email }) : s.form }));
+    this.toTop();
+  }
+  onSearchInput(v) { this.setState(s => ({ query:v, view:(v.trim() && s.view !== 'home') ? 'home' : s.view })); }
+  setAuth(k, v) { this.setState(s => ({ auth: Object.assign({}, s.auth, { [k]: v }) })); }
+  switchAuthTab(t) { this.setState({ authTab:t, authMsg:'' }); }
+  submitAuth() { if (this.state.authTab === 'register') this.register(); else this.login(); }
+  login() {
+    const a = this.state.auth, email = a.email.trim().toLowerCase();
+    const u = this.state.users.find(x => x.email === email);
+    if (!u || u.password !== a.password) { this.setState({ authMsg:'Неверный e-mail или пароль' }); return; }
+    this.setState(s => ({ currentUser:email, authMsg:'', auth:{name:'',email:'',phone:'',password:''}, form:Object.assign({}, s.form, { name:s.form.name || u.name, phone:s.form.phone || u.phone, email:s.form.email || u.email }) }), () => this.persistAuth());
+    this.toTop();
+  }
+  register() {
+    const a = this.state.auth, name = a.name.trim(), email = a.email.trim().toLowerCase(), phone = a.phone.trim(), password = a.password;
+    if (!name || !email || !password) { this.setState({ authMsg:'Заполните имя, e-mail и пароль' }); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { this.setState({ authMsg:'Введите корректный e-mail' }); return; }
+    if (password.length < 4) { this.setState({ authMsg:'Пароль должен быть не короче 4 символов' }); return; }
+    if (this.state.users.some(x => x.email === email)) { this.setState({ authMsg:'Пользователь с таким e-mail уже существует' }); return; }
+    const user = { name, email, phone, password, orders:[] };
+    this.setState(s => ({ users:s.users.concat(user), currentUser:email, authMsg:'', auth:{name:'',email:'',phone:'',password:''}, form:Object.assign({}, s.form, { name:s.form.name || name, phone:s.form.phone || phone, email:s.form.email || email }) }), () => this.persistAuth());
+    this.toTop();
+  }
+  logout() { this.setState({ currentUser:null, authTab:'login', authMsg:'' }, () => this.persistAuth()); }
+  subscribe() {
+    const e = this.state.subEmail.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)) { this.setState({ subMsg:'Введите корректный e-mail' }); return; }
+    this.setState({ subscribed:true, subMsg:'' });
+  }
+  cardPrice(p) { return p.vols[p.mainVol].price; }
+  // photo override: if a product has `photo`, use it as the image; otherwise the gradient glow.
+  photoBg(p, grad) { return p.photo ? ('#0d0d0f center/cover no-repeat url("' + p.photo + '")') : grad; }
+  // stable per-product rating (4.6–5.0) + review count derived from the id/brand, so the
+  // product page shows consistent social proof without per-product hand-authored data.
+  hash(s) { let h = 0; for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) >>> 0; return h; }
+  prodRating(p) { return (4.6 + (this.hash(p.id) % 5) * 0.1).toFixed(1); }
+  prodReviewCount(p) { return 60 + (this.hash(p.brand + p.name) % 240); }
+  stars(n) { const f = Math.round(n); return '★★★★★'.slice(0, f) + '☆☆☆☆☆'.slice(0, 5 - f); }
+  cardVM(p) {
+    const v = p.vols[p.mainVol];
+    const showBadge = this.props.showBadges !== false;
+    return {
+      id:p.id, brand:p.brand, name:p.name, volume:v.ml + ' мл', priceFmt:this.fmt(v.price),
+      badge: showBadge ? (p.badge || '') : '', capt: p.photo ? '' : ('ФОТО · ' + p.brand),
+      imgBg:this.photoBg(p,'radial-gradient(130% 115% at 30% 22%, rgba(' + p.glow + ',.30), rgba(' + p.glow + ',.07) 42%, #0d0d0f 74%)'),
+      noteTop:p.top.join(' · '), noteHeart:p.heart.join(' · '), noteBase:p.base.join(' · '),
+      wished:this.state.wishlist.includes(p.id), justAdded:this.state.justAdded === p.id,
+      onOpen:() => this.openProduct(p.id),
+      onAdd:(e) => { if (e && e.stopPropagation) e.stopPropagation(); this.addToCart(p.id, p.mainVol, 1); },
+      onWish:(e) => { if (e && e.stopPropagation) e.stopPropagation(); this.toggleWishlist(p.id); }
+    };
+  }
+  filtered() {
+    let l = this.products.slice();
+    const q = this.state.query.trim().toLowerCase();
+    if (q) l = l.filter(p => (p.brand + ' ' + p.name + ' ' + p.family).toLowerCase().indexOf(q) >= 0);
+    if (this.state.filterFamily !== 'Все') l = l.filter(p => p.family === this.state.filterFamily);
+    if (this.state.filterGender !== 'Все') l = l.filter(p => p.gender === this.state.filterGender);
+    if (this.state.filterBrand !== 'Все') l = l.filter(p => p.brand === this.state.filterBrand);
+    if (this.state.filterWish) l = l.filter(p => this.state.wishlist.includes(p.id));
+    const s = this.state.sort;
+    if (s === 'Сначала дешёвые') l.sort((a, b) => this.cardPrice(a) - this.cardPrice(b));
+    else if (s === 'Сначала дорогие') l.sort((a, b) => this.cardPrice(b) - this.cardPrice(a));
+    else if (s === 'Новинки') l.sort((a, b) => ((b.badge === 'НОВИНКА') ? 1 : 0) - ((a.badge === 'НОВИНКА') ? 1 : 0));
+    return l;
+  }
+  renderVals() {
+    const S = this.state;
+    const slide = this.heroSlides[S.heroSlide] || this.heroSlides[0];
+    const mkOpts = (arr, cur, type) => arr.map(o => ({ label:o, onClick:() => this.pick(type, o), extra: o === cur ? 'color:var(--gold2);background:rgba(201,162,75,.08)' : '' }));
+    const brands = ['Все'].concat(this.products.map(p => p.brand).filter((b, i, a) => a.indexOf(b) === i));
+    const familyChips = this.familyOptions.map(f => ({ label:f, onClick:() => this.setFamily(f), extra: f === S.filterFamily ? 'background:var(--gold);color:#0b0b0c;border-color:var(--gold)' : 'color:var(--t2)' }));
+    const cards = this.filtered().map((p, i) => Object.assign(this.cardVM(p), { animDelay: (Math.min(i, 9) * 0.05).toFixed(2) + 's' }));
+    const items = S.cart.map(it => {
+      const p = this.find(it.id); const pr = p.vols[it.vol].price;
+      return { id:it.id, vol:it.vol, brand:p.brand, name:p.name, volLabel:p.vols[it.vol].ml + ' мл', qty:it.qty, unitFmt:this.fmt(pr), lineFmt:this.fmt(pr * it.qty),
+        imgBg:this.photoBg(p,'radial-gradient(130% 120% at 32% 24%, rgba(' + p.glow + ',.32), rgba(' + p.glow + ',.07) 44%, #0d0d0f 76%)'),
+        onMinus:() => this.setQtyCart(it.id, it.vol, -1), onPlus:() => this.setQtyCart(it.id, it.vol, 1), onRemove:() => this.removeCart(it.id, it.vol) };
+    });
+    const subtotal = S.cart.reduce((a, it) => a + this.find(it.id).vols[it.vol].price * it.qty, 0);
+    const discount = (S.promoMsg.indexOf('применён') >= 0) ? Math.round(subtotal * 0.1) : 0;
+    const total = subtotal - discount;
+    let pv = null;
+    if (S.view === 'product' && S.activeId) {
+      const p = this.find(S.activeId);
+      const vol = p.vols[S.selVol] || p.vols[p.mainVol];
+      const tpos = [[30,22],[55,30],[72,20],[42,58]];
+      const tp = tpos[S.activeThumb] || tpos[0];
+      pv = {
+        brand:p.brand, name:p.name, family:p.family, gender:p.gender, tagline:p.tagline,
+        badge:(this.props.showBadges !== false) ? (p.badge || '') : '', priceFmt:this.fmt(vol.price), capt: p.photo ? '' : ('ФОТО · ' + p.brand),
+        imgBg:this.photoBg(p,'radial-gradient(120% 115% at ' + tp[0] + '% ' + tp[1] + '%, rgba(' + p.glow + ',.34), rgba(' + p.glow + ',.08) 44%, #0c0c0e 76%)'),
+        volChips:p.vols.map((v, i) => ({ label:v.ml + ' мл', priceFmt:this.fmt(v.price), onClick:() => this.selVolFn(i), extra: i === S.selVol ? 'border-color:var(--gold);background:rgba(201,162,75,.08);color:var(--text)' : 'border-color:var(--line);color:var(--t2)' })),
+        thumbs:[0,1,2,3].map(i => ({ onClick:() => this.setState({ activeThumb:i }), imgBg:this.photoBg(p,'radial-gradient(130% 120% at ' + tpos[i][0] + '% ' + tpos[i][1] + '%, rgba(' + p.glow + ',.34), rgba(' + p.glow + ',.08) 46%, #0c0c0e 78%)'), extra: i === S.activeThumb ? 'border-color:var(--gold)' : 'border-color:var(--line)' })),
+        notesTop:p.top, notesHeart:p.heart, notesBase:p.base,
+        qty:S.qty, onMinus:() => this.qtyDelta(-1), onPlus:() => this.qtyDelta(1),
+        onAdd:() => this.addToCart(p.id, S.selVol, S.qty), addLabel:'Добавить в корзину',
+        wished:S.wishlist.includes(p.id), wishGlyph:S.wishlist.includes(p.id) ? '♥' : '♡', onWish:() => this.toggleWishlist(p.id),
+        accordions:this.accordionsData.map((a, i) => ({ title:a.title, body:a.body, sign:S.openAcc === i ? '–' : '+', bodyStyle:S.openAcc === i ? 'max-height:300px;opacity:1;padding-bottom:24px' : 'max-height:0;opacity:0;padding-bottom:0', onToggle:() => this.setState(st => ({ openAcc: st.openAcc === i ? -1 : i })) })),
+        related:this.products.filter(x => x.id !== p.id && x.family === p.family).concat(this.products.filter(x => x.id !== p.id && x.family !== p.family)).slice(0, 4).map(x => this.cardVM(x)),
+        rating:this.prodRating(p), ratingStars:this.stars(this.prodRating(p)), reviewCount:this.prodReviewCount(p),
+        reviews:this.reviews.map(r => ({ name:r.name, date:r.date, text:r.text, stars:this.stars(r.rating) })),
+        onBack:() => this.goHome()
+      };
+    }
+    const f = S.form;
+    const mkField = (k) => ({ value:f[k], onInput:(e) => this.setForm(k, e.target.value) });
+    const a = S.auth;
+    const mkAuth = (k) => ({ value:a[k], onInput:(e) => this.setAuth(k, e.target.value) });
+    const cu = this.curUser();
+    const av = {
+      loggedIn:!!cu, notLoggedIn:!cu,
+      userName: cu ? cu.name : '', userEmail: cu ? cu.email : '', userPhone: cu ? (cu.phone || '—') : '', userInitial: cu ? (cu.name || cu.email).trim().charAt(0).toUpperCase() : '',
+      orders: cu ? (cu.orders || []).map(o => ({ no:o.no, date:o.date, totalFmt:o.totalFmt, countLabel:o.count + ' шт.', items:o.items })) : [],
+      hasOrders: !!(cu && (cu.orders || []).length), noOrders: !!(cu && !(cu.orders || []).length),
+      onLogout:() => this.logout(), onShop:() => this.goHome(),
+      isLogin:S.authTab === 'login', isRegister:S.authTab === 'register',
+      onTabLogin:() => this.switchAuthTab('login'), onTabRegister:() => this.switchAuthTab('register'),
+      tabLoginExtra:S.authTab === 'login' ? 'color:var(--text);border-bottom-color:var(--gold)' : 'color:var(--t3);border-bottom-color:transparent',
+      tabRegExtra:S.authTab === 'register' ? 'color:var(--text);border-bottom-color:var(--gold)' : 'color:var(--t3);border-bottom-color:transparent',
+      aName:mkAuth('name'), aEmail:mkAuth('email'), aPhone:mkAuth('phone'), aPassword:mkAuth('password'),
+      onSubmit:() => this.submitAuth(), submitLabel:S.authTab === 'register' ? 'Создать аккаунт' : 'Войти',
+      authMsg:S.authMsg, hasAuthMsg:!!S.authMsg, onBack:() => this.goHome()
+    };
+    const info = this.infoData[S.infoTopic] || null;
+    const iv = info ? {
+      eyebrow:info.eyebrow, title:info.title, lead:info.lead, sections:info.sections,
+      hasContacts:!!info.contacts, contacts:info.contacts || {},
+      onBack:() => this.goHome(), onShop:() => { this.setState({ view:'home' }, () => this.scrollCatalog()); }
+    } : null;
+    return {
+      rootRef:(el) => { this._root = el; if (el && this.props.accent) el.style.setProperty('--gold', this.props.accent); },
+      isHome:S.view === 'home', isProduct:S.view === 'product', isCart:S.view === 'cart',
+      isAccount:S.view === 'account', isInfo:S.view === 'info',
+      cartCount:S.cart.reduce((a, it) => a + it.qty, 0), wishCount:S.wishlist.length,
+      loggedIn:!!cu, accountInitial: cu ? (cu.name || cu.email).trim().charAt(0).toUpperCase() : '', onAccount:() => this.openAccount(),
+      query:S.query, onSearch:(e) => this.onSearchInput(e.target.value),
+      onLogo:() => this.goHome(), onCartIcon:() => this.goCart(),
+      onWishIcon:() => this.setState({ view:'home', filterWish:true }, () => this.scrollCatalog()),
+      navLinks:[
+        { label:'Весь каталог', onClick:() => { this.clearFilters(); this.setState({ view:'home' }, () => this.scrollCatalog()); } },
+        { label:'Для неё', onClick:() => this.setState({ view:'home', filterGender:'Женский' }, () => this.scrollCatalog()) },
+        { label:'Для него', onClick:() => this.setState({ view:'home', filterGender:'Мужской' }, () => this.scrollCatalog()) },
+        { label:'Унисекс', onClick:() => this.setState({ view:'home', filterGender:'Унисекс' }, () => this.scrollCatalog()) },
+        { label:'Нишевые дома', onClick:() => this.setState({ view:'home', filterFamily:'Восточные' }, () => this.scrollCatalog()) },
+        { label:'Избранное', onClick:() => this.setState({ view:'home', filterWish:true }, () => this.scrollCatalog()) }
+      ],
+      anyMenuOpen:!!S.openMenu, onBackdrop:() => this.setState({ openMenu:null }),
+      heroEyebrow:slide.eyebrow, heroTitle:slide.title, heroSub:slide.sub, heroCta:slide.cta,
+      heroLayers:this.heroSlides.map((s, i) => ({ bg:this.photoBg(s,'radial-gradient(120% 130% at 72% 30%, rgba(' + s.glow + ',.42), rgba(' + s.glow + ',.10) 40%, #0a0a0b 78%)'), extra: i === S.heroSlide ? 'opacity:1;transform:scale(1.06)' : 'opacity:0;transform:scale(1.0)' })),
+      heroCapt: slide.photo ? '' : slide.capt, heroNum:('0' + (S.heroSlide + 1)).slice(-2), heroTotal:('0' + this.heroSlides.length).slice(-2),
+      onHeroPrev:() => this.setState(s => ({ heroSlide:(s.heroSlide - 1 + this.heroSlides.length) % this.heroSlides.length })),
+      onHeroNext:() => this.setState(s => ({ heroSlide:(s.heroSlide + 1) % this.heroSlides.length })),
+      onHeroCta:() => this.scrollCatalog(),
+      heroDots:this.heroSlides.map((h, i) => ({ onClick:() => this.setState({ heroSlide:i }), extra: i === S.heroSlide ? 'width:34px;background:var(--gold)' : 'width:14px;background:var(--line2)' })),
+      familyChips, resultCount:cards.length, cardsEmpty:cards.length === 0, cards,
+      brandValue:S.filterBrand, brandOpen:S.openMenu === 'brand', onBrandToggle:() => this.setOpenMenu('brand'), brandOptions:mkOpts(brands, S.filterBrand, 'brand'),
+      genderValue:S.filterGender, genderOpen:S.openMenu === 'gender', onGenderToggle:() => this.setOpenMenu('gender'), genderOptions:mkOpts(this.genderOptions, S.filterGender, 'gender'),
+      sortValue:S.sort, sortOpen:S.openMenu === 'sort', onSortToggle:() => this.setOpenMenu('sort'), sortOptions:mkOpts(this.sortOptions, S.sort, 'sort'),
+      onClearFilters:() => this.clearFilters(),
+      pv,
+      showEmpty:S.cartStep === 'cart' && S.cart.length === 0,
+      showList:S.cartStep === 'cart' && S.cart.length > 0,
+      showCheckout:S.cartStep === 'checkout', showDone:S.cartStep === 'done',
+      items, subtotalFmt:this.fmt(subtotal), hasDiscount:discount > 0, discountFmt:'−' + this.fmt(discount), totalFmt:this.fmt(total),
+      promo:S.promo, onPromo:(e) => this.setState({ promo:e.target.value }), onApplyPromo:() => this.applyPromo(), promoMsg:S.promoMsg, hasPromoMsg:!!S.promoMsg,
+      onCheckout:() => this.goCheckout(),
+      onBackToCart:() => this.setState({ cartStep:'cart' }),
+      fName:mkField('name'), fPhone:mkField('phone'), fEmail:mkField('email'), fCity:mkField('city'), fAddress:mkField('address'),
+      deliveryOpts:['Курьер','Самовывоз','Почта России'].map(o => ({ label:o, onClick:() => this.setForm('delivery', o), extra: o === f.delivery ? 'border-color:var(--gold);background:rgba(201,162,75,.08);color:var(--text)' : 'border-color:var(--line);color:var(--t2)' })),
+      paymentOpts:['Карта','При получении','СБП'].map(o => ({ label:o, onClick:() => this.setForm('payment', o), extra: o === f.payment ? 'border-color:var(--gold);background:rgba(201,162,75,.08);color:var(--text)' : 'border-color:var(--line);color:var(--t2)' })),
+      onPlaceOrder:() => this.placeOrder(), orderNo:S.orderNo, onContinue:() => this.goHome(), checkoutItems:items,
+      subscribed:S.subscribed, notSubscribed:!S.subscribed, onSubscribe:() => this.subscribe(),
+      subEmail:S.subEmail, onSubEmail:(e) => this.setState({ subEmail:e.target.value, subMsg:'' }), subMsg:S.subMsg, hasSubMsg:!!S.subMsg,
+      clientLinks:this.clientLinks.map(l => ({ label:l.label, onClick:() => this.openInfo(l.topic) })),
+      av, iv
+    };
+  }
+}
+</script>
+
+
+<script>
+/* v2 hover bridge — the exported runtime has NO hover handling (no style-hover in
+   app.js) and re-renders by replacing the tree, so CSS :hover injected into <head>
+   is unreliable. We drive hover ourselves, delegated on document (same proven pattern
+   as the swipe bridge), so it survives re-renders. Buttons get a gold glow + lift;
+   text/icons turn gold; gold-filled buttons keep their dark text. */
+(function () {
+  var GOLD = '#c9a24b';
+  function lift(b) { return (b.__tf && b.__tf !== 'none' ? b.__tf + ' ' : '') + 'translateY(-2px)'; }
+  function enter(b) {
+    if (b.__hov) return;
+    var st = b.getAttribute('style') || '';
+    if (/height:\s*3px/.test(st)) return;                 // skip slider dots
+    b.__hov = 1;
+    b.__bs = b.style.boxShadow; b.__tf = b.style.transform; b.__bc = b.style.borderColor;
+    b.__cl = b.style.color; b.__ts = b.style.textShadow;
+    b.style.transition = 'box-shadow .3s ease, transform .25s ease, border-color .3s ease, color .3s ease, text-shadow .3s ease';
+
+    var bordered = /border:[^;]*solid/.test(st);
+    var goldBg   = /background:\s*var\(--gold\)/.test(st);
+    var hasText  = !!(b.textContent || '').trim();
+    var hasSvg   = !!b.querySelector('svg');
+
+    if (hasText && !bordered && !goldBg && !hasSvg) {
+      // TEXT LINKS (menu, footer, "смотреть все") — gold + soft text glow, NO box
+      b.style.color = GOLD;
+      b.style.textShadow = '0 0 14px rgba(201,162,75,.55)';
+    } else if (goldBg) {
+      // GOLD-FILLED buttons — brighten glow + lift, keep dark text
+      b.style.boxShadow = '0 8px 26px rgba(201,162,75,.5)';
+      b.style.transform = lift(b);
+    } else if (bordered) {
+      // OUTLINE buttons (CTA, chips, filters) — gold border + ring glow + lift + gold text
+      b.style.borderColor = GOLD;
+      b.style.boxShadow = '0 0 0 1px rgba(201,162,75,.5), 0 10px 30px rgba(201,162,75,.3)';
+      b.style.transform = lift(b);
+      b.style.color = GOLD;
+    } else {
+      // ICON buttons (svg, no border) — gold icon + soft halo + slight lift (no boxy ring)
+      b.style.color = GOLD;
+      b.style.boxShadow = '0 6px 20px rgba(201,162,75,.32)';
+      b.style.transform = lift(b);
+    }
+  }
+  function leave(b) {
+    if (!b.__hov) return;
+    b.__hov = 0;
+    b.style.boxShadow = b.__bs || ''; b.style.transform = b.__tf || '';
+    b.style.borderColor = b.__bc || ''; b.style.color = b.__cl || ''; b.style.textShadow = b.__ts || '';
+  }
+  document.addEventListener('pointerover', function (e) {
+    var b = e.target.closest && e.target.closest('button'); if (b) enter(b);
+  }, true);
+  document.addEventListener('pointerout', function (e) {
+    var b = e.target.closest && e.target.closest('button'); if (!b) return;
+    if (e.relatedTarget && b.contains(e.relatedTarget)) return;   // still inside the button
+    leave(b);
+  }, true);
+})();
+</script>
+
+<script>
+/* v2 swipe bridge — lets nav-button carousels (the hero) be dragged / swiped /
+   trackpad-scrolled, not only clicked. Delegated on `document` so it survives the
+   runtime re-rendering the page. Finds a carousel by the аria-labelled nav buttons
+   and "clicks" the right one on a horizontal gesture. */
+(function () {
+  var NEXT = '[aria-label="Вперёд"]', PREV = '[aria-label="Назад"]';
+  function carousel(el) {
+    for (; el && el.nodeType === 1 && el !== document.body; el = el.parentElement) {
+      if (el.querySelector && el.querySelector(NEXT) && el.querySelector(PREV)) return el;
+    }
+    return null;
+  }
+  var down = false, sx = 0, sy = 0, moved = false, horiz = false, box = null;
+
+  document.addEventListener('pointerdown', function (e) {
+    if (e.target.closest && e.target.closest('button, a')) return; // buttons keep working
+    box = carousel(e.target);
+    if (!box) return;
+    down = true; moved = false; horiz = false; sx = e.clientX; sy = e.clientY;
+  }, true);
+
+  document.addEventListener('pointermove', function (e) {
+    if (!down) return;
+    var dx = e.clientX - sx, dy = e.clientY - sy;
+    if (!moved) {
+      if (Math.abs(dx) < 6 && Math.abs(dy) < 6) return;
+      horiz = Math.abs(dx) > Math.abs(dy); moved = true;
+    }
+  }, true);
+
+  document.addEventListener('pointerup', function (e) {
+    if (!down) return; down = false;
+    if (!moved || !horiz || !box) { box = null; return; }
+    var dx = e.clientX - sx, thr = Math.max(40, (box.clientWidth || 1) * 0.12);
+    var sel = dx <= -thr ? NEXT : (dx >= thr ? PREV : null);
+    if (sel) { var b = box.querySelector(sel); if (b) b.click(); }
+    box = null;
+  }, true);
+
+  // don't select text while dragging the hero
+  document.addEventListener('selectstart', function (e) {
+    if (down && moved && horiz) e.preventDefault();
+  }, true);
+
+  // horizontal trackpad / shift+wheel → one slide per gesture
+  var lock = false;
+  document.addEventListener('wheel', function (e) {
+    var c = carousel(e.target);
+    if (!c) return;
+    var dx = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : (e.shiftKey ? e.deltaY : 0);
+    if (!dx || Math.abs(dx) < 14) return;
+    if (e.cancelable) e.preventDefault();
+    if (lock) return; lock = true; setTimeout(function () { lock = false; }, 420);
+    var b = c.querySelector(dx > 0 ? NEXT : PREV); if (b) b.click();
+  }, { passive: false, capture: true });
+})();
+</script>
+</body></html>
