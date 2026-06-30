@@ -331,7 +331,39 @@ input::placeholder{color:#6f6b63}
 @keyframes lxPop{0%{transform:scale(.6);opacity:0}60%{transform:scale(1.12)}100%{transform:scale(1);opacity:1}}
 ::-webkit-scrollbar{width:10px;height:10px}::-webkit-scrollbar-track{background:#0b0b0c}::-webkit-scrollbar-thumb{background:#26262a}::-webkit-scrollbar-thumb:hover{background:#33333a}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms !important;transition-duration:.001ms !important}}
-@media (max-width:880px){header>div{flex-wrap:wrap;height:auto !important;row-gap:12px;padding-top:11px;padding-bottom:11px}header nav{order:3;width:100%;margin-left:0 !important;justify-content:flex-start;flex-wrap:wrap;gap:14px 18px}header [style*="width:290px"]{margin-left:0 !important;width:100% !important}}
+/* ===== Mobile / responsive ===== */
+.lx-burger{display:none;place-items:center}
+/* runtime (React) serializes inline styles as "prop: value;" — selectors below must use that spaced form */
+@media (max-width:880px){
+  .lx-nav{display:none !important}
+  .lx-search{display:none !important}
+  .lx-burger{display:grid !important}
+  .lx-icons{margin-left:auto !important}
+  header > div{gap:8px !important;padding-left:14px !important;padding-right:14px !important}
+  /* horizontal gutters on every page wrapper */
+  [style*="max-width: 1480px"],[style*="max-width: 1200px"],[style*="max-width: 1100px"],[style*="max-width: 1080px"],[style*="max-width: 920px"]{padding-left:16px !important;padding-right:16px !important}
+  footer[style]{padding-left:0 !important;padding-right:0 !important}
+  /* stack the two-column layouts */
+  [style*="grid-template-columns: 1.08fr 1fr"]{grid-template-columns:1fr !important;gap:34px !important}
+  [style*="grid-template-columns: 1fr 380px"]{grid-template-columns:1fr !important;gap:30px !important}
+  [style*="grid-template-columns: 1fr 2fr"]{grid-template-columns:1fr !important}
+  [style*="top: 104px"]{position:static !important}
+  [style*="grid-template-columns: 1.5fr 1fr 1fr 1.3fr"]{grid-template-columns:1fr 1fr !important;gap:30px 24px !important}
+  /* trim oversized vertical rhythm */
+  [style*="padding: 84px 40px 100px"]{padding-top:46px !important;padding-bottom:60px !important}
+  [style*="padding: 92px 40px"]{padding-top:54px !important;padding-bottom:54px !important}
+  [style*="gap: 46px 28px"]{gap:32px 18px !important}
+}
+@media (max-width:560px){
+  [style*="grid-template-columns: 1.5fr 1fr 1fr 1.3fr"]{grid-template-columns:1fr !important;gap:30px !important}
+  [style*="grid-template-columns: 1fr 1fr"]{grid-template-columns:1fr !important}
+  /* the e-mail field spans 1/3 — that span recreates a 2nd column, so neutralize it when stacked */
+  [style*="grid-column: 1 / 3"],[style*="grid-column: 1/3"],[style*="grid-column:1/3"]{grid-column:auto !important}
+  [style*="grid-template-columns: 92px 1fr auto"]{grid-template-columns:62px 1fr !important;gap:14px 16px !important}
+  [style*="grid-template-columns: 92px 1fr auto"] > div:last-child{grid-column:1 / -1 !important;text-align:right}
+  [style*="min-width: 230px"],[style*="min-width: 210px"]{min-width:0 !important;width:min(78vw,300px) !important}
+}
+@media (min-width:881px){.lx-mnav{display:none !important}}
 </style>
 </helmet>
 <div ref="{{ rootRef }}" style="--bg:#0b0b0c;--bg2:#141416;--bg3:#1b1b1e;--line:rgba(236,232,224,.10);--line2:rgba(236,232,224,.18);--gold:#c9a24b;--gold2:#e3c178;--goldd:#9c7836;--text:#ece8e0;--t2:#a8a399;--t3:#736f67;--ease:cubic-bezier(.22,.61,.36,1);background:var(--bg);color:var(--text);min-height:100vh;font-family:Manrope,sans-serif;-webkit-font-smoothing:antialiased">
@@ -342,20 +374,41 @@ input::placeholder{color:#6f6b63}
         <span style="font-family:Prata,serif;font-size:24px;letter-spacing:.3em;color:var(--text);padding-left:.3em">LUXE</span>
         <span style="font-size:8px;letter-spacing:.46em;color:var(--gold);margin-top:5px;padding-left:.46em">ПАРФЮМЕРИЯ</span>
       </div>
-      <nav style="display:flex;align-items:center;gap:20px;margin-left:6px">
+      <nav class="lx-nav" style="display:flex;align-items:center;gap:20px;margin-left:6px">
         <sc-for list="{{ navLinks }}" as="n" hint-placeholder-count="6"><button onclick="{{ n.onClick }}" style="background:none;border:none;color:var(--t2);font-family:Manrope,sans-serif;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;cursor:pointer;padding:6px 0;transition:color .25s var(--ease),letter-spacing .25s var(--ease)" style-hover="color:var(--gold);letter-spacing:.18em">{{ n.label }}</button></sc-for>
       </nav>
-      <div style="margin-left:auto;width:290px;position:relative">
+      <div class="lx-search" style="margin-left:auto;width:290px;position:relative">
         <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="#736f67" stroke-width="1.5" style="position:absolute;left:17px;top:50%;transform:translateY(-50%)"><circle cx="11" cy="11" r="7"></circle><line x1="16.5" y1="16.5" x2="21" y2="21"></line></svg>
         <input value="{{ query }}" oninput="{{ onSearch }}" placeholder="Поиск по бренду…" style="width:100%;height:40px;background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--text);padding:0 16px 0 40px;font-family:Manrope,sans-serif;font-size:12px;letter-spacing:.02em;outline:none;transition:border-color .3s var(--ease)" style-focus="border-color:rgba(201,162,75,.5)">
       </div>
-      <div style="display:flex;align-items:center;gap:2px">
+      <div class="lx-icons" style="display:flex;align-items:center;gap:2px">
         <button onclick="{{ onAccount }}" aria-label="Аккаунт" style="position:relative;width:42px;height:42px;display:grid;place-items:center;background:none;border:none;cursor:pointer;color:var(--text);transition:color .3s var(--ease)" style-hover="color:var(--gold)"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="8" r="4"></circle><path d="M4.5 20.5c0-4.2 3.4-6.8 7.5-6.8s7.5 2.6 7.5 6.8"></path></svg><sc-if value="{{ loggedIn }}" hint-placeholder-val=""><span style="position:absolute;top:7px;right:5px;min-width:16px;height:16px;padding:0 4px;background:var(--gold);color:#0b0b0c;font-size:9px;font-weight:700;border-radius:9px;display:grid;place-items:center;animation:lxPop .4s var(--ease)">{{ accountInitial }}</span></sc-if></button>
         <button onclick="{{ onWishIcon }}" aria-label="Избранное" style="position:relative;width:42px;height:42px;display:grid;place-items:center;background:none;border:none;cursor:pointer;color:var(--text);transition:color .3s var(--ease)" style-hover="color:var(--gold)"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 20S3.5 14.5 3.5 8.8C3.5 6 5.6 4 8.1 4c1.8 0 3.1 1 3.9 2.3C12.8 5 14.1 4 15.9 4c2.5 0 4.6 2 4.6 4.8C20.5 14.5 12 20 12 20Z"></path></svg><sc-if value="{{ wishCount }}" hint-placeholder-val=""><span style="position:absolute;top:7px;right:6px;min-width:16px;height:16px;padding:0 4px;background:var(--gold);color:#0b0b0c;font-size:9px;font-weight:700;border-radius:9px;display:grid;place-items:center;animation:lxPop .4s var(--ease)">{{ wishCount }}</span></sc-if></button>
         <button onclick="{{ onCartIcon }}" aria-label="Корзина" style="position:relative;width:42px;height:42px;display:grid;place-items:center;background:none;border:none;cursor:pointer;color:var(--text);transition:color .3s var(--ease)" style-hover="color:var(--gold)"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6.5 8h11l-1 11.5h-9L6.5 8Z"></path><path d="M9 8V6.6a3 3 0 0 1 6 0V8"></path></svg><sc-if value="{{ cartCount }}" hint-placeholder-val=""><span style="position:absolute;top:7px;right:5px;min-width:16px;height:16px;padding:0 4px;background:var(--gold);color:#0b0b0c;font-size:9px;font-weight:700;border-radius:9px;display:grid;place-items:center;animation:lxPop .4s var(--ease)">{{ cartCount }}</span></sc-if></button>
       </div>
+      <button onclick="{{ onBurger }}" class="lx-burger" aria-label="Меню" style="width:42px;height:42px;background:none;border:none;cursor:pointer;color:var(--text)"><svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.6"><line x1="3.5" y1="7" x2="20.5" y2="7"></line><line x1="3.5" y1="12" x2="20.5" y2="12"></line><line x1="3.5" y1="17" x2="20.5" y2="17"></line></svg></button>
     </div>
   </header>
+
+  <sc-if value="{{ mobileNavOpen }}" hint-placeholder-val="">
+    <div onclick="{{ onBurgerClose }}" class="lx-mnav" style="position:fixed;inset:0;z-index:69;background:rgba(6,6,7,.55)"></div>
+    <div class="lx-mnav" style="position:fixed;top:0;left:0;right:0;z-index:70;background:#0c0c0e;border-bottom:1px solid var(--line2);padding:14px 16px 20px;animation:lxDrop .26s var(--ease);max-height:100vh;overflow:auto">
+      <div style="display:flex;align-items:center;justify-content:space-between;height:40px;margin-bottom:14px">
+        <span style="font-family:Prata,serif;font-size:19px;letter-spacing:.22em;color:var(--text);padding-left:.22em">МЕНЮ</span>
+        <button onclick="{{ onBurgerClose }}" aria-label="Закрыть" style="width:40px;height:40px;display:grid;place-items:center;background:none;border:none;color:var(--text);font-size:24px;line-height:1;cursor:pointer">✕</button>
+      </div>
+      <div style="position:relative;margin-bottom:18px">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="#736f67" stroke-width="1.5" style="position:absolute;left:15px;top:50%;transform:translateY(-50%)"><circle cx="11" cy="11" r="7"></circle><line x1="16.5" y1="16.5" x2="21" y2="21"></line></svg>
+        <input value="{{ query }}" oninput="{{ onSearch }}" placeholder="Поиск по бренду…" style="width:100%;height:48px;background:rgba(255,255,255,.04);border:1px solid var(--line);color:var(--text);padding:0 92px 0 40px;font-family:Manrope,sans-serif;font-size:13px;letter-spacing:.02em;outline:none">
+        <button onclick="{{ onMobileSearchGo }}" style="position:absolute;right:6px;top:6px;height:36px;padding:0 16px;background:var(--gold);border:none;color:#0b0b0c;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;cursor:pointer">Найти</button>
+      </div>
+      <div style="display:flex;flex-direction:column"><sc-for list="{{ navLinks }}" as="n" hint-placeholder-count="6"><button onclick="{{ n.onClick }}" style="text-align:left;background:none;border:none;border-top:1px solid var(--line);color:var(--text);font-family:Manrope,sans-serif;font-size:13px;letter-spacing:.14em;text-transform:uppercase;padding:17px 4px;cursor:pointer">{{ n.label }}</button></sc-for></div>
+      <div style="display:flex;gap:10px;margin-top:20px">
+        <button onclick="{{ onAccount }}" style="flex:1;display:flex;align-items:center;justify-content:center;background:none;border:1px solid var(--line2);color:var(--text);height:48px;font-family:Manrope,sans-serif;font-size:11px;letter-spacing:.14em;text-transform:uppercase;cursor:pointer">Кабинет</button>
+        <button onclick="{{ onCartIcon }}" style="flex:1;display:flex;align-items:center;justify-content:center;background:none;border:1px solid var(--line2);color:var(--text);height:48px;font-family:Manrope,sans-serif;font-size:11px;letter-spacing:.14em;text-transform:uppercase;cursor:pointer">Корзина · {{ cartCount }}</button>
+      </div>
+    </div>
+  </sc-if>
 
   <sc-if value="{{ anyMenuOpen }}" hint-placeholder-val=""><div onclick="{{ onBackdrop }}" style="position:fixed;inset:0;z-index:40"></div></sc-if>
 
@@ -712,7 +765,7 @@ class Component extends DCLogic {
       selVol:1, qty:1, activeThumb:0, openAcc:0,
       promo:'', promoMsg:'', subscribed:false, subEmail:'', subMsg:'',
       form:{name:'',phone:'',email:'',city:'',address:'',delivery:'Курьер',payment:'Карта'},
-      orderNo:'',
+      orderNo:'', mobileNav:false,
       infoTopic:null,
       users:[], currentUser:null, authTab:'login',
       auth:{name:'',email:'',phone:'',password:''}, authMsg:''
@@ -743,11 +796,14 @@ class Component extends DCLogic {
   fmt(n) { return Math.round(n).toLocaleString('ru-RU').replace(/\u00A0/g, ' ').replace(/,/g, ' ') + ' ₽'; }
   find(id) { return this.products.find(p => p.id === id); }
   toTop() { try { window.scrollTo({ top: 0, behavior: 'auto' }); } catch (e) {} }
-  goHome() { this.setState({ view:'home', openMenu:null }); this.toTop(); }
-  goCart() { this.setState({ view:'cart', cartStep:(this.state.cart.length ? this.state.cartStep : 'cart'), openMenu:null }); this.toTop(); }
-  openAccount() { this.setState({ view:'account', openMenu:null, authMsg:'' }); this.toTop(); }
-  openInfo(topic) { this.setState({ view:'info', infoTopic:topic, openMenu:null }); this.toTop(); }
-  openProduct(id) { const p = this.find(id); this.setState({ view:'product', activeId:id, selVol:p?p.mainVol:1, qty:1, activeThumb:0, openAcc:0, openMenu:null }); this.toTop(); }
+  goHome() { this.setState({ view:'home', openMenu:null, mobileNav:false }); this.toTop(); }
+  goCart() { this.setState({ view:'cart', cartStep:(this.state.cart.length ? this.state.cartStep : 'cart'), openMenu:null, mobileNav:false }); this.toTop(); }
+  openAccount() { this.setState({ view:'account', openMenu:null, mobileNav:false, authMsg:'' }); this.toTop(); }
+  openInfo(topic) { this.setState({ view:'info', infoTopic:topic, openMenu:null, mobileNav:false }); this.toTop(); }
+  toggleMobileNav() { this.setState(s => ({ mobileNav: !s.mobileNav })); }
+  closeMobileNav() { this.setState({ mobileNav:false }); }
+  mobileSearchGo() { this.setState({ mobileNav:false, view:'home' }, () => this.scrollCatalog()); }
+  openProduct(id) { const p = this.find(id); this.setState({ view:'product', activeId:id, selVol:p?p.mainVol:1, qty:1, activeThumb:0, openAcc:0, openMenu:null, mobileNav:false }); this.toTop(); }
   scrollCatalog() { try { const el = document.getElementById('catalog'); if (el) window.scrollTo({ top: el.offsetTop - 90, behavior:'smooth' }); } catch (e) {} }
   addToCart(id, volIdx, qty) {
     this.setState(s => {
@@ -795,7 +851,11 @@ class Component extends DCLogic {
     this.setState(s => ({ cartStep:'checkout', form: u ? Object.assign({}, s.form, { name:s.form.name || u.name, phone:s.form.phone || u.phone, email:s.form.email || u.email }) : s.form }));
     this.toTop();
   }
-  onSearchInput(v) { this.setState(s => ({ query:v, view:(v.trim() && s.view !== 'home') ? 'home' : s.view })); }
+  onSearchInput(v) {
+    const wasEmpty = !this.state.query.trim();
+    this.setState(s => ({ query:v, view:(v.trim() && s.view !== 'home') ? 'home' : s.view }),
+      () => { if (v.trim() && wasEmpty) this.scrollCatalog(); });
+  }
   setAuth(k, v) { this.setState(s => ({ auth: Object.assign({}, s.auth, { [k]: v }) })); }
   switchAuthTab(t) { this.setState({ authTab:t, authMsg:'' }); }
   submitAuth() { if (this.state.authTab === 'register') this.register(); else this.login(); }
@@ -931,15 +991,16 @@ class Component extends DCLogic {
       loggedIn:!!cu, accountInitial: cu ? (cu.name || cu.email).trim().charAt(0).toUpperCase() : '', onAccount:() => this.openAccount(),
       query:S.query, onSearch:(e) => this.onSearchInput(e.target.value),
       onLogo:() => this.goHome(), onCartIcon:() => this.goCart(),
-      onWishIcon:() => this.setState({ view:'home', filterWish:true }, () => this.scrollCatalog()),
+      onWishIcon:() => this.setState({ view:'home', filterWish:true, mobileNav:false }, () => this.scrollCatalog()),
       navLinks:[
-        { label:'Весь каталог', onClick:() => { this.clearFilters(); this.setState({ view:'home' }, () => this.scrollCatalog()); } },
-        { label:'Для неё', onClick:() => this.setState({ view:'home', filterGender:'Женский' }, () => this.scrollCatalog()) },
-        { label:'Для него', onClick:() => this.setState({ view:'home', filterGender:'Мужской' }, () => this.scrollCatalog()) },
-        { label:'Унисекс', onClick:() => this.setState({ view:'home', filterGender:'Унисекс' }, () => this.scrollCatalog()) },
-        { label:'Нишевые дома', onClick:() => this.setState({ view:'home', filterFamily:'Восточные' }, () => this.scrollCatalog()) },
-        { label:'Избранное', onClick:() => this.setState({ view:'home', filterWish:true }, () => this.scrollCatalog()) }
+        { label:'Весь каталог', onClick:() => { this.clearFilters(); this.setState({ view:'home', mobileNav:false }, () => this.scrollCatalog()); } },
+        { label:'Для неё', onClick:() => this.setState({ view:'home', filterGender:'Женский', mobileNav:false }, () => this.scrollCatalog()) },
+        { label:'Для него', onClick:() => this.setState({ view:'home', filterGender:'Мужской', mobileNav:false }, () => this.scrollCatalog()) },
+        { label:'Унисекс', onClick:() => this.setState({ view:'home', filterGender:'Унисекс', mobileNav:false }, () => this.scrollCatalog()) },
+        { label:'Нишевые дома', onClick:() => this.setState({ view:'home', filterFamily:'Восточные', mobileNav:false }, () => this.scrollCatalog()) },
+        { label:'Избранное', onClick:() => this.setState({ view:'home', filterWish:true, mobileNav:false }, () => this.scrollCatalog()) }
       ],
+      onBurger:() => this.toggleMobileNav(), onBurgerClose:() => this.closeMobileNav(), onMobileSearchGo:() => this.mobileSearchGo(), mobileNavOpen:S.mobileNav,
       anyMenuOpen:!!S.openMenu, onBackdrop:() => this.setState({ openMenu:null }),
       heroEyebrow:slide.eyebrow, heroTitle:slide.title, heroSub:slide.sub, heroCta:slide.cta,
       heroLayers:this.heroSlides.map((s, i) => ({ bg:this.photoBg(s,'radial-gradient(120% 130% at 72% 30%, rgba(' + s.glow + ',.42), rgba(' + s.glow + ',.10) 40%, #0a0a0b 78%)'), extra: i === S.heroSlide ? 'opacity:1;transform:scale(1.06)' : 'opacity:0;transform:scale(1.0)' })),
