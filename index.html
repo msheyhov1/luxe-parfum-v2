@@ -331,6 +331,9 @@ input::placeholder{color:#6f6b63}
 @keyframes lxPop{0%{transform:scale(.6);opacity:0}60%{transform:scale(1.12)}100%{transform:scale(1);opacity:1}}
 ::-webkit-scrollbar{width:10px;height:10px}::-webkit-scrollbar-track{background:#0b0b0c}::-webkit-scrollbar-thumb{background:#26262a}::-webkit-scrollbar-thumb:hover{background:#33333a}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms !important;transition-duration:.001ms !important}}
+/* recommendations carousel */
+.reco-strip{scrollbar-width:none;-ms-overflow-style:none}
+.reco-strip::-webkit-scrollbar{height:0;display:none}
 /* ===== Mobile / responsive ===== */
 .lx-burger{display:none;place-items:center}
 /* runtime (React) serializes inline styles as "prop: value;" — selectors below must use that spaced form */
@@ -353,8 +356,11 @@ input::placeholder{color:#6f6b63}
   [style*="padding: 84px 40px 100px"]{padding-top:46px !important;padding-bottom:60px !important}
   [style*="padding: 92px 40px"]{padding-top:54px !important;padding-bottom:54px !important}
   [style*="gap: 46px 28px"]{gap:32px 18px !important}
+  /* catalog / related grids: 2 columns on mobile instead of collapsing to 1 */
+  [style*="minmax(244px, 1fr)"]{grid-template-columns:repeat(2,1fr) !important}
 }
 @media (max-width:560px){
+  [style*="minmax(244px, 1fr)"]{grid-template-columns:repeat(2,1fr) !important;gap:22px 12px !important}
   [style*="grid-template-columns: 1.5fr 1fr 1fr 1.3fr"]{grid-template-columns:1fr !important;gap:30px !important}
   [style*="grid-template-columns: 1fr 1fr"]{grid-template-columns:1fr !important}
   /* the e-mail field spans 1/3 — that span recreates a 2nd column, so neutralize it when stacked */
@@ -446,6 +452,20 @@ input::placeholder{color:#6f6b63}
         <div style="display:flex;align-items:center;gap:11px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--t2)"><span style="width:6px;height:6px;background:var(--gold);transform:rotate(45deg)"></span>Подарочная упаковка</div>
       </div>
     </div>
+
+    <section style="max-width:1480px;margin:0 auto;padding:74px 40px 24px">
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:34px;flex-wrap:wrap">
+        <div>
+          <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px"><span style="width:34px;height:1px;background:var(--gold)"></span><span style="font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold2)">Вам может понравиться</span></div>
+          <h2 style="font-family:Prata,serif;font-weight:400;font-size:clamp(28px,3.4vw,46px);line-height:1.06;color:var(--text);margin:0">Интересные ароматы</h2>
+        </div>
+        <div class="reco-arrows" style="display:flex;gap:10px">
+          <button onclick="{{ onRecoPrev }}" aria-label="Прокрутить назад" style="width:52px;height:52px;display:grid;place-items:center;background:none;border:1px solid var(--line2);color:var(--text);cursor:pointer;transition:all .3s var(--ease)" style-hover="border-color:var(--gold);color:var(--gold)"><span style="font-size:20px;line-height:1">←</span></button>
+          <button onclick="{{ onRecoNext }}" aria-label="Прокрутить вперёд" style="width:52px;height:52px;display:grid;place-items:center;background:none;border:1px solid var(--line2);color:var(--text);cursor:pointer;transition:all .3s var(--ease)" style-hover="border-color:var(--gold);color:var(--gold)"><span style="font-size:20px;line-height:1">→</span></button>
+        </div>
+      </div>
+      <div id="reco-vp" class="reco-strip" style="overflow:hidden;padding:2px 2px 14px"><div id="reco-track" style="display:flex;gap:26px;will-change:transform;transition:transform .55s var(--ease); {{ recoTrackStyle }}"><sc-for list="{{ recoCards }}" as="c" hint-placeholder-count="6"><div style="flex:0 0 274px"><dc-import name="Product Card" card="{{ c }}" hint-size="274px,470px"></dc-import></div></sc-for></div></div>
+    </section>
 
     <section id="catalog" style="max-width:1480px;margin:0 auto;padding:84px 40px 100px">
       <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:40px;flex-wrap:wrap">
@@ -628,6 +648,134 @@ input::placeholder{color:#6f6b63}
   </div>
   </sc-if>
 
+  <sc-if value="{{ isAdmin }}" hint-placeholder-val="">
+  <div style="max-width:1180px;margin:0 auto;padding:40px 40px 96px;min-height:72vh;animation:lxView .5s var(--ease)">
+
+    <sc-if value="{{ admin.notAuthed }}" hint-placeholder-val="{{ true }}">
+      <div style="max-width:400px;margin:56px auto 0">
+        <div style="text-align:center;margin-bottom:30px">
+          <div style="font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold2);margin-bottom:16px">Панель управления</div>
+          <h1 style="font-family:Prata,serif;font-weight:400;font-size:clamp(26px,4vw,36px);color:var(--text);margin:0">Вход для администратора</h1>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <input value="{{ admin.passField.value }}" oninput="{{ admin.passField.onInput }}" type="password" placeholder="Пароль" style="height:52px;background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--text);padding:0 16px;font-family:Manrope,sans-serif;font-size:14px;letter-spacing:.06em;outline:none">
+          <sc-if value="{{ admin.hasMsg }}" hint-placeholder-val=""><div style="font-size:12px;color:#e2a59a;letter-spacing:.02em">{{ admin.msg }}</div></sc-if>
+          <button onclick="{{ admin.onLogin }}" style="height:52px;background:var(--gold);border:none;color:#0b0b0c;font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;transition:background .3s var(--ease)" style-hover="background:var(--gold2)">Войти</button>
+          <button onclick="{{ admin.onClose }}" style="background:none;border:none;color:var(--t3);font-size:11px;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;padding:8px;transition:color .3s var(--ease)" style-hover="color:var(--gold)">← Вернуться на сайт</button>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ admin.authed }}" hint-placeholder-val="">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:12px">
+        <div>
+          <div style="font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold2);margin-bottom:10px">Панель управления</div>
+          <h1 style="font-family:Prata,serif;font-weight:400;font-size:clamp(26px,4vw,40px);color:var(--text);margin:0">Админ-панель</h1>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <button onclick="{{ admin.onExport }}" style="background:none;border:1px solid var(--line2);color:var(--text);padding:11px 18px;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:all .3s var(--ease)" style-hover="border-color:var(--gold);color:var(--gold)">Экспорт JSON</button>
+          <button onclick="{{ admin.onClose }}" style="background:none;border:1px solid var(--line2);color:var(--text);padding:11px 18px;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:all .3s var(--ease)" style-hover="border-color:var(--gold);color:var(--gold)">На сайт</button>
+          <button onclick="{{ admin.onLogout }}" style="background:none;border:1px solid var(--line2);color:var(--text);padding:11px 18px;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:all .3s var(--ease)" style-hover="border-color:var(--gold);color:var(--gold)">Выход</button>
+        </div>
+      </div>
+      <p style="font-size:12px;line-height:1.6;color:var(--t3);margin:0 0 20px;max-width:720px">Изменения сохраняются автоматически в этом браузере. Чтобы они стали постоянными для всех посетителей — нажмите «Экспорт JSON» и передайте файл разработчику.</p>
+      <sc-if value="{{ admin.hasMsg }}" hint-placeholder-val=""><div style="font-size:12px;color:var(--gold2);letter-spacing:.02em;border:1px solid rgba(201,162,75,.4);background:rgba(201,162,75,.06);padding:12px 16px;margin-bottom:22px">{{ admin.msg }}</div></sc-if>
+
+      <div style="display:flex;gap:4px;border-bottom:1px solid var(--line);margin-bottom:30px;flex-wrap:wrap">
+        <button onclick="{{ admin.onTabProducts }}" style="background:none;border:none;border-bottom:2px solid transparent;padding:14px 18px;font-family:Manrope,sans-serif;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:all .3s var(--ease); {{ admin.tabPExtra }}">Товары · {{ admin.productCount }}</button>
+        <button onclick="{{ admin.onTabHero }}" style="background:none;border:none;border-bottom:2px solid transparent;padding:14px 18px;font-family:Manrope,sans-serif;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:all .3s var(--ease); {{ admin.tabHExtra }}">Слайдер · {{ admin.heroCount }}</button>
+        <button onclick="{{ admin.onTabReviews }}" style="background:none;border:none;border-bottom:2px solid transparent;padding:14px 18px;font-family:Manrope,sans-serif;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:all .3s var(--ease); {{ admin.tabRExtra }}">Отзывы · {{ admin.reviewCount }}</button>
+        <button onclick="{{ admin.onTabSettings }}" style="background:none;border:none;border-bottom:2px solid transparent;padding:14px 18px;font-family:Manrope,sans-serif;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:all .3s var(--ease); {{ admin.tabSExtra }}">Оформление</button>
+      </div>
+
+      <sc-if value="{{ admin.tabProducts }}" hint-placeholder-val="{{ true }}">
+        <button onclick="{{ admin.onAddProduct }}" style="margin-bottom:24px;background:var(--gold);border:none;color:#0b0b0c;padding:14px 24px;font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;transition:background .3s var(--ease)" style-hover="background:var(--gold2)">+ Добавить товар</button>
+        <div style="display:flex;flex-direction:column;gap:26px"><sc-for list="{{ admin.products }}" as="p" hint-placeholder-count="3">
+          <div style="border:1px solid var(--line);background:#0c0c0d;padding:24px">
+            <div style="display:flex;align-items:center;gap:16px;margin-bottom:20px;padding-bottom:18px;border-bottom:1px solid var(--line)">
+              <div style="width:52px;height:64px;flex:0 0 52px;border:1px solid var(--line);overflow:hidden;background: {{ p.thumbBg }}"></div>
+              <div style="flex:1;min-width:0"><div style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--t3)">{{ p.num }}</div><div style="font-family:Prata,serif;font-size:18px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ p.title }}</div></div>
+              <button onclick="{{ p.onDelete }}" style="background:none;border:1px solid var(--line2);color:var(--t2);padding:9px 15px;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:all .3s var(--ease)" style-hover="border-color:#e2a59a;color:#e2a59a">Удалить</button>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px 16px">
+              <div><label style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);margin-bottom:7px;display:block">Бренд</label><input value="{{ p.brand.value }}" oninput="{{ p.brand.onInput }}" style="height:44px;width:100%;background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--text);padding:0 13px;font-family:Manrope,sans-serif;font-size:13px;outline:none"></div>
+              <div><label style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);margin-bottom:7px;display:block">Название</label><input value="{{ p.name.value }}" oninput="{{ p.name.onInput }}" style="height:44px;width:100%;background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--text);padding:0 13px;font-family:Manrope,sans-serif;font-size:13px;outline:none"></div>
+              <div><label style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);margin-bottom:7px;display:block">Семейство</label><input value="{{ p.family.value }}" oninput="{{ p.family.onInput }}" style="height:44px;width:100%;background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--text);padding:0 13px;font-family:Manrope,sans-serif;font-size:13px;outline:none"></div>
+              <div><label style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);margin-bottom:7px;display:block">Пол</label><input value="{{ p.gender.value }}" oninput="{{ p.gender.onInput }}" style="height:44px;width:100%;background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--text);padding:0 13px;font-family:Manrope,sans-serif;font-size:13px;outline:none"></div>
+              <div><label style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);margin-bottom:7px;display:block">Бейдж (напр. ХИТ)</label><input value="{{ p.badge.value }}" oninput="{{ p.badge.onInput }}" style="height:44px;width:100%;background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--text);padding:0 13px;font-family:Manrope,sans-serif;font-size:13px;outline:none"></div>
+              <div><label style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);margin-bottom:7px;display:block">Свечение RGB (напр. 201,161,95)</label><input value="{{ p.glow.value }}" oninput="{{ p.glow.onInput }}" style="height:44px;width:100%;background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--text);padding:0 13px;font-family:Manrope,sans-serif;font-size:13px;outline:none"></div>
+              <div style="grid-column:1/3"><label style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);margin-bottom:7px;display:block">Описание</label><input value="{{ p.tagline.value }}" oninput="{{ p.tagline.onInput }}" style="height:44px;width:100%;background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--text);padding:0 13px;font-family:Manrope,sans-serif;font-size:13px;outline:none"></div>
+              <div><label style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);margin-bottom:7px;display:block">Верхние ноты (через запятую)</label><input value="{{ p.top.value }}" oninput="{{ p.top.onInput }}" style="height:44px;width:100%;background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--text);padding:0 13px;font-family:Manrope,sans-serif;font-size:13px;outline:none"></div>
+              <div><label style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);margin-bottom:7px;display:block">Ноты сердца</label><input value="{{ p.heart.value }}" oninput="{{ p.heart.onInput }}" style="height:44px;width:100%;background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--text);padding:0 13px;font-family:Manrope,sans-serif;font-size:13px;outline:none"></div>
+              <div><label style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);margin-bottom:7px;display:block">Ноты базы</label><input value="{{ p.base.value }}" oninput="{{ p.base.onInput }}" style="height:44px;width:100%;background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--text);padding:0 13px;font-family:Manrope,sans-serif;font-size:13px;outline:none"></div>
+              <div><label style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);margin-bottom:7px;display:block">Фото (путь или загрузка)</label><div style="display:flex;gap:8px;align-items:center"><input value="{{ p.photo.value }}" oninput="{{ p.photo.onInput }}" placeholder="photos/name.jpg" style="height:44px;flex:1;min-width:0;background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--text);padding:0 13px;font-family:Manrope,sans-serif;font-size:12px;outline:none"><label style="height:44px;display:grid;place-items:center;padding:0 14px;border:1px solid var(--line2);color:var(--t2);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;white-space:nowrap">Загрузить<input type="file" accept="image/*" onchange="{{ p.onPhoto }}" style="display:none"></label></div></div>
+            </div>
+            <div style="margin-top:20px;padding-top:18px;border-top:1px solid var(--line)">
+              <label style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);margin-bottom:12px;display:block">Объёмы и цены (₽) · «Осн.» — цена на карточке</label>
+              <div style="display:flex;flex-direction:column;gap:10px"><sc-for list="{{ p.vols }}" as="v" hint-placeholder-count="2">
+                <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+                  <input value="{{ v.ml.value }}" oninput="{{ v.ml.onInput }}" style="height:42px;width:90px;background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--text);padding:0 12px;font-family:Manrope,sans-serif;font-size:13px;outline:none">
+                  <span style="font-size:12px;color:var(--t3)">мл</span>
+                  <input value="{{ v.price.value }}" oninput="{{ v.price.onInput }}" style="height:42px;width:130px;background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--text);padding:0 12px;font-family:Manrope,sans-serif;font-size:13px;outline:none">
+                  <span style="font-size:12px;color:var(--t3)">₽</span>
+                  <button onclick="{{ v.onMain }}" style="height:42px;padding:0 14px;background:transparent;border:1px solid var(--line);font-family:Manrope,sans-serif;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:all .3s var(--ease); {{ v.mainExtra }}">Осн.</button>
+                  <button onclick="{{ v.onRemove }}" style="height:42px;width:42px;background:none;border:1px solid var(--line2);color:var(--t3);font-size:16px;cursor:pointer;transition:all .3s var(--ease)" style-hover="border-color:#e2a59a;color:#e2a59a">✕</button>
+                </div>
+              </sc-for></div>
+              <button onclick="{{ p.onAddVol }}" style="margin-top:12px;background:none;border:1px dashed var(--line2);color:var(--t2);padding:10px 18px;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:all .3s var(--ease)" style-hover="border-color:var(--gold);color:var(--gold)">+ Объём</button>
+            </div>
+          </div>
+        </sc-for></div>
+      </sc-if>
+
+      <sc-if value="{{ admin.tabHero }}" hint-placeholder-val="">
+        <button onclick="{{ admin.onAddHero }}" style="margin-bottom:24px;background:var(--gold);border:none;color:#0b0b0c;padding:14px 24px;font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;transition:background .3s var(--ease)" style-hover="background:var(--gold2)">+ Добавить слайд</button>
+        <div style="display:flex;flex-direction:column;gap:22px"><sc-for list="{{ admin.hero }}" as="h" hint-placeholder-count="3">
+          <div style="border:1px solid var(--line);background:#0c0c0d;padding:24px">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--line)"><div style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--t3)">Слайд {{ h.num }}</div><button onclick="{{ h.onDelete }}" style="background:none;border:1px solid var(--line2);color:var(--t2);padding:9px 15px;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:all .3s var(--ease)" style-hover="border-color:#e2a59a;color:#e2a59a">Удалить</button></div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px 16px">
+              <div><label style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);margin-bottom:7px;display:block">Надзаголовок</label><input value="{{ h.eyebrow.value }}" oninput="{{ h.eyebrow.onInput }}" style="height:44px;width:100%;background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--text);padding:0 13px;font-family:Manrope,sans-serif;font-size:13px;outline:none"></div>
+              <div><label style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);margin-bottom:7px;display:block">Кнопка (CTA)</label><input value="{{ h.cta.value }}" oninput="{{ h.cta.onInput }}" style="height:44px;width:100%;background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--text);padding:0 13px;font-family:Manrope,sans-serif;font-size:13px;outline:none"></div>
+              <div style="grid-column:1/3"><label style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);margin-bottom:7px;display:block">Заголовок</label><input value="{{ h.title.value }}" oninput="{{ h.title.onInput }}" style="height:44px;width:100%;background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--text);padding:0 13px;font-family:Manrope,sans-serif;font-size:13px;outline:none"></div>
+              <div style="grid-column:1/3"><label style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);margin-bottom:7px;display:block">Подзаголовок</label><input value="{{ h.sub.value }}" oninput="{{ h.sub.onInput }}" style="height:44px;width:100%;background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--text);padding:0 13px;font-family:Manrope,sans-serif;font-size:13px;outline:none"></div>
+              <div><label style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);margin-bottom:7px;display:block">Свечение RGB</label><input value="{{ h.glow.value }}" oninput="{{ h.glow.onInput }}" style="height:44px;width:100%;background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--text);padding:0 13px;font-family:Manrope,sans-serif;font-size:13px;outline:none"></div>
+              <div><label style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);margin-bottom:7px;display:block">Фото (путь или загрузка)</label><div style="display:flex;gap:8px;align-items:center"><input value="{{ h.photo.value }}" oninput="{{ h.photo.onInput }}" placeholder="photos/hero-1.jpg" style="height:44px;flex:1;min-width:0;background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--text);padding:0 13px;font-family:Manrope,sans-serif;font-size:12px;outline:none"><label style="height:44px;display:grid;place-items:center;padding:0 14px;border:1px solid var(--line2);color:var(--t2);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;white-space:nowrap">Загрузить<input type="file" accept="image/*" onchange="{{ h.onPhoto }}" style="display:none"></label></div></div>
+            </div>
+          </div>
+        </sc-for></div>
+      </sc-if>
+
+      <sc-if value="{{ admin.tabReviews }}" hint-placeholder-val="">
+        <button onclick="{{ admin.onAddReview }}" style="margin-bottom:24px;background:var(--gold);border:none;color:#0b0b0c;padding:14px 24px;font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;transition:background .3s var(--ease)" style-hover="background:var(--gold2)">+ Добавить отзыв</button>
+        <div style="display:flex;flex-direction:column;gap:18px"><sc-for list="{{ admin.reviews }}" as="r" hint-placeholder-count="3">
+          <div style="border:1px solid var(--line);background:#0c0c0d;padding:22px">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px"><div style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--t3)">Отзыв {{ r.num }}</div><button onclick="{{ r.onDelete }}" style="background:none;border:1px solid var(--line2);color:var(--t2);padding:8px 14px;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:all .3s var(--ease)" style-hover="border-color:#e2a59a;color:#e2a59a">Удалить</button></div>
+            <div style="display:grid;grid-template-columns:2fr 1.4fr 80px;gap:12px;margin-bottom:12px">
+              <input value="{{ r.name.value }}" oninput="{{ r.name.onInput }}" placeholder="Имя" style="height:44px;background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--text);padding:0 13px;font-family:Manrope,sans-serif;font-size:13px;outline:none">
+              <input value="{{ r.date.value }}" oninput="{{ r.date.onInput }}" placeholder="Дата" style="height:44px;background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--text);padding:0 13px;font-family:Manrope,sans-serif;font-size:13px;outline:none">
+              <input value="{{ r.rating.value }}" oninput="{{ r.rating.onInput }}" placeholder="★ 1-5" style="height:44px;background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--text);padding:0 13px;font-family:Manrope,sans-serif;font-size:13px;outline:none;text-align:center">
+            </div>
+            <input value="{{ r.text.value }}" oninput="{{ r.text.onInput }}" placeholder="Текст отзыва" style="height:44px;width:100%;background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--text);padding:0 13px;font-family:Manrope,sans-serif;font-size:13px;outline:none">
+          </div>
+        </sc-for></div>
+      </sc-if>
+
+      <sc-if value="{{ admin.tabSettings }}" hint-placeholder-val="">
+        <div style="border:1px solid var(--line);background:#0c0c0d;padding:28px;max-width:560px">
+          <div style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold2);margin-bottom:18px">Акцентный цвет</div>
+          <div style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:8px"><sc-for list="{{ admin.accents }}" as="a" hint-placeholder-count="6"><button onclick="{{ a.onClick }}" aria-label="Цвет" style="width:44px;height:44px;border:none;border-radius:50%;cursor:pointer;background: {{ a.bg }}; {{ a.extra }}"></button></sc-for></div>
+          <div style="font-size:12px;color:var(--t3);margin-top:14px">Текущий: <span style="color:var(--text)">{{ admin.accentValue }}</span></div>
+        </div>
+        <div style="border:1px solid rgba(226,165,154,.3);background:rgba(226,165,154,.04);padding:28px;max-width:560px;margin-top:22px">
+          <div style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#e2a59a;margin-bottom:12px">Сброс</div>
+          <p style="font-size:13px;line-height:1.6;color:var(--t2);margin:0 0 18px">Удалить все изменения и вернуть исходное содержимое сайта. Действие необратимо.</p>
+          <button onclick="{{ admin.onReset }}" style="background:none;border:1px solid #e2a59a;color:#e2a59a;padding:12px 22px;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:all .3s var(--ease)" style-hover="background:rgba(226,165,154,.1)">Сбросить всё к исходному</button>
+        </div>
+      </sc-if>
+    </sc-if>
+  </div>
+  </sc-if>
+
   <footer style="border-top:1px solid var(--line);background:#090909;padding:78px 40px 38px">
     <div style="max-width:1480px;margin:0 auto">
       <div style="display:grid;grid-template-columns:1.5fr 1fr 1fr 1.3fr;gap:48px;padding-bottom:54px;border-bottom:1px solid var(--line)">
@@ -640,7 +788,7 @@ input::placeholder{color:#6f6b63}
         <div><div style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--t3);margin-bottom:20px">Рассылка</div><p style="font-size:13px;line-height:1.7;color:var(--t2);margin:0 0 18px">Первыми узнавайте о поступлениях и закрытых распродажах.</p><sc-if value="{{ subscribed }}" hint-placeholder-val=""><div style="font-size:13px;color:var(--gold2);letter-spacing:.04em">Спасибо за подписку.</div></sc-if><sc-if value="{{ notSubscribed }}" hint-placeholder-val="{{ true }}"><div style="display:flex;gap:8px"><input value="{{ subEmail }}" oninput="{{ onSubEmail }}" placeholder="Ваш e-mail" style="flex:1;height:46px;background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--text);padding:0 14px;font-family:Manrope,sans-serif;font-size:12px;letter-spacing:.04em;outline:none"><button onclick="{{ onSubscribe }}" aria-label="Подписаться" style="width:46px;height:46px;display:grid;place-items:center;background:var(--gold);border:none;color:#0b0b0c;cursor:pointer;transition:background .3s var(--ease)" style-hover="background:var(--gold2)"><span style="font-size:16px">→</span></button></div><sc-if value="{{ hasSubMsg }}" hint-placeholder-val=""><div style="font-size:11px;color:#e2a59a;margin-top:10px;letter-spacing:.02em">{{ subMsg }}</div></sc-if></sc-if></div>
       </div>
       <div style="display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;padding-top:30px">
-        <div style="font-size:11px;color:var(--t3);letter-spacing:.04em">© 2026 LUXE Парфюмерия. Все права защищены.</div>
+        <div style="font-size:11px;color:var(--t3);letter-spacing:.04em">© 2026 LUXE Парфюмерия. Все права защищены. <button onclick="{{ onOpenAdmin }}" style="background:none;border:none;color:var(--t3);font-family:Manrope,sans-serif;font-size:11px;letter-spacing:.04em;cursor:pointer;padding:0;margin-left:6px;transition:color .3s var(--ease)" style-hover="color:var(--gold)">· Админ</button></div>
         <div style="display:flex;gap:8px;align-items:center"><span style="font-size:9.5px;letter-spacing:.12em;color:var(--t3);border:1px solid var(--line);padding:7px 12px">VISA</span><span style="font-size:9.5px;letter-spacing:.12em;color:var(--t3);border:1px solid var(--line);padding:7px 12px">MASTERCARD</span><span style="font-size:9.5px;letter-spacing:.12em;color:var(--t3);border:1px solid var(--line);padding:7px 12px">МИР</span><span style="font-size:9.5px;letter-spacing:.12em;color:var(--t3);border:1px solid var(--line);padding:7px 12px">СБП</span></div>
       </div>
     </div>
@@ -652,6 +800,9 @@ input::placeholder{color:#6f6b63}
 class Component extends DCLogic {
   constructor(props) {
     super(props);
+    // Admin panel: default password (change here). Access via the discreet «Админ» link in the footer.
+    this.ADMIN_PASS = 'luxe2026';
+    this._accent = null; // admin accent override (falls back to props.accent)
     this.products = [
       {id:'creed',brand:'CREED',name:'Millésime Impérial',family:'Цитрусовые',gender:'Унисекс',badge:'ХИТ',glow:'201,161,95',photo:'photos/creed.jpg',
        tagline:'Морская свежесть в обрамлении ириса и солёного мускуса — аромат солнца и южных побережий.',
@@ -761,17 +912,19 @@ class Component extends DCLogic {
     this.state = {
       view:'home', cartStep:'cart', activeId:null, heroSlide:0, query:'',
       filterFamily:'Все', filterGender:'Все', filterBrand:'Все', sort:'Рекомендуемые', filterWish:false,
-      cart:[], wishlist:[], openMenu:null, justAdded:null,
+      cart:[], wishlist:[], openMenu:null, justAdded:null, recoOff:0,
       selVol:1, qty:1, activeThumb:0, openAcc:0,
       promo:'', promoMsg:'', subscribed:false, subEmail:'', subMsg:'',
       form:{name:'',phone:'',email:'',city:'',address:'',delivery:'Курьер',payment:'Карта'},
       orderNo:'', mobileNav:false,
       infoTopic:null,
       users:[], currentUser:null, authTab:'login',
-      auth:{name:'',email:'',phone:'',password:''}, authMsg:''
+      auth:{name:'',email:'',phone:'',password:''}, authMsg:'',
+      adminAuthed:false, adminPass:'', adminMsg:'', adminTab:'products', adminRev:0
     };
   }
   componentDidMount() {
+    this.loadAdmin();
     try {
       const c = JSON.parse(localStorage.getItem('luxe_cart') || '[]');
       const w = JSON.parse(localStorage.getItem('luxe_wish') || '[]');
@@ -779,7 +932,11 @@ class Component extends DCLogic {
       const sess = localStorage.getItem('luxe_session') || '';
       const users = Array.isArray(u) ? u : [];
       const currentUser = (sess && users.some(x => x.email === sess)) ? sess : null;
-      this.setState({ cart: Array.isArray(c) ? c : [], wishlist: Array.isArray(w) ? w : [], users, currentUser });
+      // drop cart/wishlist entries whose product no longer exists (e.g. deleted in admin)
+      const ids = this.products.map(p => p.id);
+      const cart = (Array.isArray(c) ? c : []).filter(it => ids.indexOf(it.id) >= 0);
+      const wishlist = (Array.isArray(w) ? w : []).filter(x => ids.indexOf(x) >= 0);
+      this.setState({ cart, wishlist, users, currentUser });
     } catch (e) {}
     this._timer = setInterval(() => {
       if (this.state.view === 'home' && this.props.heroAutoplay !== false)
@@ -789,7 +946,8 @@ class Component extends DCLogic {
   }
   componentDidUpdate() { this.applyAccent(); }
   componentWillUnmount() { clearInterval(this._timer); }
-  applyAccent() { if (this._root && this.props.accent) this._root.style.setProperty('--gold', this.props.accent); }
+  accentColor() { return this._accent || this.props.accent; }
+  applyAccent() { const a = this.accentColor(); if (this._root && a) this._root.style.setProperty('--gold', a); }
   persist() { try { localStorage.setItem('luxe_cart', JSON.stringify(this.state.cart)); localStorage.setItem('luxe_wish', JSON.stringify(this.state.wishlist)); } catch (e) {} }
   persistAuth() { try { localStorage.setItem('luxe_users', JSON.stringify(this.state.users)); if (this.state.currentUser) localStorage.setItem('luxe_session', this.state.currentUser); else localStorage.removeItem('luxe_session'); } catch (e) {} }
   curUser() { return this.state.users.find(u => u.email === this.state.currentUser) || null; }
@@ -805,6 +963,19 @@ class Component extends DCLogic {
   mobileSearchGo() { this.setState({ mobileNav:false, view:'home' }, () => this.scrollCatalog()); }
   openProduct(id) { const p = this.find(id); this.setState({ view:'product', activeId:id, selVol:p?p.mainVol:1, qty:1, activeThumb:0, openAcc:0, openMenu:null, mobileNav:false }); this.toTop(); }
   scrollCatalog() { try { const el = document.getElementById('catalog'); if (el) window.scrollTo({ top: el.offsetTop - 90, behavior:'smooth' }); } catch (e) {} }
+  moveReco(dir) {
+    try {
+      const track = document.getElementById('reco-track');
+      const vp = document.getElementById('reco-vp');
+      if (!track || !vp) return;
+      const step = Math.max(280, Math.round(vp.clientWidth * 0.82));
+      const max = Math.max(0, track.scrollWidth - vp.clientWidth);
+      let off = (this.state.recoOff || 0) + dir * step;
+      off = Math.max(0, Math.min(max, off));
+      this.setState({ recoOff: off });
+    } catch (e) {}
+  }
+  recommended() { const withBadge = this.products.filter(p => p.badge); const rest = this.products.filter(p => !p.badge); return withBadge.concat(rest); }
   addToCart(id, volIdx, qty) {
     this.setState(s => {
       const cart = s.cart.slice();
@@ -818,6 +989,8 @@ class Component extends DCLogic {
   }
   setQtyCart(id, vol, d) { this.setState(s => ({ cart: s.cart.map(it => (it.id === id && it.vol === vol) ? Object.assign({}, it, { qty: Math.max(1, it.qty + d) }) : it) }), () => this.persist()); }
   removeCart(id, vol) { this.setState(s => ({ cart: s.cart.filter(it => !(it.id === id && it.vol === vol)) }), () => this.persist()); }
+  cartQty(id, vol) { const it = this.state.cart.find(x => x.id === id && x.vol === vol); return it ? it.qty : 0; }
+  decOrRemove(id, vol) { this.setState(s => { const it = s.cart.find(x => x.id === id && x.vol === vol); if (it && it.qty <= 1) return { cart: s.cart.filter(x => !(x.id === id && x.vol === vol)) }; return { cart: s.cart.map(x => (x.id === id && x.vol === vol) ? Object.assign({}, x, { qty: x.qty - 1 }) : x) }; }, () => this.persist()); }
   toggleWishlist(id) { this.setState(s => ({ wishlist: s.wishlist.includes(id) ? s.wishlist.filter(x => x !== id) : s.wishlist.concat(id) }), () => this.persist()); }
   setFamily(f) { this.setState({ filterFamily: f }); }
   setOpenMenu(m) { this.setState(s => ({ openMenu: s.openMenu === m ? null : m })); }
@@ -882,6 +1055,61 @@ class Component extends DCLogic {
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)) { this.setState({ subMsg:'Введите корректный e-mail' }); return; }
     this.setState({ subscribed:true, subMsg:'' });
   }
+  // ===== ADMIN PANEL =====
+  loadAdmin() {
+    try {
+      const raw = localStorage.getItem('luxe_admin_v2');
+      if (!raw) return;
+      const d = JSON.parse(raw);
+      if (d && Array.isArray(d.products) && d.products.length) this.products = d.products;
+      if (d && Array.isArray(d.heroSlides) && d.heroSlides.length) this.heroSlides = d.heroSlides;
+      if (d && Array.isArray(d.reviews)) this.reviews = d.reviews;
+      if (d && typeof d.accent === 'string' && d.accent) this._accent = d.accent;
+    } catch (e) {}
+  }
+  persistAdmin() {
+    try {
+      localStorage.setItem('luxe_admin_v2', JSON.stringify({ products: this.products, heroSlides: this.heroSlides, reviews: this.reviews, accent: this._accent }));
+      this.setState({ adminMsg: '' });
+    } catch (e) { this.setState({ adminMsg: 'Не удалось сохранить (возможно, превышен объём хранилища — крупные фото). Изменения действуют до перезагрузки.' }); }
+  }
+  adminTouch() { this.persistAdmin(); this.setState(s => ({ adminRev: (s.adminRev || 0) + 1 })); }
+  openAdmin() { this.setState({ view: 'admin', openMenu: null, mobileNav: false, adminMsg: '', adminPass: '' }); this.toTop(); }
+  adminLogin() { if (this.state.adminPass === this.ADMIN_PASS) this.setState({ adminAuthed: true, adminMsg: '', adminPass: '' }); else this.setState({ adminMsg: 'Неверный пароль' }); }
+  adminLogout() { this.setState({ adminAuthed: false, view: 'home' }); this.toTop(); }
+  setAdminTab(t) { this.setState({ adminTab: t }); }
+  adminField(obj, key) { return { value: (obj[key] == null ? '' : obj[key]), onInput: (e) => { obj[key] = e.target.value; this.adminTouch(); } }; }
+  adminNum(obj, key) { return { value: (obj[key] == null ? '' : String(obj[key])), onInput: (e) => { const n = parseInt(('' + e.target.value).replace(/[^0-9]/g, ''), 10); obj[key] = isNaN(n) ? 0 : n; this.adminTouch(); } }; }
+  adminArr(obj, key) { return { value: (obj[key] || []).join(', '), onInput: (e) => { obj[key] = ('' + e.target.value).split(',').map(s => s.trim()).filter(Boolean); this.adminTouch(); } }; }
+  adminUpload(obj, file) { if (!file) return; const r = new FileReader(); r.onload = () => { obj.photo = r.result; this.adminTouch(); }; r.readAsDataURL(file); }
+  addProduct() {
+    const id = 'p' + Date.now();
+    this.products.unshift({ id, brand: 'НОВЫЙ БРЕНД', name: 'Новый аромат', family: 'Цветочные', gender: 'Унисекс', badge: '', glow: '201,161,95', photo: '', tagline: 'Краткое описание аромата.', vols: [{ ml: 50, price: 10000 }, { ml: 100, price: 16000 }], mainVol: 0, top: ['Нота'], heart: ['Нота'], base: ['Нота'] });
+    this.adminTouch();
+  }
+  deleteProduct(id) {
+    this.products = this.products.filter(p => p.id !== id);
+    this.setState(s => ({ cart: s.cart.filter(it => it.id !== id), wishlist: s.wishlist.filter(w => w !== id) }), () => this.persist());
+    this.adminTouch();
+  }
+  setMainVol(p, i) { p.mainVol = i; this.adminTouch(); }
+  addVol(p) { p.vols = (p.vols || []).concat({ ml: 50, price: 10000 }); this.adminTouch(); }
+  removeVol(p, i) { if (p.vols.length <= 1) return; p.vols = p.vols.filter((v, j) => j !== i); if (p.mainVol >= p.vols.length) p.mainVol = p.vols.length - 1; this.adminTouch(); }
+  addHero() { this.heroSlides = this.heroSlides.concat({ eyebrow: 'Заголовок', title: 'Новый слайд', sub: 'Подзаголовок слайда.', cta: 'Кнопка', glow: '201,162,90', photo: '', capt: '' }); this.adminTouch(); }
+  deleteHero(i) { if (this.heroSlides.length <= 1) return; this.heroSlides = this.heroSlides.filter((s, j) => j !== i); this.setState(s => ({ heroSlide: Math.min(s.heroSlide, this.heroSlides.length - 1) })); this.adminTouch(); }
+  addReview() { this.reviews = [{ name: 'Имя К.', date: 'Дата', rating: 5, text: 'Текст отзыва.' }].concat(this.reviews); this.adminTouch(); }
+  deleteReview(i) { this.reviews = this.reviews.filter((r, j) => j !== i); this.adminTouch(); }
+  setAccent(c) { this._accent = c; this.applyAccent(); this.adminTouch(); }
+  exportAdmin() {
+    try {
+      const data = JSON.stringify({ products: this.products, heroSlides: this.heroSlides, reviews: this.reviews, accent: this._accent }, null, 2);
+      const blob = new Blob([data], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a'); a.href = url; a.download = 'luxe-content.json'; document.body.appendChild(a); a.click();
+      setTimeout(() => { document.body.removeChild(a); URL.revokeObjectURL(url); }, 100);
+    } catch (e) {}
+  }
+  resetAdmin() { try { localStorage.removeItem('luxe_admin_v2'); } catch (e) {} try { location.reload(); } catch (e) {} }
   cardPrice(p) { return p.vols[p.mainVol].price; }
   // photo override: if a product has `photo`, use it as the image; otherwise the gradient glow.
   photoBg(p, grad) { return p.photo ? ('#0d0d0f center/cover no-repeat url("' + p.photo + '")') : grad; }
@@ -894,14 +1122,18 @@ class Component extends DCLogic {
   cardVM(p) {
     const v = p.vols[p.mainVol];
     const showBadge = this.props.showBadges !== false;
+    const qtyInCart = this.cartQty(p.id, p.mainVol);
     return {
       id:p.id, brand:p.brand, name:p.name, volume:v.ml + ' мл', priceFmt:this.fmt(v.price),
       badge: showBadge ? (p.badge || '') : '', capt: p.photo ? '' : ('ФОТО · ' + p.brand),
       imgBg:this.photoBg(p,'radial-gradient(130% 115% at 30% 22%, rgba(' + p.glow + ',.30), rgba(' + p.glow + ',.07) 42%, #0d0d0f 74%)'),
       noteTop:p.top.join(' · '), noteHeart:p.heart.join(' · '), noteBase:p.base.join(' · '),
       wished:this.state.wishlist.includes(p.id), justAdded:this.state.justAdded === p.id,
+      qtyInCart, inCart: qtyInCart > 0, notInCart: qtyInCart === 0,
       onOpen:() => this.openProduct(p.id),
       onAdd:(e) => { if (e && e.stopPropagation) e.stopPropagation(); this.addToCart(p.id, p.mainVol, 1); },
+      onInc:(e) => { if (e && e.stopPropagation) e.stopPropagation(); this.addToCart(p.id, p.mainVol, 1); },
+      onDec:(e) => { if (e && e.stopPropagation) e.stopPropagation(); this.decOrRemove(p.id, p.mainVol); },
       onWish:(e) => { if (e && e.stopPropagation) e.stopPropagation(); this.toggleWishlist(p.id); }
     };
   }
@@ -977,6 +1209,36 @@ class Component extends DCLogic {
       onSubmit:() => this.submitAuth(), submitLabel:S.authTab === 'register' ? 'Создать аккаунт' : 'Войти',
       authMsg:S.authMsg, hasAuthMsg:!!S.authMsg, onBack:() => this.goHome()
     };
+    const tabExtra = (name) => S.adminTab === name ? 'color:var(--text);border-bottom-color:var(--gold)' : 'color:var(--t3);border-bottom-color:transparent';
+    const accentSwatches = ['#c9a24b','#d8b15f','#c98f6a','#cfc9bd','#b5834a','#8f9e8f'];
+    const admin = {
+      authed: S.adminAuthed, notAuthed: !S.adminAuthed,
+      passField: { value: S.adminPass, onInput: (e) => this.setState({ adminPass: e.target.value, adminMsg: '' }) },
+      onLogin: () => this.adminLogin(), onClose: () => this.goHome(), onLogout: () => this.adminLogout(),
+      hasMsg: !!S.adminMsg, msg: S.adminMsg,
+      tabProducts: S.adminTab === 'products', tabHero: S.adminTab === 'hero', tabReviews: S.adminTab === 'reviews', tabSettings: S.adminTab === 'settings',
+      onTabProducts: () => this.setAdminTab('products'), onTabHero: () => this.setAdminTab('hero'), onTabReviews: () => this.setAdminTab('reviews'), onTabSettings: () => this.setAdminTab('settings'),
+      tabPExtra: tabExtra('products'), tabHExtra: tabExtra('hero'), tabRExtra: tabExtra('reviews'), tabSExtra: tabExtra('settings'),
+      productCount: this.products.length, heroCount: this.heroSlides.length, reviewCount: this.reviews.length,
+      products: this.products.map((p, i) => ({
+        num: '№ ' + (i + 1), id: p.id, title: (p.brand || '') + ' · ' + (p.name || ''),
+        brand: this.adminField(p, 'brand'), name: this.adminField(p, 'name'), family: this.adminField(p, 'family'), gender: this.adminField(p, 'gender'),
+        badge: this.adminField(p, 'badge'), glow: this.adminField(p, 'glow'), tagline: this.adminField(p, 'tagline'), photo: this.adminField(p, 'photo'),
+        top: this.adminArr(p, 'top'), heart: this.adminArr(p, 'heart'), base: this.adminArr(p, 'base'),
+        hasPhoto: !!p.photo, thumbBg: this.photoBg(p, 'radial-gradient(130% 115% at 30% 22%, rgba(' + p.glow + ',.30), rgba(' + p.glow + ',.07) 42%, #0d0d0f 74%)'),
+        onPhoto: (e) => this.adminUpload(p, e.target.files && e.target.files[0]),
+        onDelete: () => this.deleteProduct(p.id), onAddVol: () => this.addVol(p),
+        vols: (p.vols || []).map((v, vi) => ({ ml: this.adminNum(v, 'ml'), price: this.adminNum(v, 'price'), isMain: p.mainVol === vi, mainExtra: p.mainVol === vi ? 'border-color:var(--gold);background:rgba(201,162,75,.12);color:var(--gold2)' : 'border-color:var(--line);color:var(--t3)', onMain: () => this.setMainVol(p, vi), onRemove: () => this.removeVol(p, vi) }))
+      })),
+      onAddProduct: () => this.addProduct(),
+      hero: this.heroSlides.map((h, i) => ({ num: '№ ' + (i + 1), eyebrow: this.adminField(h, 'eyebrow'), title: this.adminField(h, 'title'), sub: this.adminField(h, 'sub'), cta: this.adminField(h, 'cta'), glow: this.adminField(h, 'glow'), photo: this.adminField(h, 'photo'), hasPhoto: !!h.photo, onPhoto: (e) => this.adminUpload(h, e.target.files && e.target.files[0]), onDelete: () => this.deleteHero(i) })),
+      onAddHero: () => this.addHero(),
+      reviews: this.reviews.map((r, i) => ({ num: '№ ' + (i + 1), name: this.adminField(r, 'name'), date: this.adminField(r, 'date'), rating: this.adminNum(r, 'rating'), text: this.adminField(r, 'text'), onDelete: () => this.deleteReview(i) })),
+      onAddReview: () => this.addReview(),
+      accentValue: this.accentColor(),
+      accents: accentSwatches.map(c => ({ bg: c, onClick: () => this.setAccent(c), extra: (c.toLowerCase() === ('' + this.accentColor()).toLowerCase()) ? 'outline:2px solid var(--text);outline-offset:2px' : 'outline:1px solid var(--line2);outline-offset:2px' })),
+      onExport: () => this.exportAdmin(), onReset: () => this.resetAdmin()
+    };
     const info = this.infoData[S.infoTopic] || null;
     const iv = info ? {
       eyebrow:info.eyebrow, title:info.title, lead:info.lead, sections:info.sections,
@@ -986,7 +1248,8 @@ class Component extends DCLogic {
     return {
       rootRef:(el) => { this._root = el; if (el && this.props.accent) el.style.setProperty('--gold', this.props.accent); },
       isHome:S.view === 'home', isProduct:S.view === 'product', isCart:S.view === 'cart',
-      isAccount:S.view === 'account', isInfo:S.view === 'info',
+      isAccount:S.view === 'account', isInfo:S.view === 'info', isAdmin:S.view === 'admin',
+      onOpenAdmin:() => this.openAdmin(), admin,
       cartCount:S.cart.reduce((a, it) => a + it.qty, 0), wishCount:S.wishlist.length,
       loggedIn:!!cu, accountInitial: cu ? (cu.name || cu.email).trim().charAt(0).toUpperCase() : '', onAccount:() => this.openAccount(),
       query:S.query, onSearch:(e) => this.onSearchInput(e.target.value),
@@ -1009,6 +1272,7 @@ class Component extends DCLogic {
       onHeroNext:() => this.setState(s => ({ heroSlide:(s.heroSlide + 1) % this.heroSlides.length })),
       onHeroCta:() => this.scrollCatalog(),
       heroDots:this.heroSlides.map((h, i) => ({ onClick:() => this.setState({ heroSlide:i }), extra: i === S.heroSlide ? 'width:34px;background:var(--gold)' : 'width:14px;background:var(--line2)' })),
+      recoCards:this.recommended().map(p => this.cardVM(p)), onRecoPrev:() => this.moveReco(-1), onRecoNext:() => this.moveReco(1), recoTrackStyle:'transform:translateX(-' + (S.recoOff || 0) + 'px)',
       familyChips, resultCount:cards.length, cardsEmpty:cards.length === 0, cards,
       brandValue:S.filterBrand, brandOpen:S.openMenu === 'brand', onBrandToggle:() => this.setOpenMenu('brand'), brandOptions:mkOpts(brands, S.filterBrand, 'brand'),
       genderValue:S.filterGender, genderOpen:S.openMenu === 'gender', onGenderToggle:() => this.setOpenMenu('gender'), genderOptions:mkOpts(this.genderOptions, S.filterGender, 'gender'),
