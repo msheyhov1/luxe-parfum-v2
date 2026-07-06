@@ -331,9 +331,10 @@ input::placeholder{color:#6f6b63}
 @keyframes lxPop{0%{transform:scale(.6);opacity:0}60%{transform:scale(1.12)}100%{transform:scale(1);opacity:1}}
 ::-webkit-scrollbar{width:10px;height:10px}::-webkit-scrollbar-track{background:#0b0b0c}::-webkit-scrollbar-thumb{background:#26262a}::-webkit-scrollbar-thumb:hover{background:#33333a}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms !important;transition-duration:.001ms !important}}
-/* recommendations carousel */
+/* collections carousel */
 .reco-strip{scrollbar-width:none;-ms-overflow-style:none}
 .reco-strip::-webkit-scrollbar{height:0;display:none}
+.col-card:hover > div:nth-child(1){transform:scale(1.06)}
 /* ===== Mobile / responsive ===== */
 .lx-burger{display:none;place-items:center}
 /* runtime (React) serializes inline styles as "prop: value;" — selectors below must use that spaced form */
@@ -436,8 +437,10 @@ input::placeholder{color:#6f6b63}
           <button onclick="{{ onHeroCta }}" style="display:inline-flex;align-items:center;gap:14px;background:none;border:1px solid var(--line2);color:var(--text);padding:17px 34px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;transition:all .35s var(--ease)" style-hover="background:var(--gold);color:#0b0b0c;border-color:var(--gold)">{{ heroCta }}<span style="font-size:15px">→</span></button>
         </div>
       </div>
-      <button onclick="{{ onHeroPrev }}" aria-label="Назад" style="display:none"></button>
-      <button onclick="{{ onHeroNext }}" aria-label="Вперёд" style="display:none"></button>
+      <div style="position:absolute;right:40px;bottom:30px;display:flex;gap:12px;z-index:6">
+        <button onclick="{{ onHeroPrev }}" aria-label="Назад" style="width:54px;height:54px;display:grid;place-items:center;border-radius:50%;background:rgba(11,11,12,.5);backdrop-filter:blur(6px);border:1px solid var(--line2);color:#fff;cursor:pointer;transition:all .3s var(--ease)"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7"><polyline points="15 5 8 12 15 19"></polyline></svg></button>
+        <button onclick="{{ onHeroNext }}" aria-label="Вперёд" style="width:54px;height:54px;display:grid;place-items:center;border-radius:50%;background:rgba(11,11,12,.5);backdrop-filter:blur(6px);border:1px solid var(--line2);color:#fff;cursor:pointer;transition:all .3s var(--ease)"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7"><polyline points="9 5 16 12 9 19"></polyline></svg></button>
+      </div>
       <div style="position:absolute;left:40px;bottom:34px;display:flex;align-items:center;gap:18px">
         <div style="display:flex;gap:8px"><sc-for list="{{ heroDots }}" as="d" hint-placeholder-count="3"><button onclick="{{ d.onClick }}" style="height:3px;border:none;cursor:pointer;padding:0;transition:all .4s var(--ease); {{ d.extra }}"></button></sc-for></div>
         <span style="font-family:ui-monospace,Menlo,monospace;font-size:10px;letter-spacing:.16em;color:var(--t3)">{{ heroNum }} / {{ heroTotal }}</span>
@@ -453,18 +456,28 @@ input::placeholder{color:#6f6b63}
       </div>
     </div>
 
-    <section style="max-width:1480px;margin:0 auto;padding:74px 40px 24px">
-      <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:34px;flex-wrap:wrap">
-        <div>
-          <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px"><span style="width:34px;height:1px;background:var(--gold)"></span><span style="font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold2)">Вам может понравиться</span></div>
-          <h2 style="font-family:Prata,serif;font-weight:400;font-size:clamp(28px,3.4vw,46px);line-height:1.06;color:var(--text);margin:0">Интересные ароматы</h2>
-        </div>
-        <div class="reco-arrows" style="display:flex;gap:10px">
-          <button onclick="{{ onRecoPrev }}" aria-label="Прокрутить назад" style="width:52px;height:52px;display:grid;place-items:center;background:none;border:1px solid var(--line2);color:var(--text);cursor:pointer;transition:all .3s var(--ease)" style-hover="border-color:var(--gold);color:var(--gold)"><span style="font-size:20px;line-height:1">←</span></button>
-          <button onclick="{{ onRecoNext }}" aria-label="Прокрутить вперёд" style="width:52px;height:52px;display:grid;place-items:center;background:none;border:1px solid var(--line2);color:var(--text);cursor:pointer;transition:all .3s var(--ease)" style-hover="border-color:var(--gold);color:var(--gold)"><span style="font-size:20px;line-height:1">→</span></button>
-        </div>
+    <section style="max-width:1480px;margin:0 auto;padding:74px 40px 30px">
+      <div style="margin-bottom:32px">
+        <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px"><span style="width:34px;height:1px;background:var(--gold)"></span><span style="font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold2)">Коллекции</span></div>
+        <h2 style="font-family:Prata,serif;font-weight:400;font-size:clamp(28px,3.4vw,46px);line-height:1.06;color:var(--text);margin:0">Подобрано для вас</h2>
       </div>
-      <div id="reco-vp" class="reco-strip" style="overflow:hidden;padding:2px 2px 14px"><div id="reco-track" style="display:flex;gap:26px;will-change:transform;transition:transform .55s var(--ease); {{ recoTrackStyle }}"><sc-for list="{{ recoCards }}" as="c" hint-placeholder-count="6"><div style="flex:0 0 274px"><dc-import name="Product Card" card="{{ c }}" hint-size="274px,470px"></dc-import></div></sc-for></div></div>
+      <div style="position:relative">
+        <div id="reco-vp" class="reco-strip" style="overflow:hidden;padding:2px"><div id="reco-track" style="display:flex;gap:24px;will-change:transform;transition:transform .55s var(--ease); {{ recoTrackStyle }}"><sc-for list="{{ collections }}" as="c" hint-placeholder-count="5">
+          <div onclick="{{ c.onClick }}" style="flex:0 0 clamp(280px,40vw,438px);cursor:pointer">
+            <div class="col-card" style="position:relative;aspect-ratio:3/2.05;overflow:hidden;background:#0d0d0f;border:1px solid var(--line)">
+              <div style="position:absolute;inset:0;background: {{ c.imgBg }};background-size:cover;background-position:center;transition:transform .9s var(--ease)"></div>
+              <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(6,6,7,.92),rgba(6,6,7,.28) 54%,transparent 86%)"></div>
+              <div style="position:absolute;inset:14px;border:1px solid var(--line);pointer-events:none"></div>
+              <div style="position:absolute;left:28px;right:28px;bottom:26px">
+                <div style="font-family:Prata,serif;font-size:clamp(22px,2vw,30px);color:#fff;line-height:1.12;margin-bottom:9px">{{ c.title }}</div>
+                <div style="display:flex;align-items:center;gap:11px"><span style="font-size:12.5px;letter-spacing:.02em;color:rgba(236,232,224,.82)">{{ c.subtitle }}</span><span style="color:var(--gold2);font-size:15px">→</span></div>
+              </div>
+            </div>
+          </div>
+        </sc-for></div></div>
+        <button onclick="{{ onRecoPrev }}" aria-label="Прокрутить назад" style="position:absolute;left:16px;top:46%;transform:translateY(-50%);width:54px;height:54px;display:grid;place-items:center;border-radius:50%;background:rgba(11,11,12,.55);backdrop-filter:blur(6px);border:1px solid var(--line2);color:#fff;cursor:pointer;z-index:5;transition:all .3s var(--ease)"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7"><polyline points="15 5 8 12 15 19"></polyline></svg></button>
+        <button onclick="{{ onRecoNext }}" aria-label="Прокрутить вперёд" style="position:absolute;right:16px;top:46%;transform:translateY(-50%);width:54px;height:54px;display:grid;place-items:center;border-radius:50%;background:rgba(11,11,12,.55);backdrop-filter:blur(6px);border:1px solid var(--line2);color:#fff;cursor:pointer;z-index:5;transition:all .3s var(--ease)"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7"><polyline points="9 5 16 12 9 19"></polyline></svg></button>
+      </div>
     </section>
 
     <section id="catalog" style="max-width:1480px;margin:0 auto;padding:84px 40px 100px">
@@ -684,6 +697,7 @@ input::placeholder{color:#6f6b63}
       <div style="display:flex;gap:4px;border-bottom:1px solid var(--line);margin-bottom:30px;flex-wrap:wrap">
         <button onclick="{{ admin.onTabProducts }}" style="background:none;border:none;border-bottom:2px solid transparent;padding:14px 18px;font-family:Manrope,sans-serif;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:all .3s var(--ease); {{ admin.tabPExtra }}">Товары · {{ admin.productCount }}</button>
         <button onclick="{{ admin.onTabHero }}" style="background:none;border:none;border-bottom:2px solid transparent;padding:14px 18px;font-family:Manrope,sans-serif;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:all .3s var(--ease); {{ admin.tabHExtra }}">Слайдер · {{ admin.heroCount }}</button>
+        <button onclick="{{ admin.onTabCollections }}" style="background:none;border:none;border-bottom:2px solid transparent;padding:14px 18px;font-family:Manrope,sans-serif;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:all .3s var(--ease); {{ admin.tabColExtra }}">Коллекции · {{ admin.collectionCount }}</button>
         <button onclick="{{ admin.onTabReviews }}" style="background:none;border:none;border-bottom:2px solid transparent;padding:14px 18px;font-family:Manrope,sans-serif;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:all .3s var(--ease); {{ admin.tabRExtra }}">Отзывы · {{ admin.reviewCount }}</button>
         <button onclick="{{ admin.onTabSettings }}" style="background:none;border:none;border-bottom:2px solid transparent;padding:14px 18px;font-family:Manrope,sans-serif;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:all .3s var(--ease); {{ admin.tabSExtra }}">Оформление</button>
       </div>
@@ -740,6 +754,21 @@ input::placeholder{color:#6f6b63}
               <div style="grid-column:1/3"><label style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);margin-bottom:7px;display:block">Подзаголовок</label><input value="{{ h.sub.value }}" oninput="{{ h.sub.onInput }}" style="height:44px;width:100%;background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--text);padding:0 13px;font-family:Manrope,sans-serif;font-size:13px;outline:none"></div>
               <div><label style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);margin-bottom:7px;display:block">Свечение RGB</label><input value="{{ h.glow.value }}" oninput="{{ h.glow.onInput }}" style="height:44px;width:100%;background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--text);padding:0 13px;font-family:Manrope,sans-serif;font-size:13px;outline:none"></div>
               <div><label style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);margin-bottom:7px;display:block">Фото (путь или загрузка)</label><div style="display:flex;gap:8px;align-items:center"><input value="{{ h.photo.value }}" oninput="{{ h.photo.onInput }}" placeholder="photos/hero-1.jpg" style="height:44px;flex:1;min-width:0;background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--text);padding:0 13px;font-family:Manrope,sans-serif;font-size:12px;outline:none"><label style="height:44px;display:grid;place-items:center;padding:0 14px;border:1px solid var(--line2);color:var(--t2);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;white-space:nowrap">Загрузить<input type="file" accept="image/*" onchange="{{ h.onPhoto }}" style="display:none"></label></div></div>
+            </div>
+          </div>
+        </sc-for></div>
+      </sc-if>
+
+      <sc-if value="{{ admin.tabCollections }}" hint-placeholder-val="">
+        <button onclick="{{ admin.onAddCollection }}" style="margin-bottom:24px;background:var(--gold);border:none;color:#0b0b0c;padding:14px 24px;font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;transition:background .3s var(--ease)" style-hover="background:var(--gold2)">+ Добавить коллекцию</button>
+        <div style="display:flex;flex-direction:column;gap:22px"><sc-for list="{{ admin.collections }}" as="c" hint-placeholder-count="4">
+          <div style="border:1px solid var(--line);background:#0c0c0d;padding:24px">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--line)"><div style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--t3)">Коллекция {{ c.num }}</div><button onclick="{{ c.onDelete }}" style="background:none;border:1px solid var(--line2);color:var(--t2);padding:9px 15px;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:all .3s var(--ease)" style-hover="border-color:#e2a59a;color:#e2a59a">Удалить</button></div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px 16px">
+              <div style="grid-column:1/3"><label style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);margin-bottom:7px;display:block">Название</label><input value="{{ c.title.value }}" oninput="{{ c.title.onInput }}" style="height:44px;width:100%;background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--text);padding:0 13px;font-family:Manrope,sans-serif;font-size:13px;outline:none"></div>
+              <div style="grid-column:1/3"><label style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);margin-bottom:7px;display:block">Подзаголовок</label><input value="{{ c.subtitle.value }}" oninput="{{ c.subtitle.onInput }}" style="height:44px;width:100%;background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--text);padding:0 13px;font-family:Manrope,sans-serif;font-size:13px;outline:none"></div>
+              <div><label style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);margin-bottom:7px;display:block">Свечение RGB</label><input value="{{ c.glow.value }}" oninput="{{ c.glow.onInput }}" style="height:44px;width:100%;background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--text);padding:0 13px;font-family:Manrope,sans-serif;font-size:13px;outline:none"></div>
+              <div><label style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);margin-bottom:7px;display:block">Фото (путь или загрузка)</label><div style="display:flex;gap:8px;align-items:center"><input value="{{ c.photo.value }}" oninput="{{ c.photo.onInput }}" placeholder="photos/name.jpg" style="height:44px;flex:1;min-width:0;background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--text);padding:0 13px;font-family:Manrope,sans-serif;font-size:12px;outline:none"><label style="height:44px;display:grid;place-items:center;padding:0 14px;border:1px solid var(--line2);color:var(--t2);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;white-space:nowrap">Загрузить<input type="file" accept="image/*" onchange="{{ c.onPhoto }}" style="display:none"></label></div></div>
             </div>
           </div>
         </sc-for></div>
@@ -841,6 +870,13 @@ class Component extends DCLogic {
       {eyebrow:'Новая коллекция',title:'Роскошь в каждой капле',sub:'Изысканные ароматы для тех, кто привык к лучшему.',cta:'Смотреть коллекцию',glow:'201,162,90',photo:'photos/hero-1.jpg',capt:'HERO · FULL-BLEED PRODUCT PHOTO'},
       {eyebrow:'Для него',title:'Сила тихого присутствия',sub:'Глубокие древесные и пряные композиции с характером.',cta:'Мужские ароматы',glow:'150,120,90',photo:'photos/hero-2.jpg',capt:'HERO · FULL-BLEED PRODUCT PHOTO'},
       {eyebrow:'Нишевые дома',title:'Редкие тиражи, штучная работа',sub:'Парфюмерия, которую носят единицы.',cta:'Открыть нишу',glow:'120,134,150',photo:'photos/hero-3.jpg',capt:'HERO · FULL-BLEED PRODUCT PHOTO'}
+    ];
+    this.collections = [
+      {id:'col-new',title:'Новинки сезона',subtitle:'Стоит попробовать первыми',photo:'photos/hero-1.jpg',glow:'201,162,90',sort:'Новинки'},
+      {id:'col-her',title:'Для неё',subtitle:'Цветочные и обволакивающие',photo:'photos/chanel.jpg',glow:'198,191,154',gender:'Женский'},
+      {id:'col-him',title:'Для него',subtitle:'Древесные, пряные, глубокие',photo:'photos/dior.jpg',glow:'120,134,150',gender:'Мужской'},
+      {id:'col-niche',title:'Нишевые дома',subtitle:'Редкие тиражи, штучная работа',photo:'photos/xerjoff.jpg',glow:'181,129,74',family:'Восточные'},
+      {id:'col-uni',title:'Унисекс',subtitle:'Свежие и универсальные',photo:'photos/creed.jpg',glow:'201,161,95',gender:'Унисекс'}
     ];
     this.familyOptions = ['Все','Цветочные','Древесные','Восточные','Цитрусовые','Пряные'];
     this.genderOptions = ['Все','Женский','Мужской','Унисекс'];
@@ -975,7 +1011,7 @@ class Component extends DCLogic {
       this.setState({ recoOff: off });
     } catch (e) {}
   }
-  recommended() { const withBadge = this.products.filter(p => p.badge); const rest = this.products.filter(p => !p.badge); return withBadge.concat(rest); }
+  openCollection(c) { this.setState({ view: 'home', filterFamily: c.family || 'Все', filterGender: c.gender || 'Все', filterBrand: 'Все', filterWish: false, query: '', sort: c.sort || 'Рекомендуемые', mobileNav: false }, () => this.scrollCatalog()); }
   addToCart(id, volIdx, qty) {
     this.setState(s => {
       const cart = s.cart.slice();
@@ -1064,12 +1100,13 @@ class Component extends DCLogic {
       if (d && Array.isArray(d.products) && d.products.length) this.products = d.products;
       if (d && Array.isArray(d.heroSlides) && d.heroSlides.length) this.heroSlides = d.heroSlides;
       if (d && Array.isArray(d.reviews)) this.reviews = d.reviews;
+      if (d && Array.isArray(d.collections)) this.collections = d.collections;
       if (d && typeof d.accent === 'string' && d.accent) this._accent = d.accent;
     } catch (e) {}
   }
   persistAdmin() {
     try {
-      localStorage.setItem('luxe_admin_v2', JSON.stringify({ products: this.products, heroSlides: this.heroSlides, reviews: this.reviews, accent: this._accent }));
+      localStorage.setItem('luxe_admin_v2', JSON.stringify({ products: this.products, heroSlides: this.heroSlides, reviews: this.reviews, collections: this.collections, accent: this._accent }));
       this.setState({ adminMsg: '' });
     } catch (e) { this.setState({ adminMsg: 'Не удалось сохранить (возможно, превышен объём хранилища — крупные фото). Изменения действуют до перезагрузки.' }); }
   }
@@ -1099,10 +1136,12 @@ class Component extends DCLogic {
   deleteHero(i) { if (this.heroSlides.length <= 1) return; this.heroSlides = this.heroSlides.filter((s, j) => j !== i); this.setState(s => ({ heroSlide: Math.min(s.heroSlide, this.heroSlides.length - 1) })); this.adminTouch(); }
   addReview() { this.reviews = [{ name: 'Имя К.', date: 'Дата', rating: 5, text: 'Текст отзыва.' }].concat(this.reviews); this.adminTouch(); }
   deleteReview(i) { this.reviews = this.reviews.filter((r, j) => j !== i); this.adminTouch(); }
+  addCollection() { this.collections = this.collections.concat({ id: 'col' + Date.now(), title: 'Новая коллекция', subtitle: 'Подзаголовок подборки', photo: '', glow: '201,162,90' }); this.adminTouch(); }
+  deleteCollection(i) { this.collections = this.collections.filter((c, j) => j !== i); this.adminTouch(); }
   setAccent(c) { this._accent = c; this.applyAccent(); this.adminTouch(); }
   exportAdmin() {
     try {
-      const data = JSON.stringify({ products: this.products, heroSlides: this.heroSlides, reviews: this.reviews, accent: this._accent }, null, 2);
+      const data = JSON.stringify({ products: this.products, heroSlides: this.heroSlides, reviews: this.reviews, collections: this.collections, accent: this._accent }, null, 2);
       const blob = new Blob([data], { type: 'application/json' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a'); a.href = url; a.download = 'luxe-content.json'; document.body.appendChild(a); a.click();
@@ -1216,10 +1255,12 @@ class Component extends DCLogic {
       passField: { value: S.adminPass, onInput: (e) => this.setState({ adminPass: e.target.value, adminMsg: '' }) },
       onLogin: () => this.adminLogin(), onClose: () => this.goHome(), onLogout: () => this.adminLogout(),
       hasMsg: !!S.adminMsg, msg: S.adminMsg,
-      tabProducts: S.adminTab === 'products', tabHero: S.adminTab === 'hero', tabReviews: S.adminTab === 'reviews', tabSettings: S.adminTab === 'settings',
-      onTabProducts: () => this.setAdminTab('products'), onTabHero: () => this.setAdminTab('hero'), onTabReviews: () => this.setAdminTab('reviews'), onTabSettings: () => this.setAdminTab('settings'),
-      tabPExtra: tabExtra('products'), tabHExtra: tabExtra('hero'), tabRExtra: tabExtra('reviews'), tabSExtra: tabExtra('settings'),
-      productCount: this.products.length, heroCount: this.heroSlides.length, reviewCount: this.reviews.length,
+      tabProducts: S.adminTab === 'products', tabHero: S.adminTab === 'hero', tabCollections: S.adminTab === 'collections', tabReviews: S.adminTab === 'reviews', tabSettings: S.adminTab === 'settings',
+      onTabProducts: () => this.setAdminTab('products'), onTabHero: () => this.setAdminTab('hero'), onTabCollections: () => this.setAdminTab('collections'), onTabReviews: () => this.setAdminTab('reviews'), onTabSettings: () => this.setAdminTab('settings'),
+      tabPExtra: tabExtra('products'), tabHExtra: tabExtra('hero'), tabColExtra: tabExtra('collections'), tabRExtra: tabExtra('reviews'), tabSExtra: tabExtra('settings'),
+      productCount: this.products.length, heroCount: this.heroSlides.length, collectionCount: this.collections.length, reviewCount: this.reviews.length,
+      collections: this.collections.map((c, i) => ({ num: '№ ' + (i + 1), title: this.adminField(c, 'title'), subtitle: this.adminField(c, 'subtitle'), glow: this.adminField(c, 'glow'), photo: this.adminField(c, 'photo'), hasPhoto: !!c.photo, onPhoto: (e) => this.adminUpload(c, e.target.files && e.target.files[0]), onDelete: () => this.deleteCollection(i) })),
+      onAddCollection: () => this.addCollection(),
       products: this.products.map((p, i) => ({
         num: '№ ' + (i + 1), id: p.id, title: (p.brand || '') + ' · ' + (p.name || ''),
         brand: this.adminField(p, 'brand'), name: this.adminField(p, 'name'), family: this.adminField(p, 'family'), gender: this.adminField(p, 'gender'),
@@ -1272,7 +1313,8 @@ class Component extends DCLogic {
       onHeroNext:() => this.setState(s => ({ heroSlide:(s.heroSlide + 1) % this.heroSlides.length })),
       onHeroCta:() => this.scrollCatalog(),
       heroDots:this.heroSlides.map((h, i) => ({ onClick:() => this.setState({ heroSlide:i }), extra: i === S.heroSlide ? 'width:34px;background:var(--gold)' : 'width:14px;background:var(--line2)' })),
-      recoCards:this.recommended().map(p => this.cardVM(p)), onRecoPrev:() => this.moveReco(-1), onRecoNext:() => this.moveReco(1), recoTrackStyle:'transform:translateX(-' + (S.recoOff || 0) + 'px)',
+      collections:this.collections.map(c => ({ title:c.title, subtitle:c.subtitle, imgBg:this.photoBg(c, 'radial-gradient(120% 120% at 50% 30%, rgba(' + c.glow + ',.42), rgba(' + c.glow + ',.12) 46%, #0a0a0b 82%)'), onClick:() => this.openCollection(c) })),
+      onRecoPrev:() => this.moveReco(-1), onRecoNext:() => this.moveReco(1), recoTrackStyle:'transform:translateX(-' + (S.recoOff || 0) + 'px)',
       familyChips, resultCount:cards.length, cardsEmpty:cards.length === 0, cards,
       brandValue:S.filterBrand, brandOpen:S.openMenu === 'brand', onBrandToggle:() => this.setOpenMenu('brand'), brandOptions:mkOpts(brands, S.filterBrand, 'brand'),
       genderValue:S.filterGender, genderOpen:S.openMenu === 'gender', onGenderToggle:() => this.setOpenMenu('gender'), genderOptions:mkOpts(this.genderOptions, S.filterGender, 'gender'),
