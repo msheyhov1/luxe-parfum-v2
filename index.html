@@ -359,6 +359,10 @@ input::placeholder{color:#6f6b63}
   [style*="gap: 46px 28px"]{gap:32px 18px !important}
   /* catalog / related grids: 2 columns on mobile instead of collapsing to 1 */
   [style*="minmax(244px, 1fr)"]{grid-template-columns:repeat(2,1fr) !important}
+  /* hero side-arrows overlap the large centered title on phones — hide (dots + swipe remain) */
+  .hero-arrow{display:none !important}
+  /* collection carousel arrows a touch smaller on mobile */
+  [aria-label="Прокрутить назад"],[aria-label="Прокрутить вперёд"]{width:46px !important;height:46px !important}
 }
 @media (max-width:560px){
   [style*="minmax(244px, 1fr)"]{grid-template-columns:repeat(2,1fr) !important;gap:22px 12px !important}
@@ -377,9 +381,9 @@ input::placeholder{color:#6f6b63}
 
   <header style="position:sticky;top:0;z-index:60;background:rgba(10,10,11,.86);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)">
     <div style="max-width:1480px;margin:0 auto;padding:0 40px;height:66px;display:flex;align-items:center;gap:24px">
-      <div onclick="{{ onLogo }}" style="cursor:pointer;display:flex;flex-direction:column;line-height:1;margin-right:4px">
-        <span style="font-family:Prata,serif;font-size:24px;letter-spacing:.3em;color:var(--text);padding-left:.3em">LUXE</span>
-        <span style="font-size:8px;letter-spacing:.46em;color:var(--gold);margin-top:5px;padding-left:.46em">ПАРФЮМЕРИЯ</span>
+      <div onclick="{{ onLogo }}" style="cursor:pointer;display:flex;align-items:center;margin-right:4px">
+        <sc-if value="{{ hasLogo }}" hint-placeholder-val=""><img src="{{ logoImg }}" alt="{{ logoName }}" style="height:42px;width:auto;max-width:200px;display:block;object-fit:contain"></sc-if>
+        <sc-if value="{{ noLogo }}" hint-placeholder-val="{{ true }}"><div style="display:flex;flex-direction:column;line-height:1"><span style="font-family:Prata,serif;font-size:24px;letter-spacing:.3em;color:var(--text);padding-left:.3em">{{ logoName }}</span><span style="font-size:8px;letter-spacing:.46em;color:var(--gold);margin-top:5px;padding-left:.46em">{{ logoTagline }}</span></div></sc-if>
       </div>
       <nav class="lx-nav" style="display:flex;align-items:center;gap:20px;margin-left:6px">
         <sc-for list="{{ navLinks }}" as="n" hint-placeholder-count="6"><button onclick="{{ n.onClick }}" style="background:none;border:none;color:var(--t2);font-family:Manrope,sans-serif;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;cursor:pointer;padding:6px 0;transition:color .25s var(--ease),letter-spacing .25s var(--ease)" style-hover="color:var(--gold);letter-spacing:.18em">{{ n.label }}</button></sc-for>
@@ -437,10 +441,8 @@ input::placeholder{color:#6f6b63}
           <button onclick="{{ onHeroCta }}" style="display:inline-flex;align-items:center;gap:14px;background:none;border:1px solid var(--line2);color:var(--text);padding:17px 34px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;transition:all .35s var(--ease)" style-hover="background:var(--gold);color:#0b0b0c;border-color:var(--gold)">{{ heroCta }}<span style="font-size:15px">→</span></button>
         </div>
       </div>
-      <div style="position:absolute;right:40px;bottom:30px;display:flex;gap:12px;z-index:6">
-        <button onclick="{{ onHeroPrev }}" aria-label="Назад" style="width:54px;height:54px;display:grid;place-items:center;border-radius:50%;background:rgba(11,11,12,.5);backdrop-filter:blur(6px);border:1px solid var(--line2);color:#fff;cursor:pointer;transition:all .3s var(--ease)"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7"><polyline points="15 5 8 12 15 19"></polyline></svg></button>
-        <button onclick="{{ onHeroNext }}" aria-label="Вперёд" style="width:54px;height:54px;display:grid;place-items:center;border-radius:50%;background:rgba(11,11,12,.5);backdrop-filter:blur(6px);border:1px solid var(--line2);color:#fff;cursor:pointer;transition:all .3s var(--ease)"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7"><polyline points="9 5 16 12 9 19"></polyline></svg></button>
-      </div>
+      <button onclick="{{ onHeroPrev }}" aria-label="Назад" class="hero-arrow" style="position:absolute;left:24px;top:50%;transform:translateY(-50%);width:56px;height:56px;display:grid;place-items:center;border-radius:50%;background:rgba(11,11,12,.42);backdrop-filter:blur(6px);border:1px solid var(--line2);color:#fff;cursor:pointer;z-index:6;transition:all .3s var(--ease)"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.7"><polyline points="15 5 8 12 15 19"></polyline></svg></button>
+      <button onclick="{{ onHeroNext }}" aria-label="Вперёд" class="hero-arrow" style="position:absolute;right:24px;top:50%;transform:translateY(-50%);width:56px;height:56px;display:grid;place-items:center;border-radius:50%;background:rgba(11,11,12,.42);backdrop-filter:blur(6px);border:1px solid var(--line2);color:#fff;cursor:pointer;z-index:6;transition:all .3s var(--ease)"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.7"><polyline points="9 5 16 12 9 19"></polyline></svg></button>
       <div style="position:absolute;left:40px;bottom:34px;display:flex;align-items:center;gap:18px">
         <div style="display:flex;gap:8px"><sc-for list="{{ heroDots }}" as="d" hint-placeholder-count="3"><button onclick="{{ d.onClick }}" style="height:3px;border:none;cursor:pointer;padding:0;transition:all .4s var(--ease); {{ d.extra }}"></button></sc-for></div>
         <span style="font-family:ui-monospace,Menlo,monospace;font-size:10px;letter-spacing:.16em;color:var(--t3)">{{ heroNum }} / {{ heroTotal }}</span>
@@ -790,6 +792,15 @@ input::placeholder{color:#6f6b63}
       </sc-if>
 
       <sc-if value="{{ admin.tabSettings }}" hint-placeholder-val="">
+        <div style="border:1px solid var(--line);background:#0c0c0d;padding:28px;max-width:560px;margin-bottom:22px">
+          <div style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold2);margin-bottom:18px">Шапка сайта</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px 16px">
+            <div><label style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);margin-bottom:7px;display:block">Название</label><input value="{{ admin.hdrName.value }}" oninput="{{ admin.hdrName.onInput }}" style="height:44px;width:100%;background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--text);padding:0 13px;font-family:Manrope,sans-serif;font-size:13px;outline:none"></div>
+            <div><label style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);margin-bottom:7px;display:block">Подпись</label><input value="{{ admin.hdrTagline.value }}" oninput="{{ admin.hdrTagline.onInput }}" style="height:44px;width:100%;background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--text);padding:0 13px;font-family:Manrope,sans-serif;font-size:13px;outline:none"></div>
+            <div style="grid-column:1/3"><label style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);margin-bottom:7px;display:block">Логотип-картинка (заменяет текст названия)</label><div style="display:flex;gap:8px;align-items:center"><input value="{{ admin.hdrLogo.value }}" oninput="{{ admin.hdrLogo.onInput }}" placeholder="photos/logo.png" style="height:44px;flex:1;min-width:0;background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--text);padding:0 13px;font-family:Manrope,sans-serif;font-size:12px;outline:none"><label style="height:44px;display:grid;place-items:center;padding:0 14px;border:1px solid var(--line2);color:var(--t2);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;white-space:nowrap">Загрузить<input type="file" accept="image/*" onchange="{{ admin.onHdrLogo }}" style="display:none"></label></div></div>
+            <sc-if value="{{ admin.hdrHasLogo }}" hint-placeholder-val=""><div style="grid-column:1/3;display:flex;align-items:center;gap:14px"><div style="height:46px;padding:0 12px;display:grid;place-items:center;border:1px solid var(--line);background:#141416"><img src="{{ admin.hdrLogoImg }}" alt="logo" style="height:34px;width:auto;max-width:180px;object-fit:contain;display:block"></div><button onclick="{{ admin.onHdrLogoClear }}" style="background:none;border:1px solid var(--line2);color:var(--t2);padding:9px 15px;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:all .3s var(--ease)" style-hover="border-color:#e2a59a;color:#e2a59a">Убрать логотип</button></div></sc-if>
+          </div>
+        </div>
         <div style="border:1px solid var(--line);background:#0c0c0d;padding:28px;max-width:560px">
           <div style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold2);margin-bottom:18px">Акцентный цвет</div>
           <div style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:8px"><sc-for list="{{ admin.accents }}" as="a" hint-placeholder-count="6"><button onclick="{{ a.onClick }}" aria-label="Цвет" style="width:44px;height:44px;border:none;border-radius:50%;cursor:pointer;background: {{ a.bg }}; {{ a.extra }}"></button></sc-for></div>
@@ -809,7 +820,7 @@ input::placeholder{color:#6f6b63}
     <div style="max-width:1480px;margin:0 auto">
       <div style="display:grid;grid-template-columns:1.5fr 1fr 1fr 1.3fr;gap:48px;padding-bottom:54px;border-bottom:1px solid var(--line)">
         <div>
-          <div style="display:flex;flex-direction:column;line-height:1;margin-bottom:22px"><span style="font-family:Prata,serif;font-size:24px;letter-spacing:.3em;padding-left:.3em">LUXE</span><span style="font-size:8px;letter-spacing:.46em;color:var(--gold);margin-top:5px;padding-left:.46em">ПАРФЮМЕРИЯ</span></div>
+          <div style="display:flex;flex-direction:column;line-height:1;margin-bottom:22px"><span style="font-family:Prata,serif;font-size:24px;letter-spacing:.3em;padding-left:.3em">{{ logoName }}</span><span style="font-size:8px;letter-spacing:.46em;color:var(--gold);margin-top:5px;padding-left:.46em">{{ logoTagline }}</span></div>
           <p style="font-size:13px;line-height:1.8;color:var(--t2);max-width:300px;margin:0">Нишевая и селективная парфюмерия из официальных источников. Подбор ароматов, образцы и доставка по всей России.</p>
         </div>
         <div><div style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--t3);margin-bottom:20px">Каталог</div><div style="display:flex;flex-direction:column;gap:13px"><sc-for list="{{ navLinks }}" as="n" hint-placeholder-count="6"><button onclick="{{ n.onClick }}" style="text-align:left;background:none;border:none;color:var(--t2);font-family:Manrope,sans-serif;font-size:13px;letter-spacing:.02em;cursor:pointer;padding:0;transition:color .3s var(--ease)" style-hover="color:var(--gold)">{{ n.label }}</button></sc-for></div></div>
@@ -878,6 +889,7 @@ class Component extends DCLogic {
       {id:'col-niche',title:'Нишевые дома',subtitle:'Редкие тиражи, штучная работа',photo:'photos/xerjoff.jpg',glow:'181,129,74',family:'Восточные'},
       {id:'col-uni',title:'Унисекс',subtitle:'Свежие и универсальные',photo:'photos/creed.jpg',glow:'201,161,95',gender:'Унисекс'}
     ];
+    this.header = { name:'LUXE', tagline:'ПАРФЮМЕРИЯ', logo:'' };
     this.familyOptions = ['Все','Цветочные','Древесные','Восточные','Цитрусовые','Пряные'];
     this.genderOptions = ['Все','Женский','Мужской','Унисекс'];
     this.sortOptions = ['Рекомендуемые','Сначала дешёвые','Сначала дорогие','Новинки'];
@@ -1101,12 +1113,13 @@ class Component extends DCLogic {
       if (d && Array.isArray(d.heroSlides) && d.heroSlides.length) this.heroSlides = d.heroSlides;
       if (d && Array.isArray(d.reviews)) this.reviews = d.reviews;
       if (d && Array.isArray(d.collections)) this.collections = d.collections;
+      if (d && d.header && typeof d.header === 'object') this.header = Object.assign({ name:'LUXE', tagline:'ПАРФЮМЕРИЯ', logo:'' }, d.header);
       if (d && typeof d.accent === 'string' && d.accent) this._accent = d.accent;
     } catch (e) {}
   }
   persistAdmin() {
     try {
-      localStorage.setItem('luxe_admin_v2', JSON.stringify({ products: this.products, heroSlides: this.heroSlides, reviews: this.reviews, collections: this.collections, accent: this._accent }));
+      localStorage.setItem('luxe_admin_v2', JSON.stringify({ products: this.products, heroSlides: this.heroSlides, reviews: this.reviews, collections: this.collections, header: this.header, accent: this._accent }));
       this.setState({ adminMsg: '' });
     } catch (e) { this.setState({ adminMsg: 'Не удалось сохранить (возможно, превышен объём хранилища — крупные фото). Изменения действуют до перезагрузки.' }); }
   }
@@ -1118,7 +1131,7 @@ class Component extends DCLogic {
   adminField(obj, key) { return { value: (obj[key] == null ? '' : obj[key]), onInput: (e) => { obj[key] = e.target.value; this.adminTouch(); } }; }
   adminNum(obj, key) { return { value: (obj[key] == null ? '' : String(obj[key])), onInput: (e) => { const n = parseInt(('' + e.target.value).replace(/[^0-9]/g, ''), 10); obj[key] = isNaN(n) ? 0 : n; this.adminTouch(); } }; }
   adminArr(obj, key) { return { value: (obj[key] || []).join(', '), onInput: (e) => { obj[key] = ('' + e.target.value).split(',').map(s => s.trim()).filter(Boolean); this.adminTouch(); } }; }
-  adminUpload(obj, file) { if (!file) return; const r = new FileReader(); r.onload = () => { obj.photo = r.result; this.adminTouch(); }; r.readAsDataURL(file); }
+  adminUpload(obj, file, key) { if (!file) return; const k = key || 'photo'; const r = new FileReader(); r.onload = () => { obj[k] = r.result; this.adminTouch(); }; r.readAsDataURL(file); }
   addProduct() {
     const id = 'p' + Date.now();
     this.products.unshift({ id, brand: 'НОВЫЙ БРЕНД', name: 'Новый аромат', family: 'Цветочные', gender: 'Унисекс', badge: '', glow: '201,161,95', photo: '', tagline: 'Краткое описание аромата.', vols: [{ ml: 50, price: 10000 }, { ml: 100, price: 16000 }], mainVol: 0, top: ['Нота'], heart: ['Нота'], base: ['Нота'] });
@@ -1141,7 +1154,7 @@ class Component extends DCLogic {
   setAccent(c) { this._accent = c; this.applyAccent(); this.adminTouch(); }
   exportAdmin() {
     try {
-      const data = JSON.stringify({ products: this.products, heroSlides: this.heroSlides, reviews: this.reviews, collections: this.collections, accent: this._accent }, null, 2);
+      const data = JSON.stringify({ products: this.products, heroSlides: this.heroSlides, reviews: this.reviews, collections: this.collections, header: this.header, accent: this._accent }, null, 2);
       const blob = new Blob([data], { type: 'application/json' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a'); a.href = url; a.download = 'luxe-content.json'; document.body.appendChild(a); a.click();
@@ -1276,6 +1289,8 @@ class Component extends DCLogic {
       onAddHero: () => this.addHero(),
       reviews: this.reviews.map((r, i) => ({ num: '№ ' + (i + 1), name: this.adminField(r, 'name'), date: this.adminField(r, 'date'), rating: this.adminNum(r, 'rating'), text: this.adminField(r, 'text'), onDelete: () => this.deleteReview(i) })),
       onAddReview: () => this.addReview(),
+      hdrName: this.adminField(this.header, 'name'), hdrTagline: this.adminField(this.header, 'tagline'), hdrLogo: this.adminField(this.header, 'logo'),
+      hdrHasLogo: !!this.header.logo, hdrLogoImg: this.header.logo || '', onHdrLogo: (e) => this.adminUpload(this.header, e.target.files && e.target.files[0], 'logo'), onHdrLogoClear: () => { this.header.logo = ''; this.adminTouch(); },
       accentValue: this.accentColor(),
       accents: accentSwatches.map(c => ({ bg: c, onClick: () => this.setAccent(c), extra: (c.toLowerCase() === ('' + this.accentColor()).toLowerCase()) ? 'outline:2px solid var(--text);outline-offset:2px' : 'outline:1px solid var(--line2);outline-offset:2px' })),
       onExport: () => this.exportAdmin(), onReset: () => this.resetAdmin()
@@ -1291,6 +1306,7 @@ class Component extends DCLogic {
       isHome:S.view === 'home', isProduct:S.view === 'product', isCart:S.view === 'cart',
       isAccount:S.view === 'account', isInfo:S.view === 'info', isAdmin:S.view === 'admin',
       onOpenAdmin:() => this.openAdmin(), admin,
+      logoName:this.header.name || 'LUXE', logoTagline:this.header.tagline || '', hasLogo:!!this.header.logo, noLogo:!this.header.logo, logoImg:this.header.logo || '',
       cartCount:S.cart.reduce((a, it) => a + it.qty, 0), wishCount:S.wishlist.length,
       loggedIn:!!cu, accountInitial: cu ? (cu.name || cu.email).trim().charAt(0).toUpperCase() : '', onAccount:() => this.openAccount(),
       query:S.query, onSearch:(e) => this.onSearchInput(e.target.value),
