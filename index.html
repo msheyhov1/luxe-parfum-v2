@@ -659,6 +659,19 @@ input::placeholder{color:#6f6b63}
   </div>
   </sc-if>
 
+  <sc-if value="{{ isWishlist }}" hint-placeholder-val="">
+  <div style="max-width:1480px;margin:0 auto;padding:48px 40px 96px;min-height:60vh;animation:lxView .5s var(--ease)">
+    <button onclick="{{ wl.onBack }}" style="display:inline-flex;align-items:center;gap:10px;background:none;border:none;color:var(--t2);font-size:11px;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;margin-bottom:30px;transition:color .3s var(--ease)" style-hover="color:var(--gold)"><span style="font-size:15px">←</span>На главную</button>
+    <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px"><span style="width:34px;height:1px;background:var(--gold)"></span><span style="font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold2)">Ваши сохранённые</span></div>
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:42px">
+      <h1 style="font-family:Prata,serif;font-weight:400;font-size:clamp(32px,4.4vw,52px);line-height:1.06;color:var(--text);margin:0">Избранное</h1>
+      <div style="font-size:12px;letter-spacing:.04em;color:var(--t3)">Товаров: <span style="color:var(--text)">{{ wl.count }}</span></div>
+    </div>
+    <sc-if value="{{ wl.empty }}" hint-placeholder-val=""><div style="padding:70px 0;text-align:center"><div style="font-family:Prata,serif;font-size:26px;color:var(--text);margin-bottom:14px">В избранном пока пусто</div><div style="font-size:13px;color:var(--t2);margin-bottom:26px">Нажмите ♡ на карточке аромата, чтобы сохранить его сюда.</div><button onclick="{{ wl.onShop }}" style="background:var(--gold);border:none;color:#0b0b0c;padding:16px 34px;font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;transition:background .3s var(--ease)" style-hover="background:var(--gold2)">Перейти в каталог</button></div></sc-if>
+    <sc-if value="{{ wl.notEmpty }}" hint-placeholder-val=""><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(244px,1fr));gap:46px 28px"><sc-for list="{{ wl.cards }}" as="c" hint-placeholder-count="4"><dc-import name="Product Card" card="{{ c }}" hint-size="100%,470px"></dc-import></sc-for></div></sc-if>
+  </div>
+  </sc-if>
+
   <sc-if value="{{ isAdmin }}" hint-placeholder-val="">
   <div style="max-width:1180px;margin:0 auto;padding:40px 40px 96px;min-height:72vh;animation:lxView .5s var(--ease)">
 
@@ -1026,6 +1039,7 @@ class Component extends DCLogic {
   goHome() { this.setState({ view:'home', openMenu:null, mobileNav:false }); this.toTop(); }
   goCart() { this.setState({ view:'cart', cartStep:(this.state.cart.length ? this.state.cartStep : 'cart'), openMenu:null, mobileNav:false }); this.toTop(); }
   openAccount() { this.setState({ view:'account', openMenu:null, mobileNav:false, authMsg:'' }); this.toTop(); }
+  openWishlist() { this.setState({ view:'wishlist', openMenu:null, mobileNav:false }); this.toTop(); }
   openInfo(topic) { this.setState({ view:'info', infoTopic:topic, openMenu:null, mobileNav:false }); this.toTop(); }
   toggleMobileNav() { this.setState(s => ({ mobileNav: !s.mobileNav })); }
   closeMobileNav() { this.setState({ mobileNav:false }); }
@@ -1231,6 +1245,7 @@ class Component extends DCLogic {
     const brands = ['Все'].concat(this.products.map(p => p.brand).filter((b, i, a) => a.indexOf(b) === i));
     const familyChips = this.familyOptions.map(f => ({ label:f, onClick:() => this.setFamily(f), extra: f === S.filterFamily ? 'background:var(--gold);color:#0b0b0c;border-color:var(--gold)' : 'color:var(--t2)' }));
     const cards = this.filtered().map((p, i) => Object.assign(this.cardVM(p), { animDelay: (Math.min(i, 9) * 0.05).toFixed(2) + 's' }));
+    const wishCards = this.products.filter(p => S.wishlist.includes(p.id)).map(p => this.cardVM(p));
     const items = S.cart.map(it => {
       const p = this.find(it.id); const pr = p.vols[it.vol].price;
       return { id:it.id, vol:it.vol, brand:p.brand, name:p.name, volLabel:p.vols[it.vol].ml + ' мл', qty:it.qty, unitFmt:this.fmt(pr), lineFmt:this.fmt(pr * it.qty),
@@ -1332,30 +1347,32 @@ class Component extends DCLogic {
       rootRef:(el) => { this._root = el; if (el && this.props.accent) el.style.setProperty('--gold', this.props.accent); },
       isHome:S.view === 'home', isProduct:S.view === 'product', isCart:S.view === 'cart',
       isAccount:S.view === 'account', isInfo:S.view === 'info', isAdmin:S.view === 'admin',
+      isWishlist:S.view === 'wishlist',
+      wl:{ cards:wishCards, count:wishCards.length, empty:wishCards.length === 0, notEmpty:wishCards.length > 0, onShop:() => { this.setState({ view:'home' }, () => this.scrollCatalog()); }, onBack:() => this.goHome() },
       onOpenAdmin:() => this.openAdmin(), admin,
       logoName:this.header.name || 'LUXE', logoTagline:this.header.tagline || '', hasLogo:!!this.header.logo, noLogo:!this.header.logo, logoImg:this.header.logo || '',
       onNavHome:() => this.goHome(),
       onNavCatalog:() => { this.clearFilters(); this.setState({ view:'home', mobileNav:false }, () => this.scrollCatalog()); },
       onNavCart:() => this.goCart(),
-      onNavWish:() => this.setState({ view:'home', filterWish:true, mobileNav:false }, () => this.scrollCatalog()),
+      onNavWish:() => this.openWishlist(),
       onNavAccount:() => this.openAccount(),
-      navHomeColor:(S.view === 'home' && !S.filterWish) ? 'var(--gold)' : 'var(--t2)',
+      navHomeColor:S.view === 'home' ? 'var(--gold)' : 'var(--t2)',
       navCatalogColor:'var(--t2)',
       navCartColor:S.view === 'cart' ? 'var(--gold)' : 'var(--t2)',
-      navWishColor:(S.view === 'home' && S.filterWish) ? 'var(--gold)' : 'var(--t2)',
+      navWishColor:S.view === 'wishlist' ? 'var(--gold)' : 'var(--t2)',
       navAccountColor:S.view === 'account' ? 'var(--gold)' : 'var(--t2)',
       cartCount:S.cart.reduce((a, it) => a + it.qty, 0), wishCount:S.wishlist.length,
       loggedIn:!!cu, accountInitial: cu ? (cu.name || cu.email).trim().charAt(0).toUpperCase() : '', onAccount:() => this.openAccount(),
       query:S.query, onSearch:(e) => this.onSearchInput(e.target.value),
       onLogo:() => this.goHome(), onCartIcon:() => this.goCart(),
-      onWishIcon:() => this.setState({ view:'home', filterWish:true, mobileNav:false }, () => this.scrollCatalog()),
+      onWishIcon:() => this.openWishlist(),
       navLinks:[
         { label:'Весь каталог', onClick:() => { this.clearFilters(); this.setState({ view:'home', mobileNav:false }, () => this.scrollCatalog()); } },
         { label:'Для неё', onClick:() => this.setState({ view:'home', filterGender:'Женский', mobileNav:false }, () => this.scrollCatalog()) },
         { label:'Для него', onClick:() => this.setState({ view:'home', filterGender:'Мужской', mobileNav:false }, () => this.scrollCatalog()) },
         { label:'Унисекс', onClick:() => this.setState({ view:'home', filterGender:'Унисекс', mobileNav:false }, () => this.scrollCatalog()) },
         { label:'Нишевые дома', onClick:() => this.setState({ view:'home', filterFamily:'Восточные', mobileNav:false }, () => this.scrollCatalog()) },
-        { label:'Избранное', onClick:() => this.setState({ view:'home', filterWish:true, mobileNav:false }, () => this.scrollCatalog()) }
+        { label:'Избранное', onClick:() => this.openWishlist() }
       ],
       onBurger:() => this.toggleMobileNav(), onBurgerClose:() => this.closeMobileNav(), onMobileSearchGo:() => this.mobileSearchGo(), mobileNavOpen:S.mobileNav,
       anyMenuOpen:!!S.openMenu, onBackdrop:() => this.setState({ openMenu:null }),
