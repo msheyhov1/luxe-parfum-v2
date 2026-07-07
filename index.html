@@ -361,11 +361,16 @@ input::placeholder{color:#6f6b63}
   [style*="minmax(244px, 1fr)"]{grid-template-columns:repeat(2,1fr) !important}
   /* hero side-arrows overlap the large centered title on phones — hide (dots + swipe remain) */
   .hero-arrow{display:none !important}
+  /* sticky product add-to-cart bar: tighter gutters on mobile */
+  .pdp-bar{padding-left:16px !important;padding-right:16px !important}
   /* collection carousel arrows a touch smaller on mobile */
   [aria-label="Прокрутить назад"],[aria-label="Прокрутить вперёд"]{width:46px !important;height:46px !important}
 }
 @media (max-width:560px){
   [style*="minmax(244px, 1fr)"]{grid-template-columns:repeat(2,1fr) !important;gap:22px 12px !important}
+  /* sticky bar: drop the brand·volume line, keep price + buttons */
+  .pdp-bar-info > span:first-child{display:none !important}
+  .pdp-bar{padding-top:10px !important;padding-bottom:10px !important}
   [style*="grid-template-columns: 1.5fr 1fr 1fr 1.3fr"]{grid-template-columns:1fr !important;gap:30px !important}
   [style*="grid-template-columns: 1fr 1fr"]{grid-template-columns:1fr !important}
   /* the e-mail field spans 1/3 — that span recreates a 2nd column, so neutralize it when stacked */
@@ -521,27 +526,13 @@ input::placeholder{color:#6f6b63}
       <div>
         <div style="font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--t2);margin-bottom:18px">{{ pv.brand }}</div>
         <h1 style="font-family:Prata,serif;font-weight:400;font-size:clamp(34px,4vw,54px);line-height:1.05;color:var(--text);margin:0 0 18px">{{ pv.name }}</h1>
-        <p style="font-size:15px;line-height:1.7;color:var(--t2);max-width:460px;margin:0 0 18px">{{ pv.tagline }}</p>
+        <div style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold2);margin:0 0 18px">{{ pv.category }}</div>
         <div style="display:flex;align-items:center;gap:10px;margin-bottom:24px"><span style="color:var(--gold);font-size:15px;letter-spacing:2px">{{ pv.ratingStars }}</span><span style="font-size:13px;color:var(--text)">{{ pv.rating }}</span><span style="font-size:12px;color:var(--t3)">· {{ pv.reviewCount }} отзыва</span></div>
         <div style="display:flex;align-items:center;gap:12px;margin-bottom:30px"><span style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);border:1px solid var(--line);padding:6px 13px">{{ pv.family }}</span><span style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);border:1px solid var(--line);padding:6px 13px">{{ pv.gender }}</span></div>
         <div style="font-family:Prata,serif;font-size:34px;color:var(--text);margin-bottom:28px;letter-spacing:.01em">{{ pv.priceFmt }}</div>
         <div style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--t3);margin-bottom:13px">Объём</div>
         <div style="display:flex;gap:11px;margin-bottom:34px;flex-wrap:wrap"><sc-for list="{{ pv.volChips }}" as="v" hint-placeholder-count="2"><button onclick="{{ v.onClick }}" style="display:flex;flex-direction:column;gap:5px;padding:13px 22px;border:1px solid var(--line);background:transparent;cursor:pointer;transition:all .3s var(--ease); {{ v.extra }}"><span style="font-size:13px;letter-spacing:.05em">{{ v.label }}</span><span style="font-size:11px;color:var(--t3)">{{ v.priceFmt }}</span></button></sc-for></div>
-        <div style="border-top:1px solid var(--line);padding-top:30px;margin-bottom:34px">
-          <div style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold2);margin-bottom:24px">Пирамида аромата</div>
-          <div style="display:flex;flex-direction:column;gap:22px">
-            <div style="display:grid;grid-template-columns:96px 1fr;gap:18px;align-items:start"><div style="font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);padding-top:5px">Верхние</div><div style="display:flex;gap:8px;flex-wrap:wrap"><sc-for list="{{ pv.notesTop }}" as="n" hint-placeholder-count="3"><span style="font-size:12.5px;color:var(--text);border:1px solid var(--line);padding:7px 14px;letter-spacing:.02em">{{ n }}</span></sc-for></div></div>
-            <div style="display:grid;grid-template-columns:96px 1fr;gap:18px;align-items:start"><div style="font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);padding-top:5px">Сердце</div><div style="display:flex;gap:8px;flex-wrap:wrap"><sc-for list="{{ pv.notesHeart }}" as="n" hint-placeholder-count="3"><span style="font-size:12.5px;color:var(--text);border:1px solid var(--line);padding:7px 14px;letter-spacing:.02em">{{ n }}</span></sc-for></div></div>
-            <div style="display:grid;grid-template-columns:96px 1fr;gap:18px;align-items:start"><div style="font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);padding-top:5px">База</div><div style="display:flex;gap:8px;flex-wrap:wrap"><sc-for list="{{ pv.notesBase }}" as="n" hint-placeholder-count="3"><span style="font-size:12.5px;color:var(--text);border:1px solid var(--line);padding:7px 14px;letter-spacing:.02em">{{ n }}</span></sc-for></div></div>
-          </div>
-        </div>
-        <div style="display:flex;gap:14px;align-items:stretch;margin-bottom:18px">
-          <div style="display:flex;align-items:center;border:1px solid var(--line2)"><button onclick="{{ pv.onMinus }}" style="width:48px;height:56px;background:none;border:none;color:var(--text);font-size:20px;cursor:pointer">−</button><span style="width:40px;text-align:center;font-size:15px;color:var(--text)">{{ pv.qty }}</span><button onclick="{{ pv.onPlus }}" style="width:48px;height:56px;background:none;border:none;color:var(--text);font-size:20px;cursor:pointer">+</button></div>
-          <button onclick="{{ pv.onAdd }}" style="flex:1;height:56px;background:var(--gold);border:1px solid var(--gold);color:#0b0b0c;font-family:Manrope,sans-serif;font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;transition:all .3s var(--ease)" style-hover="background:var(--gold2);border-color:var(--gold2)">{{ pv.addLabel }}</button>
-          <button onclick="{{ pv.onWish }}" aria-label="В избранное" style="width:56px;height:56px;display:grid;place-items:center;background:none;border:1px solid var(--line2);color:var(--text);cursor:pointer;transition:all .3s var(--ease)" style-hover="border-color:var(--gold);color:var(--gold)"><span style="font-size:18px">{{ pv.wishGlyph }}</span></button>
-        </div>
-        <div style="display:flex;gap:22px;flex-wrap:wrap;margin-bottom:38px;font-size:11px;letter-spacing:.04em;color:var(--t3)"><span>✓ Оригинал с сертификатом</span><span>✓ Бесплатная доставка</span><span>✓ Пробник в подарок</span></div>
-        <div style="border-top:1px solid var(--line)"><sc-for list="{{ pv.accordions }}" as="a" hint-placeholder-count="3"><div style="border-bottom:1px solid var(--line)"><button onclick="{{ a.onToggle }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;background:none;border:none;color:var(--text);padding:22px 0;cursor:pointer;font-family:Manrope,sans-serif;font-size:13px;letter-spacing:.1em;text-transform:uppercase"><span>{{ a.title }}</span><span style="color:var(--gold);font-size:18px">{{ a.sign }}</span></button><div style="overflow:hidden;transition:all .4s var(--ease);font-size:13.5px;line-height:1.8;color:var(--t2); {{ a.bodyStyle }}">{{ a.body }}</div></div></sc-for></div>
+        <div style="border-top:1px solid var(--line);margin-top:6px"><sc-for list="{{ pv.accordions }}" as="a" hint-placeholder-count="4"><div style="border-bottom:1px solid var(--line)"><button onclick="{{ a.onToggle }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;background:none;border:none;color:var(--text);padding:22px 0;cursor:pointer;font-family:Manrope,sans-serif;font-size:13px;letter-spacing:.1em;text-transform:uppercase"><span>{{ a.title }}</span><span style="color:var(--gold);font-size:18px">{{ a.sign }}</span></button><div style="overflow:hidden;transition:all .4s var(--ease);font-size:13.5px;line-height:1.8;color:var(--t2); {{ a.bodyStyle }}">{{ a.body }}</div></div></sc-for></div>
       </div>
     </div>
     <div style="margin-top:96px;border-top:1px solid var(--line);padding-top:54px">
@@ -552,6 +543,16 @@ input::placeholder{color:#6f6b63}
     <div style="margin-top:96px;border-top:1px solid var(--line);padding-top:54px">
       <div style="display:flex;align-items:center;gap:14px;margin-bottom:38px"><span style="width:34px;height:1px;background:var(--gold)"></span><h3 style="font-family:Prata,serif;font-weight:400;font-size:28px;color:var(--text);margin:0">Похожие ароматы</h3></div>
       <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(244px,1fr));gap:46px 28px"><sc-for list="{{ pv.related }}" as="c" hint-placeholder-count="4"><dc-import name="Product Card" card="{{ c }}" hint-size="100%,470px"></dc-import></sc-for></div>
+    </div>
+  </div>
+  <div class="pdp-bar" style="position:fixed;left:0;right:0;bottom:0;z-index:55;background:rgba(10,10,11,.94);backdrop-filter:blur(16px);border-top:1px solid var(--line2);padding:12px 40px">
+    <div style="max-width:1480px;margin:0 auto;display:flex;align-items:center;gap:14px">
+      <div class="pdp-bar-info" style="flex:1;min-width:0;display:flex;flex-direction:column;gap:3px">
+        <span style="font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--t3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ pv.brand }} · {{ pv.volLabel }}</span>
+        <span style="font-family:Prata,serif;font-size:21px;color:var(--text);line-height:1">{{ pv.priceFmt }}</span>
+      </div>
+      <button onclick="{{ pv.onWish }}" aria-label="В избранное" style="width:54px;height:54px;flex:0 0 54px;display:grid;place-items:center;background:none;border:1px solid var(--line2);color:var(--text);cursor:pointer;transition:all .3s var(--ease)" style-hover="border-color:var(--gold);color:var(--gold)"><span style="font-size:20px;line-height:1">{{ pv.wishGlyph }}</span></button>
+      <button onclick="{{ pv.onAdd }}" style="flex:1;max-width:440px;height:54px;background:var(--gold);border:1px solid var(--gold);color:#0b0b0c;font-family:Manrope,sans-serif;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;transition:all .3s var(--ease)" style-hover="background:var(--gold2);border-color:var(--gold2)">{{ pv.addLabel }}</button>
     </div>
   </div>
   </sc-if>
@@ -711,7 +712,11 @@ input::placeholder{color:#6f6b63}
               <div><label style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);margin-bottom:7px;display:block">Пол</label><input value="{{ p.gender.value }}" oninput="{{ p.gender.onInput }}" style="height:44px;width:100%;background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--text);padding:0 13px;font-family:Manrope,sans-serif;font-size:13px;outline:none"></div>
               <div><label style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);margin-bottom:7px;display:block">Бейдж (напр. ХИТ)</label><input value="{{ p.badge.value }}" oninput="{{ p.badge.onInput }}" style="height:44px;width:100%;background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--text);padding:0 13px;font-family:Manrope,sans-serif;font-size:13px;outline:none"></div>
               <div><label style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);margin-bottom:7px;display:block">Свечение RGB (напр. 201,161,95)</label><input value="{{ p.glow.value }}" oninput="{{ p.glow.onInput }}" style="height:44px;width:100%;background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--text);padding:0 13px;font-family:Manrope,sans-serif;font-size:13px;outline:none"></div>
-              <div style="grid-column:1/3"><label style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);margin-bottom:7px;display:block">Описание</label><input value="{{ p.tagline.value }}" oninput="{{ p.tagline.onInput }}" style="height:44px;width:100%;background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--text);padding:0 13px;font-family:Manrope,sans-serif;font-size:13px;outline:none"></div>
+              <div style="grid-column:1/3"><label style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);margin-bottom:7px;display:block">Категория (под названием, напр. «Парфюмерная вода»)</label><input value="{{ p.category.value }}" oninput="{{ p.category.onInput }}" placeholder="Парфюмерная вода" style="height:44px;width:100%;background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--text);padding:0 13px;font-family:Manrope,sans-serif;font-size:13px;outline:none"></div>
+              <div style="grid-column:1/3"><label style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);margin-bottom:7px;display:block">Описание (аккордеон «Описание»)</label><input value="{{ p.tagline.value }}" oninput="{{ p.tagline.onInput }}" style="height:44px;width:100%;background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--text);padding:0 13px;font-family:Manrope,sans-serif;font-size:13px;outline:none"></div>
+              <div style="grid-column:1/3"><label style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);margin-bottom:7px;display:block">Состав (аккордеон)</label><input value="{{ p.composition.value }}" oninput="{{ p.composition.onInput }}" placeholder="Пусто — соберётся из нот" style="height:44px;width:100%;background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--text);padding:0 13px;font-family:Manrope,sans-serif;font-size:13px;outline:none"></div>
+              <div style="grid-column:1/3"><label style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);margin-bottom:7px;display:block">Применение (аккордеон)</label><input value="{{ p.usage.value }}" oninput="{{ p.usage.onInput }}" placeholder="Пусто — текст по умолчанию" style="height:44px;width:100%;background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--text);padding:0 13px;font-family:Manrope,sans-serif;font-size:13px;outline:none"></div>
+              <div style="grid-column:1/3"><label style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);margin-bottom:7px;display:block">О бренде (аккордеон)</label><input value="{{ p.about.value }}" oninput="{{ p.about.onInput }}" placeholder="Пусто — текст по умолчанию" style="height:44px;width:100%;background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--text);padding:0 13px;font-family:Manrope,sans-serif;font-size:13px;outline:none"></div>
               <div><label style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);margin-bottom:7px;display:block">Верхние ноты (через запятую)</label><input value="{{ p.top.value }}" oninput="{{ p.top.onInput }}" style="height:44px;width:100%;background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--text);padding:0 13px;font-family:Manrope,sans-serif;font-size:13px;outline:none"></div>
               <div><label style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);margin-bottom:7px;display:block">Ноты сердца</label><input value="{{ p.heart.value }}" oninput="{{ p.heart.onInput }}" style="height:44px;width:100%;background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--text);padding:0 13px;font-family:Manrope,sans-serif;font-size:13px;outline:none"></div>
               <div><label style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);margin-bottom:7px;display:block">Ноты базы</label><input value="{{ p.base.value }}" oninput="{{ p.base.onInput }}" style="height:44px;width:100%;background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--text);padding:0 13px;font-family:Manrope,sans-serif;font-size:13px;outline:none"></div>
@@ -982,11 +987,24 @@ class Component extends DCLogic {
         this.setState(s => ({ heroSlide: (s.heroSlide + 1) % this.heroSlides.length }));
     }, 7000);
     this.applyAccent();
+    this._onResize = () => this.applyAccent();
+    try { window.addEventListener('resize', this._onResize); } catch (e) {}
   }
   componentDidUpdate() { this.applyAccent(); }
-  componentWillUnmount() { clearInterval(this._timer); }
+  componentWillUnmount() { clearInterval(this._timer); try { window.removeEventListener('resize', this._onResize); } catch (e) {} }
   accentColor() { return this._accent || this.props.accent; }
-  applyAccent() { const a = this.accentColor(); if (this._root && a) this._root.style.setProperty('--gold', a); }
+  applyAccent() {
+    const a = this.accentColor();
+    if (!this._root) return;
+    if (a) this._root.style.setProperty('--gold', a);
+    if (this.state.view === 'product') {
+      let h = 78; // matches the fixed .pdp-bar height exactly (no gap, no overlap) across breakpoints
+      try { const bar = document.querySelector('.pdp-bar'); if (bar && bar.offsetHeight) h = bar.offsetHeight; } catch (e) {}
+      this._root.style.paddingBottom = h + 'px';
+    } else {
+      this._root.style.paddingBottom = '';
+    }
+  }
   persist() { try { localStorage.setItem('luxe_cart', JSON.stringify(this.state.cart)); localStorage.setItem('luxe_wish', JSON.stringify(this.state.wishlist)); } catch (e) {} }
   persistAuth() { try { localStorage.setItem('luxe_users', JSON.stringify(this.state.users)); if (this.state.currentUser) localStorage.setItem('luxe_session', this.state.currentUser); else localStorage.removeItem('luxe_session'); } catch (e) {} }
   curUser() { return this.state.users.find(u => u.email === this.state.currentUser) || null; }
@@ -1125,7 +1143,7 @@ class Component extends DCLogic {
   adminUpload(obj, file, key) { if (!file) return; const k = key || 'photo'; const r = new FileReader(); r.onload = () => { obj[k] = r.result; this.adminTouch(); }; r.readAsDataURL(file); }
   addProduct() {
     const id = 'p' + Date.now();
-    this.products.unshift({ id, brand: 'НОВЫЙ БРЕНД', name: 'Новый аромат', family: 'Цветочные', gender: 'Унисекс', badge: '', glow: '201,161,95', photo: '', tagline: 'Краткое описание аромата.', vols: [{ ml: 50, price: 10000 }, { ml: 100, price: 16000 }], mainVol: 0, top: ['Нота'], heart: ['Нота'], base: ['Нота'] });
+    this.products.unshift({ id, brand: 'НОВЫЙ БРЕНД', name: 'Новый аромат', family: 'Цветочные', gender: 'Унисекс', badge: '', glow: '201,161,95', photo: '', category: 'Парфюмерная вода', tagline: 'Краткое описание аромата.', composition: '', usage: '', about: '', vols: [{ ml: 50, price: 10000 }, { ml: 100, price: 16000 }], mainVol: 0, top: ['Нота'], heart: ['Нота'], base: ['Нота'] });
     this.adminTouch();
   }
   deleteProduct(id) {
@@ -1216,17 +1234,22 @@ class Component extends DCLogic {
       const vol = p.vols[S.selVol] || p.vols[p.mainVol];
       const tpos = [[30,22],[55,30],[72,20],[42,58]];
       const tp = tpos[S.activeThumb] || tpos[0];
+      const accData = [
+        { t:'Описание', b:(p.tagline || '') },
+        { t:'Состав', b:(p.composition && ('' + p.composition).trim()) ? p.composition : ('Верхние ноты: ' + p.top.join(', ') + '. Ноты сердца: ' + p.heart.join(', ') + '. База: ' + p.base.join(', ') + '.') },
+        { t:'Применение', b:(p.usage && ('' + p.usage).trim()) ? p.usage : 'Наносите на точки пульса — запястья, шею, за ушами. Не растирайте, чтобы аромат раскрывался естественно. 2–4 распыления достаточно для стойкого шлейфа.' },
+        { t:'О бренде', b:(p.about && ('' + p.about).trim()) ? p.about : (p.brand + ' — знаковый парфюмерный дом с безупречной репутацией и узнаваемым почерком. Только официальные поставки и оригинальная продукция.') }
+      ];
       pv = {
-        brand:p.brand, name:p.name, family:p.family, gender:p.gender, tagline:p.tagline,
-        badge:(this.props.showBadges !== false) ? (p.badge || '') : '', priceFmt:this.fmt(vol.price), capt: p.photo ? '' : ('ФОТО · ' + p.brand),
+        brand:p.brand, name:p.name, family:p.family, gender:p.gender,
+        category:(p.category && ('' + p.category).trim()) ? p.category : 'Парфюмерная вода',
+        badge:(this.props.showBadges !== false) ? (p.badge || '') : '', priceFmt:this.fmt(vol.price), volLabel:vol.ml + ' мл', capt: p.photo ? '' : ('ФОТО · ' + p.brand),
         imgBg:this.photoBg(p,'radial-gradient(120% 115% at ' + tp[0] + '% ' + tp[1] + '%, rgba(' + p.glow + ',.34), rgba(' + p.glow + ',.08) 44%, #0c0c0e 76%)'),
         volChips:p.vols.map((v, i) => ({ label:v.ml + ' мл', priceFmt:this.fmt(v.price), onClick:() => this.selVolFn(i), extra: i === S.selVol ? 'border-color:var(--gold);background:rgba(201,162,75,.08);color:var(--text)' : 'border-color:var(--line);color:var(--t2)' })),
         thumbs:[0,1,2,3].map(i => ({ onClick:() => this.setState({ activeThumb:i }), imgBg:this.photoBg(p,'radial-gradient(130% 120% at ' + tpos[i][0] + '% ' + tpos[i][1] + '%, rgba(' + p.glow + ',.34), rgba(' + p.glow + ',.08) 46%, #0c0c0e 78%)'), extra: i === S.activeThumb ? 'border-color:var(--gold)' : 'border-color:var(--line)' })),
-        notesTop:p.top, notesHeart:p.heart, notesBase:p.base,
-        qty:S.qty, onMinus:() => this.qtyDelta(-1), onPlus:() => this.qtyDelta(1),
-        onAdd:() => this.addToCart(p.id, S.selVol, S.qty), addLabel:'Добавить в корзину',
+        onAdd:() => this.addToCart(p.id, S.selVol, 1), addLabel:(S.justAdded === p.id) ? '✓ Добавлено' : 'В корзину',
         wished:S.wishlist.includes(p.id), wishGlyph:S.wishlist.includes(p.id) ? '♥' : '♡', onWish:() => this.toggleWishlist(p.id),
-        accordions:this.accordionsData.map((a, i) => ({ title:a.title, body:a.body, sign:S.openAcc === i ? '–' : '+', bodyStyle:S.openAcc === i ? 'max-height:300px;opacity:1;padding-bottom:24px' : 'max-height:0;opacity:0;padding-bottom:0', onToggle:() => this.setState(st => ({ openAcc: st.openAcc === i ? -1 : i })) })),
+        accordions:accData.map((a, i) => ({ title:a.t, body:a.b, sign:S.openAcc === i ? '–' : '+', bodyStyle:S.openAcc === i ? 'max-height:1200px;opacity:1;padding-bottom:24px' : 'max-height:0;opacity:0;padding-bottom:0', onToggle:() => this.setState(st => ({ openAcc: st.openAcc === i ? -1 : i })) })),
         related:this.products.filter(x => x.id !== p.id && x.family === p.family).concat(this.products.filter(x => x.id !== p.id && x.family !== p.family)).slice(0, 4).map(x => this.cardVM(x)),
         rating:this.prodRating(p), ratingStars:this.stars(this.prodRating(p)), reviewCount:this.prodReviewCount(p),
         reviews:this.reviews.map(r => ({ name:r.name, date:r.date, text:r.text, stars:this.stars(r.rating) })),
@@ -1268,7 +1291,8 @@ class Component extends DCLogic {
       products: this.products.map((p, i) => ({
         num: '№ ' + (i + 1), id: p.id, title: (p.brand || '') + ' · ' + (p.name || ''),
         brand: this.adminField(p, 'brand'), name: this.adminField(p, 'name'), family: this.adminField(p, 'family'), gender: this.adminField(p, 'gender'),
-        badge: this.adminField(p, 'badge'), glow: this.adminField(p, 'glow'), tagline: this.adminField(p, 'tagline'), photo: this.adminField(p, 'photo'),
+        badge: this.adminField(p, 'badge'), glow: this.adminField(p, 'glow'), category: this.adminField(p, 'category'), tagline: this.adminField(p, 'tagline'), photo: this.adminField(p, 'photo'),
+        composition: this.adminField(p, 'composition'), usage: this.adminField(p, 'usage'), about: this.adminField(p, 'about'),
         top: this.adminArr(p, 'top'), heart: this.adminArr(p, 'heart'), base: this.adminArr(p, 'base'),
         hasPhoto: !!p.photo, thumbBg: this.photoBg(p, 'radial-gradient(130% 115% at 30% 22%, rgba(' + p.glow + ',.30), rgba(' + p.glow + ',.07) 42%, #0d0d0f 74%)'),
         onPhoto: (e) => this.adminUpload(p, e.target.files && e.target.files[0]),
