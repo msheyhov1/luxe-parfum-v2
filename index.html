@@ -336,14 +336,13 @@ input::placeholder{color:#6f6b63}
 .reco-strip::-webkit-scrollbar{height:0;display:none}
 .col-card:hover > div:nth-child(1){transform:scale(1.06)}
 /* ===== Mobile / responsive ===== */
-.lx-burger{display:none;place-items:center}
 .lx-bottomnav{display:none}  /* mobile-only app-style bottom tab bar */
 /* runtime (React) serializes inline styles as "prop: value;" — selectors below must use that spaced form */
 @media (max-width:880px){
   .lx-nav{display:none !important}
-  .lx-search{display:none !important}
-  .lx-burger{display:grid !important}
-  .lx-icons{margin-left:auto !important}
+  /* mobile: keep logo + search on top; nav/account/cart/favorites live in the bottom tab bar */
+  .lx-search{display:block !important;width:auto !important;flex:1 1 auto !important;margin-left:14px !important}
+  .lx-icons{display:none !important}
   header > div{gap:8px !important;padding-left:14px !important;padding-right:14px !important}
   /* horizontal gutters on every page wrapper */
   [style*="max-width: 1480px"],[style*="max-width: 1200px"],[style*="max-width: 1100px"],[style*="max-width: 1080px"],[style*="max-width: 920px"]{padding-left:16px !important;padding-right:16px !important}
@@ -362,11 +361,13 @@ input::placeholder{color:#6f6b63}
   [style*="minmax(244px, 1fr)"]{grid-template-columns:repeat(2,1fr) !important}
   /* hero side-arrows overlap the large centered title on phones — hide (dots + swipe remain) */
   .hero-arrow{display:none !important}
-  /* sticky product add-to-cart bar: tighter gutters on mobile */
-  .pdp-bar{padding-left:16px !important;padding-right:16px !important}
-  /* app-style bottom tab bar (mobile only); lift the В-корзину bar above it */
+  /* app-style bottom tab bar (mobile only) */
   .lx-bottomnav{display:flex !important}
-  .pdp-bar{bottom:60px !important}
+  /* product actions: a separate floating card sitting ABOVE the bottom nav (not on it) */
+  .pdp-bar{left:10px !important;right:10px !important;bottom:70px !important;border:1px solid var(--line2) !important;border-radius:14px !important;padding:10px 12px !important}
+  .pdp-bar-info{display:none !important}          /* price already shown in product content above */
+  .pdp-buy{flex:1 1 100% !important}              /* Купить сейчас on its own row under В корзину */
+  .an-grid{grid-template-columns:1fr !important}  /* analytics: stack chart + top list on mobile */
   /* collection carousel arrows a touch smaller on mobile */
   [aria-label="Прокрутить назад"],[aria-label="Прокрутить вперёд"]{width:46px !important;height:46px !important}
 }
@@ -383,7 +384,6 @@ input::placeholder{color:#6f6b63}
   [style*="grid-template-columns: 92px 1fr auto"] > div:last-child{grid-column:1 / -1 !important;text-align:right}
   [style*="min-width: 230px"],[style*="min-width: 210px"]{min-width:0 !important;width:min(78vw,300px) !important}
 }
-@media (min-width:881px){.lx-mnav{display:none !important}}
 </style>
 </helmet>
 <div ref="{{ rootRef }}" style="--bg:#0b0b0c;--bg2:#141416;--bg3:#1b1b1e;--line:rgba(236,232,224,.10);--line2:rgba(236,232,224,.18);--gold:#c9a24b;--gold2:#e3c178;--goldd:#9c7836;--text:#ece8e0;--t2:#a8a399;--t3:#736f67;--ease:cubic-bezier(.22,.61,.36,1);background:var(--bg);color:var(--text);min-height:100vh;font-family:Manrope,sans-serif;-webkit-font-smoothing:antialiased">
@@ -406,29 +406,8 @@ input::placeholder{color:#6f6b63}
         <button onclick="{{ onWishIcon }}" aria-label="Избранное" style="position:relative;width:42px;height:42px;display:grid;place-items:center;background:none;border:none;cursor:pointer;color:var(--text);transition:color .3s var(--ease)" style-hover="color:var(--gold)"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 20S3.5 14.5 3.5 8.8C3.5 6 5.6 4 8.1 4c1.8 0 3.1 1 3.9 2.3C12.8 5 14.1 4 15.9 4c2.5 0 4.6 2 4.6 4.8C20.5 14.5 12 20 12 20Z"></path></svg><sc-if value="{{ wishCount }}" hint-placeholder-val=""><span style="position:absolute;top:7px;right:6px;min-width:16px;height:16px;padding:0 4px;background:var(--gold);color:#0b0b0c;font-size:9px;font-weight:700;border-radius:9px;display:grid;place-items:center;animation:lxPop .4s var(--ease)">{{ wishCount }}</span></sc-if></button>
         <button onclick="{{ onCartIcon }}" aria-label="Корзина" style="position:relative;width:42px;height:42px;display:grid;place-items:center;background:none;border:none;cursor:pointer;color:var(--text);transition:color .3s var(--ease)" style-hover="color:var(--gold)"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6.5 8h11l-1 11.5h-9L6.5 8Z"></path><path d="M9 8V6.6a3 3 0 0 1 6 0V8"></path></svg><sc-if value="{{ cartCount }}" hint-placeholder-val=""><span style="position:absolute;top:7px;right:5px;min-width:16px;height:16px;padding:0 4px;background:var(--gold);color:#0b0b0c;font-size:9px;font-weight:700;border-radius:9px;display:grid;place-items:center;animation:lxPop .4s var(--ease)">{{ cartCount }}</span></sc-if></button>
       </div>
-      <button onclick="{{ onBurger }}" class="lx-burger" aria-label="Меню" style="width:42px;height:42px;background:none;border:none;cursor:pointer;color:var(--text)"><svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.6"><line x1="3.5" y1="7" x2="20.5" y2="7"></line><line x1="3.5" y1="12" x2="20.5" y2="12"></line><line x1="3.5" y1="17" x2="20.5" y2="17"></line></svg></button>
     </div>
   </header>
-
-  <sc-if value="{{ mobileNavOpen }}" hint-placeholder-val="">
-    <div onclick="{{ onBurgerClose }}" class="lx-mnav" style="position:fixed;inset:0;z-index:69;background:rgba(6,6,7,.55)"></div>
-    <div class="lx-mnav" style="position:fixed;top:0;left:0;right:0;z-index:70;background:#0c0c0e;border-bottom:1px solid var(--line2);padding:14px 16px 20px;animation:lxDrop .26s var(--ease);max-height:100vh;overflow:auto">
-      <div style="display:flex;align-items:center;justify-content:space-between;height:40px;margin-bottom:14px">
-        <span style="font-family:Prata,serif;font-size:19px;letter-spacing:.22em;color:var(--text);padding-left:.22em">МЕНЮ</span>
-        <button onclick="{{ onBurgerClose }}" aria-label="Закрыть" style="width:40px;height:40px;display:grid;place-items:center;background:none;border:none;color:var(--text);font-size:24px;line-height:1;cursor:pointer">✕</button>
-      </div>
-      <div style="position:relative;margin-bottom:18px">
-        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="#736f67" stroke-width="1.5" style="position:absolute;left:15px;top:50%;transform:translateY(-50%)"><circle cx="11" cy="11" r="7"></circle><line x1="16.5" y1="16.5" x2="21" y2="21"></line></svg>
-        <input value="{{ query }}" oninput="{{ onSearch }}" placeholder="Поиск по бренду…" style="width:100%;height:48px;background:rgba(255,255,255,.04);border:1px solid var(--line);color:var(--text);padding:0 92px 0 40px;font-family:Manrope,sans-serif;font-size:13px;letter-spacing:.02em;outline:none">
-        <button onclick="{{ onMobileSearchGo }}" style="position:absolute;right:6px;top:6px;height:36px;padding:0 16px;background:var(--gold);border:none;color:#0b0b0c;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;cursor:pointer">Найти</button>
-      </div>
-      <div style="display:flex;flex-direction:column"><sc-for list="{{ navLinks }}" as="n" hint-placeholder-count="6"><button onclick="{{ n.onClick }}" style="text-align:left;background:none;border:none;border-top:1px solid var(--line);color:var(--text);font-family:Manrope,sans-serif;font-size:13px;letter-spacing:.14em;text-transform:uppercase;padding:17px 4px;cursor:pointer">{{ n.label }}</button></sc-for></div>
-      <div style="display:flex;gap:10px;margin-top:20px">
-        <button onclick="{{ onAccount }}" style="flex:1;display:flex;align-items:center;justify-content:center;background:none;border:1px solid var(--line2);color:var(--text);height:48px;font-family:Manrope,sans-serif;font-size:11px;letter-spacing:.14em;text-transform:uppercase;cursor:pointer">Кабинет</button>
-        <button onclick="{{ onCartIcon }}" style="flex:1;display:flex;align-items:center;justify-content:center;background:none;border:1px solid var(--line2);color:var(--text);height:48px;font-family:Manrope,sans-serif;font-size:11px;letter-spacing:.14em;text-transform:uppercase;cursor:pointer">Корзина · {{ cartCount }}</button>
-      </div>
-    </div>
-  </sc-if>
 
   <sc-if value="{{ anyMenuOpen }}" hint-placeholder-val=""><div onclick="{{ onBackdrop }}" style="position:fixed;inset:0;z-index:40"></div></sc-if>
 
@@ -519,13 +498,15 @@ input::placeholder{color:#6f6b63}
     <button onclick="{{ pv.onBack }}" style="display:inline-flex;align-items:center;gap:10px;background:none;border:none;color:var(--t2);font-size:11px;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;margin-bottom:34px;transition:color .3s var(--ease)" style-hover="color:var(--gold)"><span style="font-size:15px">←</span>Каталог</button>
     <div style="display:grid;grid-template-columns:1.08fr 1fr;gap:64px;align-items:start">
       <div style="position:sticky;top:104px">
-        <div style="position:relative;aspect-ratio:1/1.12;overflow:hidden;background:#0c0c0e;border:1px solid var(--line)">
+        <div class="pdp-gallery" style="position:relative;aspect-ratio:1/1.12;overflow:hidden;background:#0c0c0e;border:1px solid var(--line);touch-action:pan-y">
           <div style="position:absolute;inset:0;transition:background .6s var(--ease);background: {{ pv.imgBg }}"></div>
           <div style="position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(236,232,224,.02) 0 1px,transparent 1px 11px)"></div>
           <sc-if value="{{ pv.badge }}" hint-placeholder-val=""><div style="position:absolute;top:22px;left:22px;padding:7px 14px;background:rgba(11,11,12,.5);backdrop-filter:blur(5px);border:1px solid rgba(201,162,75,.55);color:var(--gold2);font-size:9.5px;letter-spacing:.24em;text-transform:uppercase">{{ pv.badge }}</div></sc-if>
           <div style="position:absolute;left:24px;bottom:22px;font-family:ui-monospace,Menlo,monospace;font-size:10px;letter-spacing:.16em;color:var(--t3);text-transform:uppercase">{{ pv.capt }}</div>
+          <button onclick="{{ pv.onThumbPrev }}" aria-label="Назад" style="display:none"></button>
+          <button onclick="{{ pv.onThumbNext }}" aria-label="Вперёд" style="display:none"></button>
+          <div style="position:absolute;left:0;right:0;bottom:16px;display:flex;justify-content:center;gap:8px;z-index:2"><sc-for list="{{ pv.galleryDots }}" as="d" hint-placeholder-count="4"><button onclick="{{ d.onClick }}" aria-label="Кадр" style="height:3px;border:none;border-radius:2px;cursor:pointer;padding:0;transition:all .4s var(--ease); {{ d.extra }}"></button></sc-for></div>
         </div>
-        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:12px"><sc-for list="{{ pv.thumbs }}" as="t" hint-placeholder-count="4"><button onclick="{{ t.onClick }}" style="aspect-ratio:1/1;cursor:pointer;overflow:hidden;background:#0c0c0e;border:1px solid var(--line);transition:border-color .3s var(--ease); {{ t.extra }}"><div style="width:100%;height:100%;background: {{ t.imgBg }}"></div></button></sc-for></div>
       </div>
       <div>
         <div style="font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--t2);margin-bottom:18px">{{ pv.brand }}</div>
@@ -550,13 +531,14 @@ input::placeholder{color:#6f6b63}
     </div>
   </div>
   <div class="pdp-bar" style="position:fixed;left:0;right:0;bottom:0;z-index:55;background:rgba(10,10,11,.94);backdrop-filter:blur(16px);box-shadow:0 -14px 36px rgba(0,0,0,.5);padding:12px 40px">
-    <div style="max-width:1480px;margin:0 auto;display:flex;align-items:center;gap:14px">
-      <div class="pdp-bar-info" style="flex:1;min-width:0;display:flex;flex-direction:column;gap:3px">
+    <div style="max-width:1480px;margin:0 auto;display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+      <div class="pdp-bar-info" style="min-width:0;margin-right:auto;display:flex;flex-direction:column;gap:3px">
         <span style="font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--t3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ pv.brand }} · {{ pv.volLabel }}</span>
         <span style="font-family:Prata,serif;font-size:21px;color:var(--text);line-height:1">{{ pv.priceFmt }}</span>
       </div>
-      <button onclick="{{ pv.onWish }}" aria-label="В избранное" style="width:50px;height:54px;flex:0 0 50px;display:grid;place-items:center;background:none;border:none;color:var(--text);cursor:pointer;transition:all .3s var(--ease)" style-hover="color:var(--gold)"><span style="font-size:23px;line-height:1">{{ pv.wishGlyph }}</span></button>
-      <button onclick="{{ pv.onAdd }}" style="flex:1;max-width:440px;height:54px;background:var(--gold);border:1px solid var(--gold);color:#0b0b0c;font-family:Manrope,sans-serif;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;transition:all .3s var(--ease)" style-hover="background:var(--gold2);border-color:var(--gold2)">{{ pv.addLabel }}</button>
+      <button onclick="{{ pv.onWish }}" aria-label="В избранное" style="width:54px;height:54px;flex:0 0 54px;display:grid;place-items:center;background:none;border:1px solid var(--line2);color:var(--text);cursor:pointer;transition:all .3s var(--ease)" style-hover="border-color:var(--gold);color:var(--gold)"><span style="font-size:20px;line-height:1">{{ pv.wishGlyph }}</span></button>
+      <button onclick="{{ pv.onAdd }}" class="pdp-add" style="flex:1 1 160px;height:54px;background:var(--gold);border:1px solid var(--gold);color:#0b0b0c;font-family:Manrope,sans-serif;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:all .3s var(--ease)" style-hover="background:var(--gold2);border-color:var(--gold2)">{{ pv.addLabel }}</button>
+      <button onclick="{{ pv.onBuyNow }}" class="pdp-buy" style="flex:1 1 160px;height:54px;background:transparent;border:1px solid var(--line2);color:var(--text);font-family:Manrope,sans-serif;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:all .3s var(--ease)" style-hover="border-color:var(--gold);color:var(--gold)">Купить сейчас</button>
     </div>
   </div>
   </sc-if>
@@ -706,6 +688,7 @@ input::placeholder{color:#6f6b63}
       <sc-if value="{{ admin.hasMsg }}" hint-placeholder-val=""><div style="font-size:12px;color:var(--gold2);letter-spacing:.02em;border:1px solid rgba(201,162,75,.4);background:rgba(201,162,75,.06);padding:12px 16px;margin-bottom:22px">{{ admin.msg }}</div></sc-if>
 
       <div style="display:flex;gap:4px;border-bottom:1px solid var(--line);margin-bottom:30px;flex-wrap:wrap">
+        <button onclick="{{ admin.onTabAnalytics }}" style="background:none;border:none;border-bottom:2px solid transparent;padding:14px 18px;font-family:Manrope,sans-serif;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:all .3s var(--ease); {{ admin.tabAExtra }}">Аналитика</button>
         <button onclick="{{ admin.onTabProducts }}" style="background:none;border:none;border-bottom:2px solid transparent;padding:14px 18px;font-family:Manrope,sans-serif;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:all .3s var(--ease); {{ admin.tabPExtra }}">Товары · {{ admin.productCount }}</button>
         <button onclick="{{ admin.onTabHero }}" style="background:none;border:none;border-bottom:2px solid transparent;padding:14px 18px;font-family:Manrope,sans-serif;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:all .3s var(--ease); {{ admin.tabHExtra }}">Слайдер · {{ admin.heroCount }}</button>
         <button onclick="{{ admin.onTabCollections }}" style="background:none;border:none;border-bottom:2px solid transparent;padding:14px 18px;font-family:Manrope,sans-serif;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:all .3s var(--ease); {{ admin.tabColExtra }}">Коллекции · {{ admin.collectionCount }}</button>
@@ -713,7 +696,35 @@ input::placeholder{color:#6f6b63}
         <button onclick="{{ admin.onTabSettings }}" style="background:none;border:none;border-bottom:2px solid transparent;padding:14px 18px;font-family:Manrope,sans-serif;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:all .3s var(--ease); {{ admin.tabSExtra }}">Оформление</button>
       </div>
 
-      <sc-if value="{{ admin.tabProducts }}" hint-placeholder-val="{{ true }}">
+      <sc-if value="{{ admin.tabAnalytics }}" hint-placeholder-val="{{ true }}">
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px;margin-bottom:26px"><sc-for list="{{ admin.analytics.metrics }}" as="m" hint-placeholder-count="8">
+          <div style="border:1px solid var(--line);background:#0c0c0d;padding:20px 22px">
+            <div style="font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--t3);margin-bottom:12px">{{ m.label }}</div>
+            <div style="font-family:Prata,serif;font-size:25px;color:var(--text);line-height:1">{{ m.value }}</div>
+          </div>
+        </sc-for></div>
+        <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:22px" class="an-grid">
+          <div style="border:1px solid var(--line);background:#0c0c0d;padding:24px 26px">
+            <div style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold2);margin-bottom:22px">Товары по семействам</div>
+            <div style="display:flex;flex-direction:column;gap:14px"><sc-for list="{{ admin.analytics.bars }}" as="b" hint-placeholder-count="5">
+              <div style="display:grid;grid-template-columns:110px 1fr 34px;gap:12px;align-items:center">
+                <div style="font-size:12px;color:var(--t2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ b.name }}</div>
+                <div style="height:10px;background:rgba(236,232,224,.06);border-radius:5px;overflow:hidden"><div style="height:100%;background:linear-gradient(90deg,var(--goldd),var(--gold));width: {{ b.width }};transition:width .7s var(--ease)"></div></div>
+                <div style="font-size:12px;color:var(--text);text-align:right">{{ b.count }}</div>
+              </div>
+            </sc-for></div>
+          </div>
+          <div style="border:1px solid var(--line);background:#0c0c0d;padding:24px 26px">
+            <div style="font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold2);margin-bottom:8px">Топ по цене</div>
+            <div style="display:flex;flex-direction:column"><sc-for list="{{ admin.analytics.topProducts }}" as="t" hint-placeholder-count="5">
+              <div style="display:flex;align-items:center;gap:12px;padding:12px 0;border-top:1px solid var(--line)"><span style="font-family:Prata,serif;font-size:15px;color:var(--gold2);width:20px">{{ t.rank }}</span><span style="flex:1;min-width:0;font-size:12.5px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ t.name }}</span><span style="font-family:Prata,serif;font-size:14px;color:var(--text);white-space:nowrap">{{ t.price }}</span></div>
+            </sc-for></div>
+          </div>
+        </div>
+        <p style="font-size:11.5px;color:var(--t3);margin:18px 0 0;letter-spacing:.02em">Данные считаются из содержимого сайта и заказов пользователей (localStorage). {{ admin.analytics.ordersLabel }}.</p>
+      </sc-if>
+
+      <sc-if value="{{ admin.tabProducts }}" hint-placeholder-val="">
         <button onclick="{{ admin.onAddProduct }}" style="margin-bottom:24px;background:var(--gold);border:none;color:#0b0b0c;padding:14px 24px;font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;transition:background .3s var(--ease)" style-hover="background:var(--gold2)">+ Добавить товар</button>
         <div style="display:flex;flex-direction:column;gap:26px"><sc-for list="{{ admin.products }}" as="p" hint-placeholder-count="3">
           <div style="border:1px solid var(--line);background:#0c0c0d;padding:24px">
@@ -989,7 +1000,7 @@ class Component extends DCLogic {
       infoTopic:null,
       users:[], currentUser:null, authTab:'login',
       auth:{name:'',email:'',phone:'',password:''}, authMsg:'',
-      adminAuthed:false, adminPass:'', adminMsg:'', adminTab:'products', adminRev:0
+      adminAuthed:false, adminPass:'', adminMsg:'', adminTab:'analytics', adminRev:0
     };
   }
   componentDidMount() {
@@ -1022,11 +1033,12 @@ class Component extends DCLogic {
     const a = this.accentColor();
     if (!this._root) return;
     if (a) this._root.style.setProperty('--gold', a);
-    // reserve exact space for the fixed bars: mobile bottom-nav (all views) + product add-to-cart bar
+    // reserve exact space for the fixed bars: mobile bottom-nav (all views) + product action bar.
+    // Measure the action bar's distance from the viewport bottom (covers nav + gap + bar height).
     let pad = 0;
     try {
-      if (window.innerWidth <= 880) { const nav = document.querySelector('.lx-bottomnav'); if (nav && nav.offsetHeight) pad += nav.offsetHeight; }
-      if (this.state.view === 'product') { const bar = document.querySelector('.pdp-bar'); if (bar && bar.offsetHeight) pad += bar.offsetHeight; }
+      if (window.innerWidth <= 880) { const nav = document.querySelector('.lx-bottomnav'); if (nav && nav.offsetHeight) pad = nav.offsetHeight; }
+      if (this.state.view === 'product') { const bar = document.querySelector('.pdp-bar'); if (bar) { const fromBottom = Math.round(window.innerHeight - bar.getBoundingClientRect().top); if (fromBottom > pad) pad = fromBottom; } }
     } catch (e) {}
     this._root.style.paddingBottom = pad ? (pad + 'px') : '';
   }
@@ -1041,9 +1053,6 @@ class Component extends DCLogic {
   openAccount() { this.setState({ view:'account', openMenu:null, mobileNav:false, authMsg:'' }); this.toTop(); }
   openWishlist() { this.setState({ view:'wishlist', openMenu:null, mobileNav:false }); this.toTop(); }
   openInfo(topic) { this.setState({ view:'info', infoTopic:topic, openMenu:null, mobileNav:false }); this.toTop(); }
-  toggleMobileNav() { this.setState(s => ({ mobileNav: !s.mobileNav })); }
-  closeMobileNav() { this.setState({ mobileNav:false }); }
-  mobileSearchGo() { this.setState({ mobileNav:false, view:'home' }, () => this.scrollCatalog()); }
   openProduct(id) { const p = this.find(id); this.setState({ view:'product', activeId:id, selVol:p?p.mainVol:1, qty:1, activeThumb:0, openAcc:0, openMenu:null, mobileNav:false }); this.toTop(); }
   scrollCatalog() { try { const el = document.getElementById('catalog'); if (el) window.scrollTo({ top: el.offsetTop - 90, behavior:'smooth' }); } catch (e) {} }
   moveReco(dir) {
@@ -1072,6 +1081,7 @@ class Component extends DCLogic {
   }
   setQtyCart(id, vol, d) { this.setState(s => ({ cart: s.cart.map(it => (it.id === id && it.vol === vol) ? Object.assign({}, it, { qty: Math.max(1, it.qty + d) }) : it) }), () => this.persist()); }
   removeCart(id, vol) { this.setState(s => ({ cart: s.cart.filter(it => !(it.id === id && it.vol === vol)) }), () => this.persist()); }
+  buyNow(id, vol) { this.addToCart(id, vol, 1); this.setState({ view: 'cart', cartStep: 'cart', openMenu: null, mobileNav: false }); this.toTop(); }
   cartQty(id, vol) { const it = this.state.cart.find(x => x.id === id && x.vol === vol); return it ? it.qty : 0; }
   decOrRemove(id, vol) { this.setState(s => { const it = s.cart.find(x => x.id === id && x.vol === vol); if (it && it.qty <= 1) return { cart: s.cart.filter(x => !(x.id === id && x.vol === vol)) }; return { cart: s.cart.map(x => (x.id === id && x.vol === vol) ? Object.assign({}, x, { qty: x.qty - 1 }) : x) }; }, () => this.persist()); }
   toggleWishlist(id) { this.setState(s => ({ wishlist: s.wishlist.includes(id) ? s.wishlist.filter(x => x !== id) : s.wishlist.concat(id) }), () => this.persist()); }
@@ -1212,6 +1222,8 @@ class Component extends DCLogic {
     const qtyInCart = this.cartQty(p.id, p.mainVol);
     return {
       id:p.id, brand:p.brand, name:p.name, volume:v.ml + ' мл', priceFmt:this.fmt(v.price),
+      category:(p.category && ('' + p.category).trim()) ? p.category : 'Парфюмерная вода',
+      ratingStars:this.stars(this.prodRating(p)), rating:this.prodRating(p), reviewCount:this.prodReviewCount(p),
       badge: showBadge ? (p.badge || '') : '', capt: p.photo ? '' : ('ФОТО · ' + p.brand),
       imgBg:this.photoBg(p,'radial-gradient(130% 115% at 30% 22%, rgba(' + p.glow + ',.30), rgba(' + p.glow + ',.07) 42%, #0d0d0f 74%)'),
       noteTop:p.top.join(' · '), noteHeart:p.heart.join(' · '), noteBase:p.base.join(' · '),
@@ -1271,10 +1283,11 @@ class Component extends DCLogic {
         brand:p.brand, name:p.name, family:p.family, gender:p.gender,
         category:(p.category && ('' + p.category).trim()) ? p.category : 'Парфюмерная вода',
         badge:(this.props.showBadges !== false) ? (p.badge || '') : '', priceFmt:this.fmt(vol.price), volLabel:vol.ml + ' мл', capt: p.photo ? '' : ('ФОТО · ' + p.brand),
-        imgBg:this.photoBg(p,'radial-gradient(120% 115% at ' + tp[0] + '% ' + tp[1] + '%, rgba(' + p.glow + ',.34), rgba(' + p.glow + ',.08) 44%, #0c0c0e 76%)'),
+        imgBg: p.photo ? ('#0d0d0f ' + (['center','32% center','68% center','center 28%'][S.activeThumb] || 'center') + '/cover no-repeat url("' + p.photo + '")') : ('radial-gradient(120% 115% at ' + tp[0] + '% ' + tp[1] + '%, rgba(' + p.glow + ',.34), rgba(' + p.glow + ',.08) 44%, #0c0c0e 76%)'),
         volChips:p.vols.map((v, i) => ({ label:v.ml + ' мл', priceFmt:this.fmt(v.price), onClick:() => this.selVolFn(i), extra: i === S.selVol ? 'border-color:var(--gold);background:rgba(201,162,75,.08);color:var(--text)' : 'border-color:var(--line);color:var(--t2)' })),
-        thumbs:[0,1,2,3].map(i => ({ onClick:() => this.setState({ activeThumb:i }), imgBg:this.photoBg(p,'radial-gradient(130% 120% at ' + tpos[i][0] + '% ' + tpos[i][1] + '%, rgba(' + p.glow + ',.34), rgba(' + p.glow + ',.08) 46%, #0c0c0e 78%)'), extra: i === S.activeThumb ? 'border-color:var(--gold)' : 'border-color:var(--line)' })),
-        onAdd:() => this.addToCart(p.id, S.selVol, 1), addLabel:(S.justAdded === p.id) ? '✓ Добавлено' : 'В корзину',
+        galleryDots:[0,1,2,3].map(i => ({ onClick:() => this.setState({ activeThumb:i }), extra: i === S.activeThumb ? 'width:26px;background:var(--gold)' : 'width:12px;background:var(--line2)' })),
+        onThumbPrev:() => this.setState(s => ({ activeThumb:(s.activeThumb + 3) % 4 })), onThumbNext:() => this.setState(s => ({ activeThumb:(s.activeThumb + 1) % 4 })),
+        onAdd:() => this.addToCart(p.id, S.selVol, 1), addLabel:(S.justAdded === p.id) ? '✓ Добавлено' : 'В корзину', onBuyNow:() => this.buyNow(p.id, S.selVol),
         wished:S.wishlist.includes(p.id), wishGlyph:S.wishlist.includes(p.id) ? '♥' : '♡', onWish:() => this.toggleWishlist(p.id),
         accordions:accData.map((a, i) => ({ title:a.t, body:a.b, sign:S.openAcc === i ? '–' : '+', bodyStyle:S.openAcc === i ? 'max-height:1200px;opacity:1;padding-bottom:24px' : 'max-height:0;opacity:0;padding-bottom:0', onToggle:() => this.setState(st => ({ openAcc: st.openAcc === i ? -1 : i })) })),
         related:this.products.filter(x => x.id !== p.id && x.family === p.family).concat(this.products.filter(x => x.id !== p.id && x.family !== p.family)).slice(0, 4).map(x => this.cardVM(x)),
@@ -1304,14 +1317,37 @@ class Component extends DCLogic {
     };
     const tabExtra = (name) => S.adminTab === name ? 'color:var(--text);border-bottom-color:var(--gold)' : 'color:var(--t3);border-bottom-color:transparent';
     const accentSwatches = ['#c9a24b','#d8b15f','#c98f6a','#cfc9bd','#b5834a','#8f9e8f'];
+    // ---- analytics (derived from localStorage-backed data) ----
+    const catValue = this.products.reduce((a, p) => a + ((p.vols && p.vols[p.mainVol]) ? p.vols[p.mainVol].price : 0), 0);
+    const allOrders = (S.users || []).reduce((a, u) => a.concat(u.orders || []), []);
+    const revenue = allOrders.reduce((a, o) => a + (parseInt(('' + (o.totalFmt || '')).replace(/[^0-9]/g, ''), 10) || 0), 0);
+    const famCount = {}; this.products.forEach(p => { const f = p.family || '—'; famCount[f] = (famCount[f] || 0) + 1; });
+    const famBars = Object.keys(famCount).map(f => ({ name: f, count: famCount[f] }));
+    const famMax = Math.max.apply(null, [1].concat(famBars.map(b => b.count)));
+    const topProducts = this.products.slice().sort((a, b) => (((b.vols[b.mainVol] || {}).price) || 0) - (((a.vols[a.mainVol] || {}).price) || 0)).slice(0, 5);
     const admin = {
       authed: S.adminAuthed, notAuthed: !S.adminAuthed,
       passField: { value: S.adminPass, onInput: (e) => this.setState({ adminPass: e.target.value, adminMsg: '' }) },
       onLogin: () => this.adminLogin(), onClose: () => this.goHome(), onLogout: () => this.adminLogout(),
       hasMsg: !!S.adminMsg, msg: S.adminMsg,
-      tabProducts: S.adminTab === 'products', tabHero: S.adminTab === 'hero', tabCollections: S.adminTab === 'collections', tabReviews: S.adminTab === 'reviews', tabSettings: S.adminTab === 'settings',
-      onTabProducts: () => this.setAdminTab('products'), onTabHero: () => this.setAdminTab('hero'), onTabCollections: () => this.setAdminTab('collections'), onTabReviews: () => this.setAdminTab('reviews'), onTabSettings: () => this.setAdminTab('settings'),
-      tabPExtra: tabExtra('products'), tabHExtra: tabExtra('hero'), tabColExtra: tabExtra('collections'), tabRExtra: tabExtra('reviews'), tabSExtra: tabExtra('settings'),
+      tabAnalytics: S.adminTab === 'analytics', tabProducts: S.adminTab === 'products', tabHero: S.adminTab === 'hero', tabCollections: S.adminTab === 'collections', tabReviews: S.adminTab === 'reviews', tabSettings: S.adminTab === 'settings',
+      onTabAnalytics: () => this.setAdminTab('analytics'), onTabProducts: () => this.setAdminTab('products'), onTabHero: () => this.setAdminTab('hero'), onTabCollections: () => this.setAdminTab('collections'), onTabReviews: () => this.setAdminTab('reviews'), onTabSettings: () => this.setAdminTab('settings'),
+      tabAExtra: tabExtra('analytics'), tabPExtra: tabExtra('products'), tabHExtra: tabExtra('hero'), tabColExtra: tabExtra('collections'), tabRExtra: tabExtra('reviews'), tabSExtra: tabExtra('settings'),
+      analytics: {
+        metrics: [
+          { label:'Товары', value:String(this.products.length) },
+          { label:'Стоимость каталога', value:this.fmt(catValue) },
+          { label:'Средняя цена', value:this.fmt(this.products.length ? catValue / this.products.length : 0) },
+          { label:'Заказы', value:String(allOrders.length) },
+          { label:'Выручка', value:this.fmt(revenue) },
+          { label:'Пользователи', value:String((S.users || []).length) },
+          { label:'Коллекции', value:String(this.collections.length) },
+          { label:'В избранном', value:String((S.wishlist || []).length) }
+        ],
+        bars: famBars.map(b => ({ name:b.name, count:String(b.count), width:(Math.round(b.count / famMax * 100)) + '%' })),
+        topProducts: topProducts.map((p, i) => ({ rank:String(i + 1), name:p.brand + ' ' + p.name, price:this.fmt(((p.vols[p.mainVol] || {}).price) || 0) })),
+        hasOrders: allOrders.length > 0, ordersLabel: allOrders.length + ' заказ(ов) · выручка ' + this.fmt(revenue)
+      },
       productCount: this.products.length, heroCount: this.heroSlides.length, collectionCount: this.collections.length, reviewCount: this.reviews.length,
       collections: this.collections.map((c, i) => ({ num: '№ ' + (i + 1), title: this.adminField(c, 'title'), subtitle: this.adminField(c, 'subtitle'), glow: this.adminField(c, 'glow'), photo: this.adminField(c, 'photo'), hasPhoto: !!c.photo, onPhoto: (e) => this.adminUpload(c, e.target.files && e.target.files[0]), onDelete: () => this.deleteCollection(i) })),
       onAddCollection: () => this.addCollection(),
@@ -1374,7 +1410,6 @@ class Component extends DCLogic {
         { label:'Нишевые дома', onClick:() => this.setState({ view:'home', filterFamily:'Восточные', mobileNav:false }, () => this.scrollCatalog()) },
         { label:'Избранное', onClick:() => this.openWishlist() }
       ],
-      onBurger:() => this.toggleMobileNav(), onBurgerClose:() => this.closeMobileNav(), onMobileSearchGo:() => this.mobileSearchGo(), mobileNavOpen:S.mobileNav,
       anyMenuOpen:!!S.openMenu, onBackdrop:() => this.setState({ openMenu:null }),
       heroEyebrow:slide.eyebrow, heroTitle:slide.title, heroSub:slide.sub, heroCta:slide.cta,
       heroLayers:this.heroSlides.map((s, i) => ({ bg:this.photoBg(s,'radial-gradient(120% 130% at 72% 30%, rgba(' + s.glow + ',.42), rgba(' + s.glow + ',.10) 40%, #0a0a0b 78%)'), extra: i === S.heroSlide ? 'opacity:1;transform:scale(1.06)' : 'opacity:0;transform:scale(1.0)' })),
