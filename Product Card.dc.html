@@ -12,20 +12,15 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Prata&display=swap" rel="stylesheet">
 </helmet>
-<div onMouseEnter="{{ onEnter }}" onMouseLeave="{{ onLeave }}" onClick="{{ onOpen }}" style="--gold:#c9a24b;--gold2:#e3c178;--line:rgba(236,232,224,.10);--line2:rgba(236,232,224,.20);--text:#ece8e0;--t2:#a8a399;--t3:#736f67;--ease:cubic-bezier(.22,.61,.36,1);display:flex;flex-direction:column;cursor:pointer;font-family:Manrope,sans-serif;background:transparent">
-  <div style="position:relative;aspect-ratio:4/5;overflow:hidden;background:#0d0d0f">
+<div onMouseEnter="{{ onEnter }}" onMouseLeave="{{ onLeave }}" onClick="{{ onOpen }}" style="--gold:#c9a24b;--gold2:#9c7836;--line:rgba(51,51,51,.13);--line2:rgba(51,51,51,.22);--text:#2b2620;--t2:#6b675e;--t3:#9a968a;--ease:cubic-bezier(.22,.61,.36,1);display:flex;flex-direction:column;cursor:pointer;font-family:Manrope,sans-serif;background:transparent">
+  <div style="position:relative;aspect-ratio:4/5;overflow:hidden;background:#f1efe4">
     <div style="position:absolute;inset:0;transition:transform .9s var(--ease);transform: {{ imgTransform }};background: {{ imgBg }}"></div>
-    <div style="position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(236,232,224,.022) 0 1px,transparent 1px 9px)"></div>
+    <div style="position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(51,51,51,.03) 0 1px,transparent 1px 9px)"></div>
     <div style="position:absolute;inset:14px;border:1px solid var(--line);pointer-events:none"></div>
     <sc-if value="{{ badge }}" hint-placeholder-val="">
-      <div style="position:absolute;top:16px;left:16px;padding:6px 12px;background:rgba(11,11,12,.5);backdrop-filter:blur(5px);border:1px solid rgba(201,162,75,.55);color:var(--gold2);font-size:9px;letter-spacing:.24em;text-transform:uppercase;font-weight:500">{{ badge }}</div>
+      <div style="position:absolute;top:16px;left:16px;padding:6px 12px;background:rgba(255,254,242,.72);backdrop-filter:blur(5px);border:1px solid rgba(201,162,75,.55);color:var(--gold2);font-size:9px;letter-spacing:.24em;text-transform:uppercase;font-weight:500">{{ badge }}</div>
     </sc-if>
     <div style="position:absolute;left:18px;bottom:16px;font-family:ui-monospace,Menlo,monospace;font-size:9px;letter-spacing:.16em;color:var(--t3);text-transform:uppercase">{{ capt }}</div>
-    <div style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;gap:13px;padding:24px;background:linear-gradient(to top,rgba(7,7,8,.95),rgba(7,7,8,.55) 46%,transparent 82%);transition:opacity .5s var(--ease);pointer-events:none;opacity: {{ overlayOpacity }}">
-      <div style="display:flex;gap:14px;align-items:baseline"><div style="min-width:50px;font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold2)">Верх</div><div style="font-size:12px;color:var(--text);line-height:1.4">{{ noteTop }}</div></div>
-      <div style="display:flex;gap:14px;align-items:baseline"><div style="min-width:50px;font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold2)">Сердце</div><div style="font-size:12px;color:var(--text);line-height:1.4">{{ noteHeart }}</div></div>
-      <div style="display:flex;gap:14px;align-items:baseline"><div style="min-width:50px;font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold2)">База</div><div style="font-size:12px;color:var(--text);line-height:1.4">{{ noteBase }}</div></div>
-    </div>
   </div>
   <div style="padding:16px 2px 0;display:flex;flex-direction:column;gap:5px">
     <div style="font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--t2)">{{ brand }}</div>
@@ -36,7 +31,7 @@
       <div style="font-family:Prata,serif;font-size:18px;color:var(--text);letter-spacing:.01em">{{ priceFmt }}</div>
       <div style="display:flex;align-items:center;gap:8px">
         <button onClick="{{ onWish }}" aria-label="В избранное" style="width:42px;height:42px;flex:0 0 42px;display:grid;place-items:center;border:1px solid var(--line2);background:transparent;cursor:pointer;transition:all .3s var(--ease)" style-hover="border-color:var(--gold)"><span style="font-size:16px;line-height:1;color: {{ heartColor }}">{{ heart }}</span></button>
-        <sc-if value="{{ notInCart }}" hint-placeholder-val="{{ true }}"><button onClick="{{ onAdd }}" aria-label="В корзину" style="width:42px;height:42px;display:grid;place-items:center;border:1px solid var(--line2);background:transparent;color:var(--text);cursor:pointer;transition:all .3s var(--ease)" style-hover="background:var(--gold);color:#0b0b0c;border-color:var(--gold)"><span style="font-size:17px;line-height:1">{{ addGlyph }}</span></button></sc-if>
+        <sc-if value="{{ notInCart }}" hint-placeholder-val="{{ true }}"><button onClick="{{ onAdd }}" aria-label="В корзину" style="width:42px;height:42px;display:grid;place-items:center;border:1px solid var(--line2);background:transparent;color:var(--text);cursor:pointer;transition:all .3s var(--ease)" style-hover="background:var(--gold);color:#2b2620;border-color:var(--gold)"><span style="font-size:17px;line-height:1">{{ addGlyph }}</span></button></sc-if>
         <sc-if value="{{ inCart }}" hint-placeholder-val=""><div style="display:flex;align-items:center;border:1px solid var(--gold);background:rgba(201,162,75,.08)"><button onClick="{{ onDec }}" aria-label="Убрать одну" style="width:36px;height:42px;display:grid;place-items:center;background:none;border:none;color:var(--text);font-size:18px;line-height:1;cursor:pointer">−</button><span style="min-width:22px;text-align:center;font-size:14px;color:var(--gold2);font-weight:600">{{ qtyInCart }}</span><button onClick="{{ onInc }}" aria-label="Добавить одну" style="width:36px;height:42px;display:grid;place-items:center;background:none;border:none;color:var(--text);font-size:17px;line-height:1;cursor:pointer">+</button></div></sc-if>
       </div>
     </div>
@@ -50,7 +45,7 @@ class Component extends DCLogic {
     const c = this.props.card || {};
     return Object.assign({}, c, {
       heart: c.wished ? '♥' : '♡',
-      heartColor: c.wished ? '#e3c178' : '#cfcabf',
+      heartColor: c.wished ? '#e3c178' : '#b6b2a6',
       addGlyph: c.justAdded ? '✓' : '+',
       overlayOpacity: this.state.hover ? '1' : '0',
       imgTransform: this.state.hover ? 'scale(1.05)' : 'scale(1)',
