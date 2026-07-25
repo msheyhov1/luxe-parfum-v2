@@ -43,6 +43,19 @@ window.addEventListener('popstate', e => {
   _showPage(state.page || 'home');
 });
 
+// A pasted/bookmarked hash may change while the SPA is already open.
+// Handle it explicitly because history.pushState does not emit hashchange.
+window.addEventListener('hashchange', () => {
+  const hash = location.hash.slice(1);
+  if (!hash) { _showPage('home'); return; }
+  if (hash.startsWith('product-')) {
+    const id = parseInt(hash.replace('product-', ''), 10);
+    const product = PRODUCTS.find(item => item.id === id);
+    if (product) { _renderProduct(product); return; }
+  }
+  if (document.getElementById('page-' + hash)) _showPage(hash);
+});
+
 // ── menu (sidebar) ──
 function toggleMenu() {
   document.getElementById('sidebar').classList.toggle('open');
