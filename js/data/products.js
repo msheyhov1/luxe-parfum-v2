@@ -10,7 +10,7 @@
 //   desc, descExtra, ingredients
 //   imgs[]     — gallery images (first is the cover)
 // ════════════════════════════════════════
-const PRODUCTS = [
+const DEFAULT_PRODUCTS = [
   {id:1,brand:'CREED',name:'Millésime Impérial',vol:'100 мл',price:43500,cat:['hits','him','toilette'],badge:'Хит',rating:4.9,reviews:214,
    notes:['Морской бриз','Арбуз','Ирис','Мускус','Амбра'],
    desc:'Морской аромат с нотами морского бриза, арбуза и ириса. Классика парфюмерного дома Creed, созданная для настоящих знатоков элегантности. Идеален для тёплых летних дней и вечерних выходов.',
@@ -86,7 +86,7 @@ const PRODUCTS = [
 ];
 
 // Category hero metadata (catalog page banners)
-const CAT_META = {
+const DEFAULT_CAT_META = {
   all:    {title:'Весь ассортимент', sub:'Все ароматы LUXE Парфюмерия',             img:'assets/img/p09.jpg'},
   hits:   {title:'Хиты продаж',     sub:'Самые любимые ароматы наших клиентов',   img:'assets/img/p23.jpg'},
   him:    {title:'Для него',        sub:'Мужская парфюмерия — сила и элегантность',img:'assets/img/p11.jpg'},
@@ -98,4 +98,33 @@ const CAT_META = {
 };
 
 // Category labels used by sidebar / catalog tabs
-const CAT_LABELS = { all:'Все', hits:'Хиты', him:'Для него', her:'Для неё', unisex:'Унисекс', toilette:'Туалетная вода', oil:'Масляные духи', home:'Для дома' };
+const DEFAULT_CAT_LABELS = { all:'Все', hits:'Хиты', him:'Для него', her:'Для неё', unisex:'Унисекс', toilette:'Туалетная вода', oil:'Масляные духи', home:'Для дома' };
+
+// ── Editable content layer ───────────────────────────────────────────────
+// The storefront reads PRODUCTS / CAT_META / CAT_LABELS as live globals.
+// The admin panel (js/admin.js) rewrites them and persists to localStorage,
+// so a shop owner can change catalogue, prices, photos and banners without
+// touching the code. This file loads first (before state.js/utils.js), so
+// hydration here is self-contained — no dependency on other modules.
+const CONTENT_KEYS = {
+  products:  'luxeProducts',
+  catMeta:   'luxeCatMeta',
+  catLabels: 'luxeCatLabels',
+  hero:      'luxeHero',
+  texts:     'luxeTexts',
+};
+
+function _contentClone(value) { return JSON.parse(JSON.stringify(value)); }
+
+function _contentLoad(key, fallback) {
+  try {
+    const raw = localStorage.getItem(key);
+    return raw === null ? _contentClone(fallback) : JSON.parse(raw);
+  } catch (e) {
+    return _contentClone(fallback);
+  }
+}
+
+let PRODUCTS   = _contentLoad(CONTENT_KEYS.products,  DEFAULT_PRODUCTS);
+let CAT_META   = _contentLoad(CONTENT_KEYS.catMeta,   DEFAULT_CAT_META);
+let CAT_LABELS = _contentLoad(CONTENT_KEYS.catLabels, DEFAULT_CAT_LABELS);

@@ -38,7 +38,7 @@ function mkCard(p) {
   const isFaved = favorites.has(p.id);
 
   const slides = p.imgs.map(src =>
-    '<div class="pcard-slide"><img src="' + src + '" alt="' + escapeHtml(p.name) + '" loading="lazy"><div class="pcard-slide-ov"></div></div>'
+    '<div class="pcard-slide"><img src="' + escapeHtml(src) + '" alt="' + escapeHtml(p.name) + '" loading="lazy"><div class="pcard-slide-ov"></div></div>'
   ).join('');
   const dotBtns = p.imgs.map((_, i) =>
     '<button class="pgdot' + (i === 0 ? ' active' : '') + '"></button>'

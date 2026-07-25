@@ -30,7 +30,7 @@ function _showPage(page) {
   if (page === 'catalog')   { renderCatalog(_catFilter); _syncCatTabs(); }
   if (page === 'account')   renderAccount();
   if (page === 'order')     renderOrderForm();
-  if (page === 'journal-admin') renderJournalAdmin();
+  if (page === 'journal-admin') initAdminDashboard();
 }
 
 window.addEventListener('popstate', e => {
@@ -92,7 +92,9 @@ function navProfile() {
 }
 
 function _syncCatTabs() {
+  // Match by category key (data-cat), not label text, so an admin-renamed
+  // category still highlights correctly.
   document.querySelectorAll('.ct').forEach(t => {
-    t.classList.toggle('active', t.textContent.trim() === CAT_LABELS[_catFilter]);
+    t.classList.toggle('active', t.dataset.cat === _catFilter);
   });
 }
