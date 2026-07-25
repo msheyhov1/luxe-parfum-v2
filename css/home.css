@@ -1,0 +1,127 @@
+/* ════════════════════════════════════════
+   HOME — hero slider, section headers, banner
+════════════════════════════════════════ */
+
+/* ── HERO ── */
+.hero{position:relative;height:calc(100vh - var(--th));max-height:700px;overflow:hidden;flex-shrink:0}
+.hslide{position:absolute;inset:0;opacity:0;transition:opacity 1s;pointer-events:none}
+.hslide.active{opacity:1;pointer-events:auto}
+.hslide-bg{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform 7s ease}
+.hslide.active .hslide-bg{transform:scale(1.05)}
+.hslide-ov{position:absolute;inset:0;background:linear-gradient(100deg,rgba(8,8,8,.88) 0%,rgba(8,8,8,.5) 55%,rgba(8,8,8,.15) 100%)}
+.hcont{position:relative;z-index:2;padding:0 80px;height:100%;display:flex;flex-direction:column;justify-content:center;max-width:580px}
+.h-tag{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:18px;display:flex;align-items:center;gap:12px}
+.h-tag::before{content:'';width:36px;height:1px;background:var(--gold);opacity:.6}
+.hcont h1{font-family:'Cormorant Garamond',serif;font-size:56px;font-weight:300;line-height:1.05;margin-bottom:18px;color:#fff}
+.hcont p{font-size:13px;line-height:1.9;color:rgba(240,236,228,.55);margin-bottom:34px;letter-spacing:.3px;max-width:360px}
+.h-btn{border:1px solid var(--gold);color:var(--text);padding:13px 34px;font-size:9px;letter-spacing:4px;text-transform:uppercase;font-family:'Montserrat',sans-serif;font-weight:600;cursor:pointer;background:transparent;transition:all .3s}
+.h-btn:hover{background:var(--gold);color:var(--bg)}
+.h-arr{position:absolute;top:50%;transform:translateY(-50%);background:rgba(8,8,8,.4);backdrop-filter:blur(8px);border:1px solid var(--border);color:var(--dim);width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:10;font-size:20px;transition:all .2s}
+.h-arr:hover{border-color:var(--gold);color:var(--gold)}
+.h-arr.p{left:24px}.h-arr.n{right:24px}
+.hdots{position:absolute;bottom:26px;left:80px;display:flex;gap:5px;z-index:10}
+.hdot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.18);cursor:pointer;transition:all .3s;border:none}
+.hdot.active{background:var(--gold);width:20px;border-radius:3px}
+.h-ctr{position:absolute;bottom:26px;right:80px;font-size:10px;color:rgba(255,255,255,.25);letter-spacing:3px;z-index:10}
+
+/* ── SECTION HEADERS ── */
+.content{padding:36px 40px;flex:1}
+.sh{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}
+.st{font-size:10px;letter-spacing:5px;font-weight:600;text-transform:uppercase}
+.sl{font-size:10px;letter-spacing:1px;color:var(--gold);cursor:pointer;transition:color .2s}
+.sl:hover{color:var(--gold-l)}
+
+/* ── BANNER ── */
+.banner{margin:44px 40px 0;position:relative;height:300px;overflow:hidden;border:1px solid var(--border)}
+.banner-bg{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform 6s ease}
+.banner:hover .banner-bg{transform:scale(1.03)}
+.banner-ov{position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,8,8,.93) 0%,rgba(8,8,8,.6) 50%,transparent 100%)}
+.banner-cnt{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;justify-content:center;padding:0 52px}
+.banner-tag{font-size:8px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.banner-title{font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:300;line-height:1.1;margin-bottom:12px;color:#fff}
+.banner-sub{font-size:12px;color:rgba(240,236,228,.45);letter-spacing:.4px;margin-bottom:24px;max-width:300px;line-height:1.7}
+.banner-btn{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--gold);color:var(--gold);padding:10px 24px;font-size:9px;letter-spacing:3px;text-transform:uppercase;font-family:'Montserrat',sans-serif;font-weight:600;cursor:pointer;background:transparent;transition:all .3s}
+.banner-btn:hover{background:var(--gold);color:var(--bg)}
+.banner-decor{position:absolute;right:52px;top:50%;transform:translateY(-50%);z-index:2;text-align:right}
+.banner-decor-n{font-family:'Cormorant Garamond',serif;font-size:110px;font-weight:300;color:rgba(201,168,76,.07);line-height:1}
+.banner-decor-l{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:rgba(201,168,76,.18)}
+
+/* ── WHITE EDITORIAL HOME ── */
+.hero{height:min(640px,calc(100vh - var(--th)));max-height:none;margin:18px 24px 0}
+.hslide-bg{background-position:center}
+.hslide-ov{background:linear-gradient(90deg,rgba(0,0,0,.66),rgba(0,0,0,.2) 58%,rgba(0,0,0,.04))}
+.hcont{padding:0 clamp(42px,7vw,100px);max-width:690px}
+.h-tag{color:#fff;margin-bottom:20px;font-weight:500}.h-tag::before{background:#fff}
+.hcont p{color:rgba(255,255,255,.78);font-size:13px}
+.h-btn{border-color:#fff;color:#111;background:#fff;padding:14px 28px;letter-spacing:.13em}
+.h-btn:hover{background:#111;color:#fff;border-color:#111}
+.h-arr{background:rgba(255,255,255,.9);border:0;color:#111;border-radius:0}
+.h-arr:hover{background:#111;color:#fff}
+.hdot.active{background:#fff}.h-ctr{color:rgba(255,255,255,.7)}
+.content{padding:52px 24px 0;max-width:1480px;margin:0 auto;width:100%}
+.sh{margin-bottom:22px}.sh.compact{margin-bottom:18px}
+.sh small{display:block;color:#858585;font-size:9px;text-transform:uppercase;letter-spacing:.12em;margin-bottom:6px}
+.st{font-size:20px;font-weight:500;text-transform:none}
+.sl{font-size:9px;color:#111;text-transform:uppercase;letter-spacing:.1em;border-bottom:1px solid #111;padding-bottom:4px}
+.sl:hover{color:#777;border-color:#777}
+
+.brand-strip,.promo-grid,.assortment,.all-products,.journal,.service-strip{margin-top:64px}
+.brand-row{display:grid;grid-template-columns:repeat(7,1fr);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.brand-row button{border:0;border-right:1px solid var(--border);background:#fff;padding:28px 12px;font-family:'Cormorant Garamond',serif;font-size:20px;letter-spacing:.04em;cursor:pointer;transition:background .2s}
+.brand-row button:last-child{border-right:0}.brand-row button:hover{background:#f5f5f3}
+
+.promo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.promo-grid article{height:280px;position:relative;overflow:hidden;cursor:pointer;background:#eee}
+.promo-grid img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease-out)}
+.promo-grid article:hover img{transform:scale(1.025)}
+.promo-grid article::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,255,255,.94),rgba(255,255,255,.38) 72%,transparent)}
+.promo-grid article>div{position:absolute;z-index:2;inset:0;padding:32px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;max-width:72%}
+.promo-grid span{font-size:8px;text-transform:uppercase;letter-spacing:.13em;color:#666}
+.promo-grid h2{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:500;line-height:1;margin:8px 0 10px}
+.promo-grid p{font-size:10px;line-height:1.6;color:#555;margin-bottom:18px}
+.promo-grid button,.journal-card button{border:0;border-bottom:1px solid #111;background:none;padding:0 0 4px;font-size:8px;text-transform:uppercase;letter-spacing:.1em;cursor:pointer}
+
+.assortment-row{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}
+.assortment-row button{border:0;background:#f5f5f3;min-width:0;cursor:pointer;padding:0 0 16px}
+.assortment-row img{width:100%;aspect-ratio:1/1;object-fit:cover;mix-blend-mode:multiply;transition:transform .35s}
+.assortment-row button:hover img{transform:scale(1.025)}
+.assortment-row span{display:block;font-size:10px;color:#111;margin-top:12px;padding:0 6px}
+
+.assortment-head{align-items:flex-end}
+.product-sort{display:flex;align-items:center;gap:24px;overflow-x:auto}
+.product-sort button{border:0;background:none;color:#777;font:500 9px 'Montserrat',sans-serif;text-transform:uppercase;letter-spacing:.08em;padding:8px 0;white-space:nowrap;cursor:pointer;border-bottom:1px solid transparent}
+.product-sort button.active,.product-sort button:hover{color:#111;border-bottom-color:#111}
+.view-all-row{display:flex;justify-content:flex-end;margin-top:24px}
+.view-all-btn{background:#111;color:#fff;border:1px solid #111;padding:13px 28px;font:600 9px 'Montserrat',sans-serif;text-transform:uppercase;letter-spacing:.12em;cursor:pointer}
+.view-all-btn:hover{background:#fff;color:#111}
+
+.journal-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.journal-card{border:1px solid var(--border);background:#fff}
+.journal-card img{width:100%;aspect-ratio:1.25/1;object-fit:cover}
+.journal-copy{padding:20px}.journal-copy time{font-size:8px;color:#888;text-transform:uppercase;letter-spacing:.08em}
+.journal-copy h3{font-family:'Cormorant Garamond',serif;font-size:23px;font-weight:500;line-height:1.08;margin:10px 0}
+.journal-copy p{font-size:10px;line-height:1.7;color:#666;min-height:52px;margin-bottom:16px}
+
+.service-strip{display:grid;grid-template-columns:repeat(4,1fr);background:#f7f7f5;border:0}
+.service-strip article{display:flex;gap:16px;padding:30px 24px;border-right:1px solid #e3e3e0}
+.service-strip article:last-child{border-right:0}
+.service-strip article>span{font-family:'Cormorant Garamond',serif;font-size:22px;color:#aaa}
+.service-strip strong{font-size:10px;text-transform:uppercase;letter-spacing:.08em}
+.service-strip p{font-size:9px;line-height:1.5;color:#777;margin-top:6px}
+
+/* ── FOOTER ── */
+.site-footer{background:#111;color:#fff;margin-top:72px}
+.footer-news{max-width:1432px;margin:auto;padding:48px 24px;display:flex;align-items:center;justify-content:space-between;gap:40px;border-bottom:1px solid #333}
+.footer-news span{font-size:8px;text-transform:uppercase;letter-spacing:.18em;color:#aaa}
+.footer-news h2{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:400;margin-top:6px}
+.footer-news form{display:flex;width:min(440px,100%)}
+.footer-news input{flex:1;background:transparent;border:0;border-bottom:1px solid #777;color:#fff;padding:13px 4px;outline:0}
+.footer-news button{background:#fff;color:#111;border:1px solid #fff;padding:0 24px;font-size:8px;text-transform:uppercase;letter-spacing:.12em;cursor:pointer}
+.footer-main{max-width:1432px;margin:auto;padding:48px 24px;display:grid;grid-template-columns:1.6fr repeat(3,1fr);gap:48px}
+.footer-main h3{font-size:9px;text-transform:uppercase;letter-spacing:.12em;margin-bottom:18px}
+.footer-main>div:not(.footer-brand){display:flex;flex-direction:column;align-items:flex-start}
+.footer-main button{border:0;background:none;color:#aaa;padding:5px 0;font:9px 'Montserrat',sans-serif;cursor:pointer}.footer-main button:hover{color:#fff}
+.footer-logo{font-family:'Cormorant Garamond',serif;font-size:34px;letter-spacing:.18em}.footer-brand p{font-size:10px;line-height:1.6;color:#999;max-width:260px;margin:12px 0 20px}
+.footer-brand strong{display:block;font-size:13px}.footer-brand>span{font-size:8px;color:#777}
+.footer-social{display:flex;gap:14px;margin-top:16px}.footer-social a{font-size:9px;color:#fff;text-decoration:none;border-bottom:1px solid #777;padding-bottom:3px}
+.footer-bottom{border-top:1px solid #333;padding:18px 24px;display:flex;justify-content:space-between;color:#777;font-size:8px;max-width:1432px;margin:auto}

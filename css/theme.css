@@ -1,0 +1,13 @@
+/* Monochrome polish layered after the feature styles. */
+body{background:#fff}
+::selection{background:#111;color:#fff}
+.hcont h1{font-size:clamp(40px,4vw,64px);letter-spacing:-.02em}
+.st{letter-spacing:.03em}
+.auth-btn,.gold-btn,.pp-cbtn.add{background:#111;color:#fff;box-shadow:none}
+.auth-btn:hover,.gold-btn:hover,.pp-cbtn.add:hover{background:#333;color:#fff;box-shadow:none}
+.pcard{border:1px solid transparent;transition:border-color .25s ease,box-shadow .25s ease}
+.pcard:hover{border-color:#d8d8d6;box-shadow:0 12px 34px rgba(0,0,0,.08)}
+.pcard-badge{background:#fff;color:#111;border:1px solid #ddd}
+.fi:focus{box-shadow:0 0 0 2px rgba(0,0,0,.08)}
+.topbar{border-bottom:1px solid var(--border)}
+.pcard-price,.pp-price,.ci-price,.st-row span:last-child{color:#111}

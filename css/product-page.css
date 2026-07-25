@@ -1,0 +1,163 @@
+/* ════════════════════════════════════════
+   PRODUCT PAGE — gallery, info, specs,
+   reviews, lightbox
+════════════════════════════════════════ */
+
+#page-product{flex-direction:column;background:var(--bg2)}
+
+/* ── breadcrumb ── */
+.pp-bread{padding:0;border-bottom:1px solid var(--border);font-size:10px;color:var(--muted);letter-spacing:.5px;display:flex;align-items:center;flex-shrink:0;background:var(--bg2)}
+.pp-bread span{cursor:pointer;transition:color .2s}
+.pp-bread span:hover{color:var(--gold)}
+.pp-bread-sep{opacity:.3;cursor:default !important}
+.pp-bread-cur{color:var(--dim);cursor:default !important}
+.pp-bread-inner{max-width:1200px;margin:0 auto;width:100%;display:flex;align-items:center;gap:8px;padding:14px 40px}
+.pp-close-btn{margin-left:auto;background:none;border:1px solid var(--border);color:var(--muted);width:30px;height:30px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;border-radius:2px;flex-shrink:0}
+.pp-close-btn:hover{border-color:var(--gold);color:var(--gold)}
+
+/* ── product banner ── */
+.pp-banner{position:relative;height:160px;overflow:hidden;border-bottom:1px solid var(--border);flex-shrink:0}
+.pp-banner-bg{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform 6s ease}
+.pp-banner:hover .pp-banner-bg{transform:scale(1.03)}
+.pp-banner-ov{position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,8,8,.92) 0%,rgba(8,8,8,.55) 55%,transparent 100%)}
+.pp-banner-cnt{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;justify-content:center;max-width:1200px;margin:0 auto;padding:0 40px}
+.pp-banner-tag{font-size:8px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.pp-banner-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:#fff;margin-bottom:4px}
+.pp-banner-sub{font-size:11px;color:rgba(240,236,228,.45);letter-spacing:.4px}
+
+/* ── BODY: media + info ── */
+.pp-body{display:flex;gap:0;padding:32px 40px;max-width:1200px;margin:0 auto;width:100%}
+
+/* LEFT: thumbs column + main image */
+.pp-media{display:flex;gap:12px;flex-shrink:0;width:50%}
+.pp-thumbs{display:flex;flex-direction:column;gap:6px;width:68px;flex-shrink:0}
+.pp-thumb{width:64px;height:86px;object-fit:cover;cursor:pointer;border:2px solid transparent;opacity:.5;transition:all .25s;display:block;flex-shrink:0}
+.pp-thumb:hover{opacity:.75}
+.pp-thumb.active{border-color:var(--gold);opacity:1}
+.pp-main-wrap{flex:1;position:relative;background:var(--bg3);overflow:hidden;aspect-ratio:3/4;max-height:680px;cursor:pointer}
+.pp-main-track{display:flex;width:100%;height:100%;transition:transform .5s cubic-bezier(.4,0,.2,1)}
+.pp-main-img{flex:0 0 100%;height:100%;object-fit:cover;object-position:center top;display:block;cursor:pointer;transition:transform .3s ease}
+.pp-main-img:hover{transform:scale(1.02)}
+.pp-garr{position:absolute;top:50%;transform:translateY(-50%);background:rgba(8,8,8,.55);backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.7);width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:5;font-size:18px;transition:all .2s}
+.pp-garr:hover{border-color:var(--gold);color:var(--gold);background:rgba(8,8,8,.8)}
+.pp-garr.l{left:10px}.pp-garr.r{right:10px}
+
+/* RIGHT: info column */
+.pp-info{flex:1;padding:0 0 0 36px;display:flex;flex-direction:column;min-width:0}
+.pp-brand{font-size:9px;letter-spacing:4px;color:var(--gold);font-weight:600;text-transform:uppercase;margin-bottom:8px}
+.pp-name{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;line-height:1.1;margin-bottom:6px}
+.pp-vol-row{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.pp-vol{font-size:12px;color:var(--dim);letter-spacing:.5px}
+.pp-rating{display:flex;align-items:center;gap:8px;margin-bottom:16px}
+.pp-stars{display:flex;gap:2px}
+.pp-star{font-size:12px;color:var(--muted)}
+.pp-star.lit{color:var(--gold)}
+.pp-rating-count{font-size:11px;color:var(--dim)}
+.pp-divider{height:1px;background:var(--border);margin:16px 0}
+
+/* price */
+.pp-price-block{margin-bottom:20px}
+.pp-price{font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:300;color:var(--gold-l);line-height:1}
+
+/* variant selector (reserved) */
+.pp-variant-label{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.pp-variants{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.pp-variant{border:1px solid var(--border);padding:6px 14px;font-size:11px;color:var(--dim);cursor:pointer;transition:all .2s}
+.pp-variant:hover{border-color:var(--gold);color:var(--text)}
+.pp-variant.active{border-color:var(--gold);color:var(--gold)}
+
+/* actions */
+.pp-acts{display:flex;gap:10px;align-items:stretch;margin-bottom:20px}
+.pp-cbtn{flex:1;border:none;padding:15px 20px;font-family:'Montserrat',sans-serif;font-size:9px;letter-spacing:3px;text-transform:uppercase;font-weight:700;cursor:pointer;transition:all .25s}
+.pp-cbtn.add{background:var(--gold);color:var(--bg)}
+.pp-cbtn.add:hover{background:var(--gold-l)}
+.pp-cbtn.added{background:rgba(201,168,76,.1);color:var(--gold);border:1px solid var(--gold)}
+.pp-cbtn.added:hover{background:var(--gold);color:var(--bg)}
+.pp-fbtn{width:50px;border:1px solid var(--border);background:none;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;color:var(--dim);flex-shrink:0}
+.pp-fbtn:hover,.pp-fbtn.faved{border-color:var(--red);color:var(--red)}
+.pp-fbtn.faved svg{fill:var(--red)}
+.pp-qty-ctrl{display:flex;align-items:center;border:1px solid var(--gold);flex-shrink:0}
+.pp-qty-btn{width:36px;height:48px;background:none;border:none;color:var(--gold);font-size:18px;cursor:pointer;transition:background .2s;display:flex;align-items:center;justify-content:center}
+.pp-qty-btn:hover{background:rgba(201,168,76,.1)}
+.pp-qty-num{min-width:32px;text-align:center;font-size:14px;font-weight:500;color:var(--text)}
+
+/* delivery */
+.pp-dlv{border:1px solid var(--border);margin-bottom:20px}
+.pp-dlv-title{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);padding:12px 16px;border-bottom:1px solid var(--border)}
+.pp-dlv-row{display:flex;align-items:flex-start;gap:12px;font-size:11px;color:var(--dim);padding:11px 16px;border-bottom:1px solid var(--border);line-height:1.5}
+.pp-dlv-row:last-child{border-bottom:none}
+.pp-dlv-row svg{color:var(--gold);flex-shrink:0;width:16px;height:16px;margin-top:1px}
+.pp-dlv-row-txt strong{display:block;color:var(--text);font-size:11px;font-weight:500;margin-bottom:2px}
+.pp-dlv-row-txt span{font-size:10px;color:var(--muted)}
+
+/* notes */
+.pp-nt{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.pp-notes{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:0}
+.pp-note{border:1px solid var(--border);padding:5px 12px;font-size:10px;letter-spacing:.8px;color:var(--dim)}
+
+/* ── LOWER: description + specs ── */
+.pp-lower{padding:40px;border-top:1px solid var(--border);background:var(--bg2)}
+.pp-lower-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;max-width:1200px;margin:0 auto}
+.pp-desc-h{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;margin-bottom:18px;color:var(--text)}
+.pp-desc-text{font-size:13px;line-height:2;color:var(--dim);letter-spacing:.3px;margin-bottom:16px}
+.pp-desc-expand{font-size:11px;color:var(--gold);cursor:pointer;letter-spacing:1px;border:none;background:none;padding:0;font-family:'Montserrat',sans-serif;transition:color .2s}
+.pp-desc-expand:hover{color:var(--gold-l)}
+.pp-usage-h{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;color:var(--text);margin:32px 0 14px}
+.pp-usage-text{font-size:12px;line-height:1.9;color:var(--dim);letter-spacing:.3px}
+.pp-specs-h{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;margin-bottom:18px;color:var(--text)}
+.pp-spec-block-h{font-size:12px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;margin-top:24px}
+.pp-spec-block-h:first-child{margin-top:0}
+.pp-spec-row{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border);align-items:center}
+.pp-spec-row:last-child{border-bottom:none}
+.pp-spec-key{font-size:11px;color:var(--muted);letter-spacing:.3px}
+.pp-spec-val{font-size:12px;color:var(--text);text-align:right;max-width:60%}
+.pp-ingr-h{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;color:var(--text);margin:28px 0 12px}
+.pp-ingr{font-size:10px;line-height:1.85;color:var(--muted);letter-spacing:.4px;text-transform:uppercase;background:var(--bg3);border:1px solid var(--border);padding:16px}
+
+/* ── REVIEWS ── */
+.pp-reviews{padding:40px;background:var(--bg);border-top:1px solid var(--border)}
+.pp-reviews-inner{max-width:1200px;margin:0 auto}
+.pp-reviews-hdr{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:28px;flex-wrap:wrap;gap:12px}
+.pp-reviews-title{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300}
+.pp-reviews-rating-line{display:flex;align-items:center;gap:10px}
+.pp-reviews-list{display:flex;flex-direction:column;gap:1px;margin-bottom:20px}
+.pp-review{background:var(--bg2);padding:24px;border-left:2px solid var(--border);transition:border-color .2s}
+.pp-review:hover{border-left-color:var(--gold)}
+.pp-review-hdr{display:flex;align-items:center;gap:14px;margin-bottom:14px;flex-wrap:wrap}
+.pp-review-author{font-size:13px;font-weight:500;color:var(--text)}
+.pp-review-stars{display:flex;gap:2px}
+.pp-review-star{font-size:11px;color:var(--muted)}
+.pp-review-star.lit{color:var(--gold)}
+.pp-review-date{font-size:10px;color:var(--muted);margin-left:auto}
+.pp-review-block{margin-bottom:10px}
+.pp-review-block:last-child{margin-bottom:0}
+.pp-review-label{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
+.pp-review-text{font-size:12px;line-height:1.8;color:var(--dim)}
+.pp-review-pros{border-left:2px solid #4a8c4a;padding-left:10px}
+.pp-review-cons{border-left:2px solid #8c4a4a;padding-left:10px}
+.pp-reviews-more{border:1px solid var(--border);background:none;color:var(--dim);padding:12px 32px;font-family:'Montserrat',sans-serif;font-size:9px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;transition:all .2s;display:block;margin:0 auto}
+.pp-reviews-more:hover{border-color:var(--gold);color:var(--gold)}
+
+/* ── LIGHTBOX ── */
+.pp-lightbox{position:fixed;top:0;left:0;right:0;bottom:0;width:100vw;height:100vh;background:rgba(0,0,0,.93);z-index:9000;display:flex;align-items:center;justify-content:center;padding:0;margin:0;opacity:0;visibility:hidden;pointer-events:none;transition:opacity var(--dur-1) var(--ease-out),visibility var(--dur-1)}
+.pp-lightbox.open{opacity:1;visibility:visible;pointer-events:auto}
+.pp-lightbox.open .pp-lb-img{animation:lbZoom var(--dur-1) var(--ease-out) both}
+.pp-lb-inner{display:flex;align-items:center;justify-content:center;width:100%;height:100%;padding:60px 80px}
+.pp-lb-img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;border:1px solid rgba(201,168,76,.2);display:block;user-select:none}
+.pp-lb-close{position:fixed;top:20px;right:28px;background:rgba(8,8,8,.6);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.7);font-size:22px;cursor:pointer;z-index:9010;transition:color .2s,border-color .2s;line-height:1;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.pp-lb-close:hover{color:var(--gold);border-color:var(--gold)}
+.pp-lb-arr{position:fixed;top:50%;transform:translateY(-50%);background:rgba(8,8,8,.5);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.7);width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:22px;z-index:9010;transition:all .2s}
+.pp-lb-arr:hover{border-color:var(--gold);color:var(--gold);background:rgba(8,8,8,.8)}
+.pp-lb-arr.l{left:24px}
+.pp-lb-arr.r{right:24px}
+
+/* light product details */
+#page-product,.pp-bread,.pp-lower{background:#fff}
+.pp-main-wrap{background:#f5f5f3}
+.pp-brand,.pp-desc-expand,.pp-review-label{color:#111}
+.pp-thumb.active{border-color:#111}
+.pp-star.lit,.pp-review-star.lit{color:#111}
+.pp-cbtn.add{background:#111;color:#fff}
+.pp-dlv-row svg{color:#111}
+.pp-review{background:#f7f7f5}.pp-review:hover{border-left-color:#111}
+.pp-ingr{background:#f7f7f5}
