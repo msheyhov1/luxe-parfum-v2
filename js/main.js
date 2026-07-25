@@ -3,8 +3,9 @@
 // and the DOM is fully parsed.
 // ════════════════════════════════════════
 
-// initial history state for the home page
-history.replaceState({ page: 'home' }, '', '#home');
+// Set the home history state only when the URL has no deep link.
+// Direct links such as #journal-admin and #product-3 must survive reload.
+if (!location.hash) history.replaceState({ page: 'home' }, '', '#home');
 
 // home grids
 renderGrid(_hd, 'homeGrid');
