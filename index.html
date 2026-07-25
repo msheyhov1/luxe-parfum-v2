@@ -30,7 +30,8 @@
 <link rel="stylesheet" href="css/product-page.css">
 <link rel="stylesheet" href="css/catalog.css">
 <link rel="stylesheet" href="css/cart.css">
-<link rel="stylesheet" href="css/account.css">
+<link rel="stylesheet" href="css/account.css?v=20260725-4">
+<link rel="stylesheet" href="css/admin.css?v=20260725-4">
 <link rel="stylesheet" href="css/static.css">
 <link rel="stylesheet" href="css/theme.css">
 <link rel="stylesheet" href="css/motion.css">
@@ -401,14 +402,14 @@
     <div class="cat-hero-cnt"><h1 id="catTitle">Каталог</h1><p id="catSub">Весь ассортимент LUXE</p></div>
   </div>
   <div class="cat-tabs">
-    <button class="ct active" onclick="filterCat('all',this)">Все</button>
-    <button class="ct" onclick="filterCat('hits',this)">Хиты</button>
-    <button class="ct" onclick="filterCat('him',this)">Для него</button>
-    <button class="ct" onclick="filterCat('her',this)">Для неё</button>
-    <button class="ct" onclick="filterCat('unisex',this)">Унисекс</button>
-    <button class="ct" onclick="filterCat('toilette',this)">Туалетная вода</button>
-    <button class="ct" onclick="filterCat('oil',this)">Масляные духи</button>
-    <button class="ct" onclick="filterCat('home',this)">Для дома</button>
+    <button class="ct active" data-cat="all" onclick="filterCat('all',this)">Все</button>
+    <button class="ct" data-cat="hits" onclick="filterCat('hits',this)">Хиты</button>
+    <button class="ct" data-cat="him" onclick="filterCat('him',this)">Для него</button>
+    <button class="ct" data-cat="her" onclick="filterCat('her',this)">Для неё</button>
+    <button class="ct" data-cat="unisex" onclick="filterCat('unisex',this)">Унисекс</button>
+    <button class="ct" data-cat="toilette" onclick="filterCat('toilette',this)">Туалетная вода</button>
+    <button class="ct" data-cat="oil" onclick="filterCat('oil',this)">Масляные духи</button>
+    <button class="ct" data-cat="home" onclick="filterCat('home',this)">Для дома</button>
   </div>
   <div class="cat-body"><div class="pgrid" id="catalogGrid"></div></div>
 </div>
@@ -490,7 +491,7 @@
       <div class="acc-card" onclick="nav('favorites')"><div class="acc-card-icon">♡</div><div class="acc-card-title">Избранное</div><div class="acc-card-sub" id="accFavC">0 товаров</div></div>
       <div class="acc-card" onclick="nav('cart')"><div class="acc-card-icon">◻</div><div class="acc-card-title">Корзина</div><div class="acc-card-sub" id="accCartC">0 товаров</div></div>
       <div class="acc-card"><div class="acc-card-icon">◈</div><div class="acc-card-title">Мои заказы</div><div class="acc-card-sub" id="accOrdC">0 заказов</div></div>
-      <div class="acc-card" onclick="nav('journal-admin')"><div class="acc-card-icon">✎</div><div class="acc-card-title">Журнал</div><div class="acc-card-sub">Управление материалами</div></div>
+      <div class="acc-card" onclick="nav('journal-admin')"><div class="acc-card-icon">✎</div><div class="acc-card-title">Админ‑панель</div><div class="acc-card-sub">Управление сайтом</div></div>
     </div>
     <div class="acc-st">Личные данные</div>
     <div class="acc-ig" id="accIG"></div>
@@ -515,18 +516,45 @@
 </div>
 
 <div class="page" id="page-journal-admin">
-  <div class="journal-admin-wrap">
-    <div class="pi-hdr">
-      <button class="pi-back" onclick="history.back()">← Назад</button>
-      <h1>Редактор журнала</h1>
-      <button class="admin-logout" onclick="adminLogout()">Выйти</button>
-    </div>
-    <div class="journal-admin-note">Изменения сохраняются в этом браузере. При подключении серверной админ‑панели этот редактор можно заменить API без изменения витрины.</div>
-    <div class="journal-editor" id="journalEditor"></div>
-    <div class="journal-admin-actions">
-      <button class="auth-btn" onclick="saveJournalAdmin()">Сохранить материалы</button>
-      <button class="ghost-btn" onclick="resetJournalAdmin()">Вернуть исходные</button>
-    </div>
+  <div class="admin-dash">
+    <header class="admin-top">
+      <div class="admin-top-l">
+        <span class="admin-mark">LUXE</span>
+        <span class="admin-top-title">Панель управления</span>
+      </div>
+      <div class="admin-top-r">
+        <button class="adm-btn ghost sm" onclick="goHome()">На сайт</button>
+        <button class="adm-btn ghost sm" onclick="adminLogout()">Выйти</button>
+      </div>
+    </header>
+
+    <nav class="admin-tabs" id="adminTabs">
+      <button class="admin-tab active" data-tab="products" onclick="adminTab('products')">Товары</button>
+      <button class="admin-tab" data-tab="hero" onclick="adminTab('hero')">Слайдер</button>
+      <button class="admin-tab" data-tab="cats" onclick="adminTab('cats')">Категории</button>
+      <button class="admin-tab" data-tab="journal" onclick="adminTab('journal')">Журнал</button>
+      <button class="admin-tab" data-tab="texts" onclick="adminTab('texts')">Тексты</button>
+    </nav>
+
+    <div class="admin-note">Изменения сохраняются в этом браузере (демо-режим). «Экспорт JSON» выгружает весь контент, чтобы разработчик зашил его в сайт навсегда. «Сбросить всё» вернёт исходные материалы.</div>
+
+    <section class="admin-panel" id="adminPanel-products"></section>
+    <section class="admin-panel" id="adminPanel-hero" hidden></section>
+    <section class="admin-panel" id="adminPanel-cats" hidden></section>
+    <section class="admin-panel" id="adminPanel-journal" hidden>
+      <div class="adm-bar"><h2>Журнал</h2></div>
+      <div class="journal-editor" id="journalEditor"></div>
+      <div class="admin-actions">
+        <button class="adm-btn" onclick="saveJournalAdmin()">Сохранить материалы</button>
+        <button class="adm-btn ghost" onclick="resetJournalAdmin()">Вернуть исходные</button>
+      </div>
+    </section>
+    <section class="admin-panel" id="adminPanel-texts" hidden></section>
+
+    <footer class="admin-foot">
+      <button class="adm-btn ghost" onclick="exportContent()">⤓ Экспорт JSON</button>
+      <button class="adm-btn danger" onclick="resetAllContent()">Сбросить всё</button>
+    </footer>
   </div>
 </div>
 
@@ -569,12 +597,12 @@
     <div class="pg-hero-txt"><h1>О нас</h1><p>История дома LUXE Парфюмерия</p></div>
   </div>
   <div class="about-body reveal">
-    <h2>Искусство элитной парфюмерии</h2>
-    <p>LUXE Парфюмерия — кураторский дом редких и эксклюзивных ароматов, основанный в 2018 году. Мы объединяем лучшие парфюмерные дома мира в одном пространстве, предоставляя нашим клиентам доступ к настоящим произведениям обонятельного искусства.</p>
-    <h2>Наша миссия</h2>
-    <p>Мы верим, что каждый аромат — это история. Наша команда тщательно отбирает каждый флакон, обеспечивая 100% подлинность и безупречное качество. Здесь нет случайных позиций — только то, что достойно называться элитной парфюмерией.</p>
-    <h2>Гарантии LUXE</h2>
-    <p>Все ароматы поставляются напрямую от производителей или авторизованных дистрибьюторов. Мы предоставляем сертификаты подлинности и фирменную упаковку для каждого заказа.</p>
+    <h2 id="abH1">Искусство элитной парфюмерии</h2>
+    <p id="abP1">LUXE Парфюмерия — кураторский дом редких и эксклюзивных ароматов, основанный в 2018 году. Мы объединяем лучшие парфюмерные дома мира в одном пространстве, предоставляя нашим клиентам доступ к настоящим произведениям обонятельного искусства.</p>
+    <h2 id="abH2">Наша миссия</h2>
+    <p id="abP2">Мы верим, что каждый аромат — это история. Наша команда тщательно отбирает каждый флакон, обеспечивая 100% подлинность и безупречное качество. Здесь нет случайных позиций — только то, что достойно называться элитной парфюмерией.</p>
+    <h2 id="abH3">Гарантии LUXE</h2>
+    <p id="abP3">Все ароматы поставляются напрямую от производителей или авторизованных дистрибьюторов. Мы предоставляем сертификаты подлинности и фирменную упаковку для каждого заказа.</p>
   </div>
 </div>
 
@@ -588,8 +616,8 @@
   <div class="contacts-wrap reveal">
     <div class="contacts-block">
       <h3>Свяжитесь с нами</h3>
-      <p>📍 Москва, ул. Петровка, 20<br>Пн–Вс: 10:00 – 22:00</p>
-      <p style="margin-top:12px">📞 +7 (495) 123-45-67<br>✉️ hello@luxe-parfum.ru</p>
+      <p id="ctAddr">📍 Москва, ул. Петровка, 20<br>Пн–Вс: 10:00 – 22:00</p>
+      <p id="ctPhone" style="margin-top:12px">📞 +7 (495) 123-45-67<br>✉️ hello@luxe-parfum.ru</p>
     </div>
     <div class="contacts-block">
       <h3>Напишите нам</h3>
@@ -648,23 +676,23 @@
      See CLAUDE.md for the module map.
 ════════════════════════════════════════ -->
 <!-- data -->
-<script src="js/data/products.js"></script>
+<script src="js/data/products.js?v=20260725-4"></script>
 <script src="js/data/cdek.js"></script>
 <script src="js/data/reviews.js"></script>
 <!-- core -->
 <script src="js/utils.js"></script>
 <script src="js/state.js"></script>
 <script src="js/notify.js"></script>
-<script src="js/router.js?v=20260725-2"></script>
+<script src="js/router.js?v=20260725-4"></script>
 <!-- features -->
-<script src="js/hero.js"></script>
-<script src="js/product-card.js"></script>
+<script src="js/hero.js?v=20260725-4"></script>
+<script src="js/product-card.js?v=20260725-4"></script>
 <script src="js/home.js"></script>
-<script src="js/admin.js?v=20260725-2"></script>
-<script src="js/catalog.js"></script>
-<script src="js/cart.js"></script>
+<script src="js/admin.js?v=20260725-4"></script>
+<script src="js/catalog.js?v=20260725-4"></script>
+<script src="js/cart.js?v=20260725-4"></script>
 <script src="js/favorites.js"></script>
-<script src="js/product-page.js"></script>
+<script src="js/product-page.js?v=20260725-4"></script>
 <script src="js/reviews.js"></script>
 <script src="js/lightbox.js"></script>
 <script src="js/search.js"></script>
@@ -673,6 +701,6 @@
 <script src="js/motion.js"></script>
 <script src="js/gestures.js"></script>
 <!-- init (must be last) -->
-<script src="js/main.js?v=20260725-2"></script>
+<script src="js/main.js?v=20260725-4"></script>
 </body>
 </html>

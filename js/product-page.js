@@ -28,7 +28,7 @@ function _renderProduct(p) {
   // main image track — click opens lightbox
   const track = document.getElementById('ppTrack');
   track.innerHTML = p.imgs.map((src, i) =>
-    '<img class="pp-main-img" src="' + src + '" alt="' + escapeHtml(p.name) + '" data-i="' + i + '">'
+    '<img class="pp-main-img" src="' + escapeHtml(src) + '" alt="' + escapeHtml(p.name) + '" data-i="' + i + '">'
   ).join('');
   track.style.transform = 'translateX(0)';
   track.querySelectorAll('.pp-main-img').forEach(img => {
@@ -38,7 +38,7 @@ function _renderProduct(p) {
   // thumbnails
   const thumbsEl = document.getElementById('ppThumbs');
   thumbsEl.innerHTML = p.imgs.map((src, i) =>
-    '<img class="pp-thumb' + (i === 0 ? ' active' : '') + '" src="' + src + '" alt="" data-i="' + i + '">'
+    '<img class="pp-thumb' + (i === 0 ? ' active' : '') + '" src="' + escapeHtml(src) + '" alt="" data-i="' + i + '">'
   ).join('');
   thumbsEl.querySelectorAll('.pp-thumb').forEach(t => {
     t.addEventListener('click', () => goPP(+t.dataset.i));

@@ -70,7 +70,7 @@ function renderCart() {
     row.className = 'ci';
     row.style.cursor = 'pointer';
     row.innerHTML =
-      '<img class="ci-img" src="' + item.imgs[0] + '" alt="' + escapeHtml(item.name) + '">' +
+      '<img class="ci-img" src="' + escapeHtml(item.imgs[0]) + '" alt="' + escapeHtml(item.name) + '">' +
       '<div class="ci-info">' +
         '<div class="ci-brand">' + escapeHtml(item.brand) + '</div>' +
         '<div class="ci-name">' + escapeHtml(item.name) + '</div>' +

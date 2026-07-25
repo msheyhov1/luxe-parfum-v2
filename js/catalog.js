@@ -17,3 +17,13 @@ function filterCat(cat, btn) {
   btn.classList.add('active');
   renderCatalog(cat);
 }
+
+// Sync the catalog tab-button labels with CAT_LABELS (admin-editable).
+// The sidebar keeps its own richer wording; only the tab strip mirrors labels.
+function applyCatLabels() {
+  document.querySelectorAll('.ct[data-cat]').forEach(btn => {
+    const label = CAT_LABELS[btn.dataset.cat];
+    if (label) btn.textContent = label;
+  });
+}
+applyCatLabels();
