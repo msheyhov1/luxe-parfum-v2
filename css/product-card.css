@@ -1,0 +1,66 @@
+/* ════════════════════════════════════════
+   PRODUCT CARD + GRID
+════════════════════════════════════════ */
+
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:2px;background:var(--bg2)}
+.pgrid.with-gap{gap:1px}
+.pcard{background:var(--bg2);cursor:pointer;overflow:hidden;transition:transform .4s cubic-bezier(.4,0,.2,1);position:relative}
+.pcard:hover{z-index:2}
+
+/* ── card gallery ── */
+.pcard-gallery{position:relative;height:270px;overflow:hidden;background:var(--bg3)}
+.pcard-track{display:flex;height:100%;transition:transform .5s cubic-bezier(.4,0,.2,1)}
+.pcard-slide{flex:0 0 100%;height:100%;position:relative}
+.pcard-slide img{width:100%;height:100%;object-fit:cover;display:block;transition:filter .5s ease}
+.pcard:hover .pcard-slide img{filter:brightness(1.06)}
+.pcard-slide-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,.6),transparent 55%)}
+.pg-dots{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);display:flex;gap:4px;z-index:5}
+.pgdot{width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,.28);border:none;cursor:pointer;transition:all .2s;padding:0}
+.pgdot.active{background:var(--gold);width:12px;border-radius:2px}
+.pg-arr{position:absolute;top:50%;transform:translateY(-50%);background:rgba(8,8,8,.55);border:none;color:rgba(255,255,255,.65);width:27px;height:27px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:12px;z-index:5;opacity:0;transition:opacity .2s}
+.pcard:hover .pg-arr{opacity:1}
+.pg-arr.l{left:7px}.pg-arr.r{right:7px}
+.pg-arr:hover{background:rgba(201,168,76,.4);color:var(--gold)}
+
+/* ── card badge + fav ── */
+.pcard-badge{position:absolute;top:12px;left:12px;z-index:4;background:var(--gold);color:var(--bg);font-size:7px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:3px 9px}
+.pcard-fav{position:absolute;top:10px;right:10px;z-index:4;width:30px;height:30px;border-radius:50%;background:rgba(8,8,8,.55);backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;color:rgba(255,255,255,.45)}
+.pcard-fav:hover,.pcard-fav.faved{background:rgba(176,64,80,.2);border-color:var(--red);color:var(--red)}
+.pcard-fav.faved svg{fill:var(--red)}
+
+/* ── card body ── */
+.pcard-body{padding:18px 16px 16px}
+.pcard-brand{font-size:8px;letter-spacing:4px;color:var(--gold);font-weight:600;margin-bottom:4px;text-transform:uppercase}
+.pcard-name{font-family:'Cormorant Garamond',serif;font-size:18px;margin-bottom:2px;line-height:1.2}
+.pcard-vol{font-size:10px;color:var(--muted);letter-spacing:.5px;margin-bottom:14px}
+.pcard-foot{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.pcard-price{font-family:'Cormorant Garamond',serif;font-size:21px;color:var(--gold-l);flex-shrink:0}
+.add-btn{height:30px;border-radius:2px;border:1px solid var(--border);color:var(--dim);font-family:'Montserrat',sans-serif;font-size:10px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .22s;flex-shrink:0;padding:0 11px;white-space:nowrap;background:transparent;min-width:30px}
+.add-btn.plus-only{padding:0;width:30px;font-size:15px}
+.add-btn:hover{background:var(--gold);border-color:var(--gold);color:var(--bg)}
+.add-btn.in-cart{background:rgba(201,168,76,.08);border-color:var(--gold);color:var(--gold)}
+.add-btn.in-cart:hover{background:var(--gold);color:var(--bg)}
+
+/* ── inline qty on card ── */
+.pcard-qty{display:flex;align-items:center;border:1px solid var(--gold);border-radius:2px;overflow:hidden;flex-shrink:0}
+.pcard-qb{width:24px;height:28px;background:none;border:none;color:var(--gold);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.pcard-qb:hover{background:rgba(201,168,76,.15)}
+.pcard-qn{min-width:22px;text-align:center;font-size:11px;color:var(--text);font-weight:500}
+
+/* ── LIGHT RETAIL CARD ── */
+.pgrid{grid-template-columns:repeat(4,1fr);gap:12px;background:transparent}
+.pcard{background:#fff}
+.pcard-gallery{height:auto;aspect-ratio:1/1.14;background:#f5f5f3}
+.pcard-slide img{object-position:center;filter:saturate(.88)}
+.pcard-slide-ov{display:none}
+.pcard-body{padding:16px 4px 18px}
+.pcard-brand{color:#111;font-size:8px;letter-spacing:.08em;margin-bottom:7px}
+.pcard-name{font-family:'Montserrat',sans-serif;font-size:11px;font-weight:400;margin-bottom:5px}
+.pcard-vol{font-size:9px;margin-bottom:12px}
+.pcard-price{font-family:'Montserrat',sans-serif;font-size:12px;font-weight:600}
+.pcard-fav{background:rgba(255,255,255,.86);border-color:#e5e5e5;color:#111}
+.pcard-fav:hover,.pcard-fav.faved{background:#111;border-color:#111;color:#fff}.pcard-fav.faved svg{fill:#fff}
+.pcard-badge{top:10px;left:10px;font-size:7px;letter-spacing:.08em}
+.pgdot.active{background:#111}.pg-arr{background:rgba(255,255,255,.9);color:#111}.pg-arr:hover{background:#111;color:#fff}
+.add-btn{border-color:#111;color:#111;border-radius:0}.add-btn:hover{background:#111;color:#fff;border-color:#111}
+.pcard-qty{border-color:#111;border-radius:0}.pcard-qb{color:#111}

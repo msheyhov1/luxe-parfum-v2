@@ -1,0 +1,65 @@
+/* ════════════════════════════════════════
+   AUTH / ACCOUNT / ORDER
+════════════════════════════════════════ */
+
+/* ── auth (login / register) ── */
+.auth-wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1;padding:56px 20px}
+.auth-box{background:var(--bg2);border:1px solid var(--border);width:100%;max-width:420px;padding:40px}
+.auth-title{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;margin-bottom:5px;text-align:center}
+.auth-sub{font-size:9px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:28px;text-align:center}
+.auth-switch{text-align:center;margin-top:16px;font-size:12px;color:var(--muted)}
+.auth-switch span{color:var(--gold);cursor:pointer;border-bottom:1px solid transparent;transition:border-color .2s}
+.auth-switch span:hover{border-color:var(--gold)}
+.auth-err{color:#c0504a;font-size:10px;margin-top:-3px;display:none}
+.auth-err.show{display:block}
+
+/* ── account ── */
+.acc-wrap{padding:44px;flex:1}
+.acc-hello{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:300;margin-bottom:4px}
+.acc-email{font-size:11px;color:var(--muted);margin-bottom:28px}
+.acc-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);margin-bottom:28px;border:1px solid var(--border)}
+.acc-card{background:var(--bg2);padding:24px;cursor:pointer;transition:background .2s}
+.acc-card:hover{background:var(--bg3)}
+.acc-card-icon{font-size:20px;color:var(--gold);margin-bottom:10px}
+.acc-card-title{font-size:11px;font-weight:500;letter-spacing:1px;margin-bottom:2px}
+.acc-card-sub{font-size:11px;color:var(--muted)}
+.acc-st{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.acc-ig{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px}
+.acc-ii label{font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:3px}
+.acc-ii p{font-size:13px}
+.acc-logout{background:none;border:1px solid var(--border);color:var(--muted);padding:10px 22px;font-family:'Montserrat',sans-serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .2s}
+.acc-logout:hover{border-color:#c0504a;color:#c0504a}
+
+/* ── order ── */
+.order-wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1;padding:52px 20px}
+.order-box{background:var(--bg2);border:1px solid var(--border);width:100%;max-width:480px;padding:40px}
+.order-title{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;margin-bottom:5px;text-align:center}
+.order-sub{font-size:9px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:28px;text-align:center}
+.cdek-sug{background:var(--bg3);border:1px solid var(--border);border-top:none;max-height:160px;overflow-y:auto}
+.cdek-item{padding:9px 13px;font-size:11px;color:var(--dim);cursor:pointer;transition:background .2s;border-bottom:1px solid var(--border)}
+.cdek-item:hover{background:rgba(201,168,76,.05);color:var(--gold)}
+
+.auth-box,.order-box{background:#fff;box-shadow:0 18px 60px rgba(0,0,0,.07)}
+.auth-wrap,.order-wrap{background:#f7f7f5}
+.acc-card{background:#fff}.acc-card:hover{background:#f7f7f5}
+.cdek-sug{background:#fff}
+
+/* journal editor */
+.journal-admin-wrap{padding:44px;max-width:1200px;width:100%;margin:0 auto}
+.journal-admin-note{font-size:11px;line-height:1.7;color:#666;background:#f7f7f5;padding:16px 18px;margin-bottom:24px;border-left:2px solid #111}
+.journal-editor{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.journal-editor-card{border:1px solid var(--border);padding:22px;display:flex;flex-direction:column;gap:13px}
+.journal-editor-card legend{font-family:'Cormorant Garamond',serif;font-size:22px;padding:0 8px}
+.journal-editor-card label{display:flex;flex-direction:column;gap:6px;font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:#777}
+.journal-admin-actions{display:flex;align-items:center;gap:12px;margin-top:24px}.journal-admin-actions .auth-btn{width:auto;padding-left:28px;padding-right:28px}
+
+.admin-login-wrap{min-height:calc(100vh - var(--th));display:grid;place-items:center;background:#f5f5f3;padding:36px 18px}
+.admin-login-box{width:min(440px,100%);background:#fff;padding:42px;border:1px solid var(--border);box-shadow:0 24px 70px rgba(0,0,0,.08)}
+.admin-login-back{border:0;background:none;padding:0;color:#777;font:9px 'Montserrat',sans-serif;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
+.admin-login-mark{font-family:'Cormorant Garamond',serif;font-size:30px;letter-spacing:.18em;text-align:center;margin-top:10px}
+.admin-login-box h1{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:500;text-align:center;margin-top:12px}
+.admin-login-box>p{text-align:center;color:#777;font-size:10px;line-height:1.6;margin:8px 0 28px}
+.admin-login-box label{display:flex;flex-direction:column;gap:7px;font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:#777;margin-bottom:15px}
+.admin-login-box .auth-btn{margin-top:18px}
+.admin-logout{margin-left:auto;border:1px solid #111;background:#fff;color:#111;padding:9px 16px;font:600 8px 'Montserrat',sans-serif;text-transform:uppercase;letter-spacing:.1em;cursor:pointer}
+.admin-logout:hover{background:#111;color:#fff}

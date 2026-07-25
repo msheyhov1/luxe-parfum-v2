@@ -1,0 +1,24 @@
+/* ════════════════════════════════════════
+   STATIC PAGES — about / contacts, notifications
+════════════════════════════════════════ */
+
+.pg-hero{height:230px;background:var(--bg2);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;border-bottom:1px solid var(--border)}
+.pg-hero-bg{position:absolute;inset:0;background-size:cover;background-position:center;opacity:.28}
+.pg-hero-ov{position:absolute;inset:0;background:rgba(8,8,8,.58)}
+.pg-hero-txt{position:relative;text-align:center}
+.pg-hero-txt h1{font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:300;margin-bottom:8px}
+.pg-hero-txt p{font-size:10px;letter-spacing:4px;color:var(--muted);text-transform:uppercase}
+.about-body{padding:48px 70px;max-width:740px}
+.about-body h2{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--gold-l);margin-bottom:14px}
+.about-body p{font-size:13px;line-height:2;color:var(--dim);margin-bottom:22px;letter-spacing:.3px}
+.contacts-wrap{padding:48px 70px;display:grid;grid-template-columns:1fr 1fr;gap:48px;max-width:820px}
+.contacts-block h3{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;color:var(--gold-l);margin-bottom:14px}
+.contacts-block p{font-size:12px;line-height:2;color:var(--dim)}
+.cform{display:flex;flex-direction:column;gap:8px;margin-top:10px}
+
+/* ── NOTIFICATION TOAST ── */
+.notif{position:fixed;bottom:22px;left:50%;transform:translate(-50%,80px);background:var(--bg2);border:1px solid var(--gold);color:var(--text);padding:11px 26px;font-size:11px;letter-spacing:1px;z-index:999;transition:transform .4s;white-space:nowrap}
+.notif.show{transform:translate(-50%,0)}
+
+.about-body h2,.contacts-block h3{color:#111}
+.notif{background:#111;border-color:#111;color:#fff}

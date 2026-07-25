@@ -1,0 +1,90 @@
+/* ════════════════════════════════════════
+   MOTION — the site's "feel": entrances, reveals,
+   refined easing, micro-interactions.
+   Layered on top of feature CSS. LOAD after theme.css,
+   before responsive.css.
+   All heavy motion is disabled under prefers-reduced-motion
+   at the bottom of this file.
+════════════════════════════════════════ */
+
+/* ── keyframes ── */
+@keyframes pageIn { from{opacity:0;transform:translateY(14px) scale(.994)} to{opacity:1;transform:none} }
+@keyframes cardIn { from{opacity:0;transform:translateY(28px)}            to{opacity:1;transform:none} }
+@keyframes heroIn { from{opacity:0;transform:translateY(20px)}            to{opacity:1;transform:none} }
+@keyframes imgFade{ from{opacity:0;transform:scale(1.04)}                 to{opacity:1;transform:scale(1)} }
+@keyframes badgePop{ 0%{transform:scale(1)} 35%{transform:scale(1.45)} 70%{transform:scale(.9)} 100%{transform:scale(1)} }
+@keyframes lbZoom { from{opacity:0;transform:scale(.92)}                  to{opacity:1;transform:scale(1)} }
+
+/* ── page transition (replaces the old abrupt fade) ── */
+.page{animation:none}
+.page.active{animation:pageIn var(--dur-2) var(--ease-out) both}
+
+/* ── product card entrance (staggered; class is stripped on
+   animationend by motion.js so :hover transforms keep working) ── */
+.pcard.card-enter{animation:cardIn var(--dur-2) var(--ease-out) both}
+
+/* card hover handled in theme.css (flat ring, no Z-axis pop) */
+.pcard{transition:border-color var(--dur-1) var(--ease),box-shadow var(--dur-1) var(--ease)}
+
+/* ── product page media: soft zoom-in on each product ── */
+.pp-main-img{animation:imgFade var(--dur-2) var(--ease-out) both}
+
+/* ── hero: staggered content entrance whenever a slide becomes active ── */
+.hslide.active .h-tag   {animation:heroIn .85s var(--ease-out) .05s both}
+.hslide.active .hcont h1{animation:heroIn .85s var(--ease-out) .16s both}
+.hslide.active .hcont p {animation:heroIn .85s var(--ease-out) .28s both}
+.hslide.active .h-btn   {animation:heroIn .85s var(--ease-out) .40s both}
+
+/* ── scroll reveal for static sections (added in markup, toggled by motion.js) ── */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity var(--dur-2) var(--ease-out),transform var(--dur-2) var(--ease-out)}
+.reveal.in{opacity:1;transform:none}
+
+/* ── micro-interactions ── */
+/* badge bump on change */
+.badge-pop{animation:badgePop var(--dur-1) var(--ease-spring)}
+
+/* buttons: lift + settle */
+.h-btn,.banner-btn,.auth-btn,.gold-btn,.pp-cbtn,.ghost-btn{transition:all var(--dur-1) var(--ease-out)}
+.auth-btn:hover,.gold-btn:hover,.pp-cbtn.add:hover{transform:translateY(-2px)}
+.auth-btn:active,.gold-btn:active,.pp-cbtn.add:active,.h-btn:active,.banner-btn:active{transform:translateY(0) scale(.99)}
+
+/* "Смотреть все →" / section links: arrow nudges on hover */
+.sl{display:inline-flex;gap:6px;transition:color var(--dur-1) var(--ease),gap var(--dur-1) var(--ease-out)}
+.sl:hover{gap:11px}
+
+/* sidebar nav items glide */
+.sb-nav li,.sb-links li{transition:color .25s var(--ease),background .25s var(--ease),padding-left .25s var(--ease-out)}
+.sb-nav li:hover{padding-left:27px}
+
+/* category tabs underline grows from refined easing */
+.ct{transition:color var(--dur-1) var(--ease),border-color var(--dur-1) var(--ease-out)}
+
+/* thumbnails / notes / spec rows: gentler hovers */
+.pp-thumb{transition:opacity .3s var(--ease-out),border-color .3s var(--ease-out),transform .3s var(--ease-out)}
+.pp-thumb:hover{transform:translateY(-2px)}
+.pp-note{transition:border-color .3s var(--ease),color .3s var(--ease),transform .3s var(--ease-out)}
+.pp-note:hover{border-color:var(--gold);color:var(--text);transform:translateY(-2px)}
+
+/* cart line + account cards: smoother */
+.ci{transition:background .3s var(--ease),transform .3s var(--ease-out)}
+.acc-card{transition:background .3s var(--ease),transform .3s var(--ease-out)}
+.acc-card:hover{transform:translateY(-3px)}
+
+/* sidebar/menu overlay timing aligned to the luxe curve */
+.sidebar{transition:transform var(--dur-2) var(--ease-out)}
+.menu-overlay{transition:opacity var(--dur-2) var(--ease)}
+
+/* ── draggable carousels: no text selection / image ghost-drag ── */
+.pcard-gallery,.pp-main-wrap,.pp-lb-inner{user-select:none;-webkit-user-select:none}
+.pcard-gallery img,.pp-main-img,.pp-lb-img{-webkit-user-drag:none;user-drag:none}
+
+/* ── accessibility: respect reduced-motion ── */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{
+    animation-duration:.001ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;
+    scroll-behavior:auto !important;
+  }
+  .reveal{opacity:1 !important;transform:none !important}
+}
